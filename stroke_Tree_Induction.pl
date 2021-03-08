@@ -50,11 +50,13 @@ seleziona l'Attributo che meglio discrimina le classi; si basa sul
 concetto della "Gini-disuguaglianza"; utilizza il setof per ordinare
 gli attributi in base al valore crescente della loro disuguaglianza
 usare il setof per far questo è dispendioso e si può fare di meglio ..
-sceglie_attributo( Attributi, Esempi, MigliorAttributo )  :-
+*/
+sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
 	setof( Disuguaglianza/A,
 	      (member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
 	      [MinorDisuguaglianza/MigliorAttributo|_] ).
 
+/*
 disuguaglianza(+Esempi, +Attributo, -Dis):
 Dis è la disuguaglianza combinata dei sottoinsiemi degli esempi
 partizionati dai valori dell'Attributo
@@ -88,7 +90,7 @@ somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	NuovaSommaParziale is SommaParziale + Gini*NVal/N,
 	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
-	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). % nessun esempio soddisfa Att = Val
+	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 						% nessun esempio soddisfa Att = Val
 
 /*
 gini(ListaProbabilità, IndiceGini)
@@ -107,7 +109,7 @@ induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
 induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori
 degli Attributi
 */
-induce_alberi(_,[],_,_,[]).     % nessun valore, nessun sottoalbero
+induce_alberi(_,[],_,_,[]).     												% nessun valore, nessun sotto albero
 induce_alberi(Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
 	attval_subset(Att=Val1,Esempi,SottoinsiemeEsempi),
 	induce_albero(AttRimasti,SottoinsiemeEsempi,Alb1),
@@ -121,8 +123,8 @@ attval_subset( Attributo = Valore, Esempi, Subset):
 attval_subset(AttributoValore,Esempi,Sottoinsieme) :-
 	findall(e(C,O),(member(e(C,O),Esempi),soddisfa(O,[AttributoValore])),Sottoinsieme).
 
-/soddisfa(Oggetto, Descrizione):/
-soddisfa(Oggetto,Congiunzione)  :-
+/*soddisfa(Oggetto, Descrizione):*/
+soddisfa(Oggetto,Congiunzione) :-
 	\+ (member(Att=Val,Congiunzione),
 	    member(Att=ValX,Oggetto),
 	    ValX \== Val).
@@ -168,7 +170,6 @@ classifica(Oggetto,Classe,t(Att,Valori)) :-
 	member(Val:t(AttFiglio,ValoriFiglio),Valori),
 	classifica(Resto,Classe,t(AttFiglio,ValoriFiglio)).
 
-
 stampa_matrice_di_confusione :-
 	alb(Albero),
 	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
@@ -184,20 +185,20 @@ stampa_matrice_di_confusione :-
 	write('Errore: '), writeln(E).
 
 valuta(_,[],VN,VN,VP,VP,FN,FN,FP,FP,NC,NC).                                     % testset vuoto -> valutazioni finali
-valuta(Albero,[sano/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,sano,Albero), !,                                         % prevede correttamente che il paziente � sano
+valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,healthy,Albero), !,                                      % prevede correttamente che il paziente � sano
 	VNA1 is VNA + 1,
 	valuta(Albero,Coda,VN,VNA1,VP,VPA,FN,FNA,FP,FPA,NC,NCA).
-valuta(Albero,[malato/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,malato,Albero), !,                                       % prevede correttamente che il paziente � malato
+valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,sick,Albero), !,                                       % prevede correttamente che il paziente � malato
 	VPA1 is VPA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA1,FN,FNA,FP,FPA,NC,NCA).
-valuta(Albero,[malato/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,sano,Albero), !,                                         % prevede erroneamente che il paziente � sano
+valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,healthy,Albero), !,                                    % prevede erroneamente che il paziente � sano
 	FNA1 is FNA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA1,FP,FPA,NC,NCA).
-valuta(Albero,[sano/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,malato,Albero), !,                                       % prevede erroneamente che il paziente � malato
+valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,sick,Albero), !,                                       % prevede erroneamente che il paziente � malato
 	FPA1 is FPA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA1,NC,NCA).
 valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-           % non classifica
