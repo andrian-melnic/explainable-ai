@@ -1,9 +1,9 @@
 % programma per apprendere inducendo Alberi di Decisione testandone
 % l' efficacia
 
-:- ensure_loaded(heart_dataset).
-:- ensure_loaded(heart_training_set).
-:- ensure_loaded(heart_test_set).
+:- ensure_loaded(stroke_dataset).
+:- ensure_loaded(stroke_training_set).
+:- ensure_loaded(stroke_test_set).
 
 :- dynamic alb/1.
 
@@ -56,7 +56,7 @@ induce_albero( _, Esempi, l(Classi)) :-
 sceglie_attributo( Attributi, Esempi, MigliorAttributo )  :-
 	setof( Disuguaglianza/A,
 		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
-		[MinorDisuguaglianza/MigliorAttributo|_] ).
+		[_/MigliorAttributo|_] ). %MinorDisuguaglianza -> _ (Singleton var.)
 
 % disuguaglianza(+Esempi, +Attributo, -Dis):
 % Dis è la disuguaglianza combinata dei sottoinsiemi degli esempi
