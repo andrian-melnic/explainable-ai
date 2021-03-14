@@ -1,359 +1,359 @@
 a(gender,[0,1]).
-a(age,[80,0-30,30-40,40-50,50-60,60-70,70-80]).
+a(age,['0-30','30-40','40-50','50-60','60-70','70-80','80+']).
 a(hypertension,[0,1]).
 a(heart_disease,[0,1]).
 a(ever_married,[0,1]).
-a(work_type,[1,2,3,4]).
-a(residence_type,[0,1]).
-a(avg_glucose_level,[126,0-110,111-119,120-125]).
-a(bmi,[31,0-18,19-25,26-30]).
-a(smoking_status,[0,1,2]).
-e(healthy,[gender = 1, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 120-125, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 1, residence_type = 0, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 4, residence_type = 0, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 80, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 120-125, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 120-125, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 1, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 111-119, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 0, age = 80, hypertension = 0, heart_disease = 1, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 1, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(healthy,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(healthy,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 31, smoking_status = 2]).
-e(healthy,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(healthy,[gender = 0, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 1, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(healthy,[gender = 1, age = 0-30, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 1, residence_type = 1, avg_glucose_level = 120-125, bmi = 0-18, smoking_status = 0]).
-e(healthy,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 111-119, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 111-119, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 111-119, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 80, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 40-50, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 111-119, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 126, bmi = 19-25, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(sick,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 120-125, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 80, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 0-18, smoking_status = 0]).
-e(sick,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 80, hypertension = 1, heart_disease = 1, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 111-119, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 40-50, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 30-40, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 2]).
-e(sick,[gender = 0, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 1, ever_married = 0, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 3, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 80, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 1, ever_married = 0, work_type = 4, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 111-119, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 111-119, bmi = 19-25, smoking_status = 2]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 120-125, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 1, avg_glucose_level = 126, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 0, age = 80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 111-119, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 4, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 1, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 1]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 111-119, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 50-60, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 126, bmi = 19-25, smoking_status = 2]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 2]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 126, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 1]).
-e(sick,[gender = 1, age = 60-70, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 126, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 1, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 19-25, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 3, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
-e(sick,[gender = 0, age = 30-40, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 80, hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 2]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 4, residence_type = 1, avg_glucose_level = 126, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 40-50, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 31, smoking_status = 1]).
-e(sick,[gender = 0, age = 80, hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 0, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 1, age = 50-60, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 26-30, smoking_status = 0]).
-e(sick,[gender = 0, age = 70-80, hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 2, residence_type = 1, avg_glucose_level = 0-110, bmi = 31, smoking_status = 0]).
+a(work_type,['Children','Govt job','Private','Self employed']).
+a(residence_type,['City','Rural']).
+a(avg_glucose_level,['0-110','111-119','120-125','126+']).
+a(bmi,['0-18','19-25','26-30','31+']).
+a(smoking_status,['Formerly smoked','Never smoked','Smokes']).
+e(healthy,[gender = 1, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '120-125', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Children', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '120-125', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '120-125', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '80+', hypertension = 0, heart_disease = 1, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Children', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(healthy,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(healthy,[gender = 0, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Children', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(healthy,[gender = 1, age = '0-30', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Children', residence_type = 'City', avg_glucose_level = '120-125', bmi = '0-18', smoking_status = 'Never smoked']).
+e(healthy,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '40-50', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '120-125', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '0-18', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '80+', hypertension = 1, heart_disease = 1, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '111-119', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '40-50', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '30-40', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 1, ever_married = 0, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 1, ever_married = 0, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '19-25', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '120-125', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'City', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '111-119', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Govt job', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '111-119', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 1, heart_disease = 0, ever_married = 0, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Smokes']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 1, age = '60-70', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '126+', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '19-25', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Self employed', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '30-40', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '80+', hypertension = 0, heart_disease = 1, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Smokes']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Govt job', residence_type = 'City', avg_glucose_level = '126+', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '40-50', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Formerly smoked']).
+e(sick,[gender = 0, age = '80+', hypertension = 1, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'Rural', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 1, age = '50-60', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '26-30', smoking_status = 'Never smoked']).
+e(sick,[gender = 0, age = '70-80', hypertension = 0, heart_disease = 0, ever_married = 1, work_type = 'Private', residence_type = 'City', avg_glucose_level = '0-110', bmi = '31+', smoking_status = 'Never smoked']).
