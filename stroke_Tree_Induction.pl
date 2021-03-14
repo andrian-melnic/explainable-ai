@@ -60,7 +60,8 @@ usare il setof per far questo è dispendioso e si può fare di meglio ..
 sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
 	setof( Disuguaglianza/A,
 		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
-		[MinorDisuguaglianza/MigliorAttributo|_] ). %MinorDisuguaglianza -> _ (Singleton var.)
+		[_/MigliorAttributo|_] ).
+		/*MinorDisuguaglianza -> _ (Singleton var.)*/
 
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):

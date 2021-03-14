@@ -33,6 +33,7 @@ startt :-
     write('a(smoking_status,'), writeq(AttributesSmoking_status), writeln(').'),
     starttt.
 
+/*
 starttt :-
     aa(Gender,Age,Hypertension,Heart_disease,Ever_married,Work_type,Residence_type,Avg_glucose_level,Bmi,Smoking_status,0),
     write('e(healthy,['),
@@ -60,5 +61,36 @@ starttt :-
     write('avg_glucose_level = '),  writeq(Avg_glucose_level),  write(', '),
 	write('bmi = '),                writeq(Bmi),                write(', '),
     write('smoking_status = '),     writeq(Smoking_status),     writeln(']).'),
+    fail.
+starttt :- told.
+*/
+
+starttt :-
+    aa(Gender,Age,Hypertension,Heart_disease,Ever_married,Work_type,Residence_type,Avg_glucose_level,Bmi,Smoking_status,0),
+    write('e(['),
+    write('gender = '),             writeq(Gender),             write(', '),
+    write('age = '),                writeq(Age),                write(', '),
+    write('hypertension = '),       writeq(Hypertension),       write(', '),
+    write('heart_disease = '),      writeq(Heart_disease),      write(', '),
+    write('ever_married = '),       writeq(Ever_married),       write(', '),
+    write('work_type = '),          writeq(Work_type),          write(', '),
+    write('residence_type = '),     writeq(Residence_type),     write(', '),
+    write('avg_glucose_level = '),  writeq(Avg_glucose_level),  write(', '),
+	write('bmi = '),                writeq(Bmi),                write(', '),
+    write('smoking_status = '),     writeq(Smoking_status),     writeln('],healthy).'),
+    fail.
+starttt :-
+    aa(Gender,Age,Hypertension,Heart_disease,Ever_married,Work_type,Residence_type,Avg_glucose_level,Bmi,Smoking_status,1),
+    write('e(['),
+    write('gender = '),             writeq(Gender),             write(', '),
+    write('age = '),                writeq(Age),                write(', '),
+    write('hypertension = '),       writeq(Hypertension),       write(', '),
+    write('heart_disease = '),      writeq(Heart_disease),      write(', '),
+    write('ever_married = '),       writeq(Ever_married),       write(', '),
+    write('work_type = '),          writeq(Work_type),          write(', '),
+    write('residence_type = '),     writeq(Residence_type),     write(', '),
+    write('avg_glucose_level = '),  writeq(Avg_glucose_level),  write(', '),
+	write('bmi = '),                writeq(Bmi),                write(', '),
+    write('smoking_status = '),     writeq(Smoking_status),     writeln('],sick).'),
     fail.
 starttt :- told.
