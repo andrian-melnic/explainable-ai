@@ -1,0 +1,1 @@
+t(age,[80:null,0-30:null,30-40:null,40-50:null,50-60:null,60-70:null,70-80:null])

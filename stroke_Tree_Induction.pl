@@ -56,7 +56,7 @@ induce_albero( _, Esempi, l(Classi)) :-
 sceglie_attributo( Attributi, Esempi, MigliorAttributo )  :-
 	setof( Disuguaglianza/A,
 		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
-		[_/MigliorAttributo|_] ). %MinorDisuguaglianza -> _ (Singleton var.)
+		[MinorDisuguaglianza/MigliorAttributo|_] ). %MinorDisuguaglianza -> _ (Singleton var.)
 
 % disuguaglianza(+Esempi, +Attributo, -Dis):
 % Dis è la disuguaglianza combinata dei sottoinsiemi degli esempi
@@ -186,27 +186,27 @@ stampa_matrice_di_confusione :-
 % testset vuoto -> valutazioni finali
 valuta(_,[],VN,VN,VP,VP,FN,FN,FP,FP,NC,NC).            
 
-% prevede correttamente che il paziente � sano
-valuta(Albero,[sano/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,sano,Albero), !,      
+% prevede correttamente che il paziente � healthy
+valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,healthy,Albero), !,      
 	VNA1 is VNA + 1,
 	valuta(Albero,Coda,VN,VNA1,VP,VPA,FN,FNA,FP,FPA,NC,NCA).
 
-% prevede correttamente che il paziente � malato
-valuta(Albero,[malato/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,malato,Albero), !, 
+% prevede correttamente che il paziente � sick
+valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,sick,Albero), !, 
 	VPA1 is VPA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA1,FN,FNA,FP,FPA,NC,NCA).
 
-% prevede erroneamente che il paziente � sano
-valuta(Albero,[malato/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,sano,Albero), !,      
+% prevede erroneamente che il paziente � healthy
+valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,healthy,Albero), !,      
 	FNA1 is FNA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA1,FP,FPA,NC,NCA).
 
-% prevede erroneamente che il paziente � malato
-valuta(Albero,[sano/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,malato,Albero), !, 
+% prevede erroneamente che il paziente � sick
+valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	classifica(Oggetto,sick,Albero), !, 
 	FPA1 is FPA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA1,NC,NCA).
 
