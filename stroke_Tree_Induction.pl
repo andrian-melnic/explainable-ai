@@ -4,8 +4,8 @@ l' efficacia
 */
 
 :- ensure_loaded(stroke_dataset).
-%:- ensure_loaded(stroke_training_set).
-%:- ensure_loaded(stroke_test_set).
+:- ensure_loaded(stroke_training_set).
+:- ensure_loaded(stroke_test_set).
 
 :- dynamic alb/1.
 
