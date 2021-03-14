@@ -18,33 +18,34 @@ induce_albero( Albero ) :-
 	stampa(Albero).
 
 
-% induce_albero( +Attributi, +Esempi, -Albero):
-% l'Albero indotto dipende da questi tre casi:
-% (1) Albero = null: l'insieme degli esempi è vuoto
-% (2) Albero = l(Classe): tutti gli esempi sono della stessa classe
-% (3) Albero = t(Attributo, [Val1:SubAlb1, Val2:SubAlb2, ...]):
-%     gli esempi appartengono a più di una classe
-%     Attributo è la radice dell'albero
-%     Val1, Val2, ... sono i possibili valori di Attributo
-%     SubAlb1, SubAlb2,... sono i corrispondenti sottoalberi di
-%     decisione.
-% (4) Albero = l(Classi): non abbiamo Attributi utili per
-%     discriminare ulteriormente
-
+/*
+induce_albero( +Attributi, +Esempi, -Albero):
+l'Albero indotto dipende da questi tre casi:
+(1) Albero = null: l'insieme degli esempi è vuoto
+(2) Albero = l(Classe): tutti gli esempi sono della stessa classe
+(3) Albero = t(Attributo, [Val1:SubAlb1, Val2:SubAlb2, ...]):
+    gli esempi appartengono a più di una classe
+    Attributo è la radice dell'albero
+    Val1, Val2, ... sono i possibili valori di Attributo
+    SubAlb1, SubAlb2,... sono i corrispondenti sottoalberi di
+    decisione.
+(4) Albero = l(Classi): non abbiamo Attributi utili per
+     discriminare ulteriormente
+*/
 
 
 induce_albero( _, [], null ) :- !. % (1)
 
-induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :- % (2)
+induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :-           % (2)
 	\+ ( member(e(ClassX,_),Esempi), ClassX \== Classe ), !.	% no esempi di altre classi (OK!!)
 
-induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	% (3)
-	sceglie_attributo( Attributi, Esempi, Attributo), !,	% implementa la politica di scelta
-	del( Attributo, Attributi, Rimanenti ),					% elimina Attributo scelto
-	a( Attributo, Valori ),					 				% ne preleva i valori
+induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
+	sceglie_attributo( Attributi, Esempi, Attributo), !,	    % implementa la politica di scelta
+	del( Attributo, Attributi, Rimanenti ),					    % elimina Attributo scelto
+	a( Attributo, Valori ),					 				    % ne preleva i valori
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
 
-% finiti gli attributi utili (KO!!)
+%finiti gli attributi utili (KO!!)
 induce_albero( _, Esempi, l(Classi)) :-
 	findall( Classe, member(e(Classe,_),Esempi), Classi).
 
@@ -91,7 +92,7 @@ somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	NuovaSommaParziale is SommaParziale + Gini*NVal/N,
 	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
-	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 						% nessun esempio soddisfa Att = Val
+	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
 
 /*
 gini(ListaProbabilità, IndiceGini)
@@ -105,6 +106,7 @@ somma_quadrati([],S,S).
 somma_quadrati([P|Ps],PartS,S)  :-
 	NewPartS is PartS + P*P,
 	somma_quadrati(Ps,NewPartS,S).
+
 /*
 induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
 induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori
@@ -127,7 +129,7 @@ attval_subset(AttributoValore,Esempi,Sottoinsieme) :-
 			soddisfa(O,[AttributoValore])),
 			Sottoinsieme).
 
-/*soddisfa(Oggetto, Descrizione):*/
+% soddisfa(Oggetto, Descrizione):
 soddisfa(Oggetto,Congiunzione) :-
 	\+ (member(Att=Val,Congiunzione),
 		member(Att=ValX,Oggetto),
@@ -157,15 +159,17 @@ mostratutto([V:T|C],I) :-
 	mostratutto(C,I).
 
 
-% ==============================================================================
-%  classifica( +Oggetto, -Classe, t(+Att,+Valori))
-%  		Oggetto: [Attributo1=Valore1, .. , AttributoN=ValoreN]
-%  		Classe: classe a cui potrebbe appartenere un oggetto caratterizzato
-% 				da quelle coppie
-%  		Attributo=Valore
-%
-%  t(-Att,-Valori): Albero di Decisione
-%  presuppone sia stata effettuata l'induzione dell'Albero di Decisione
+/*
+==============================================================================
+classifica( +Oggetto, -Classe, t(+Att,+Valori))
+	Oggetto: [Attributo1=Valore1, .. , AttributoN=ValoreN]
+	Classe: classe a cui potrebbe appartenere un oggetto caratterizzato
+			da quelle coppie
+	Attributo=Valore
+
+t(-Att,-Valori): Albero di Decisione
+presuppone sia stata effettuata l'induzione dell'Albero di Decisione
+*/
 
 classifica(Oggetto,nc,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
 	member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
