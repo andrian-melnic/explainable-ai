@@ -95,6 +95,10 @@ somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	;
 	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 gini(ListaProbabilità, IndiceGini)
     IndiceGini = SOMMATORIA Pi*Pj per tutti i,j tali per cui i\=j
@@ -108,6 +112,33 @@ somma_quadrati([P|Ps],PartS,S)  :-
 	NewPartS is PartS + P*P,
 	somma_quadrati(Ps,NewPartS,S).
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/* 
+shannon(ListaProbabilità,Shannon) :-
+	somma_entropie(ListaProbabilità,0,SommaEntropie),
+	Shannon is SommaEntropie.
+ */
+log2(P, Log2ris):-
+	log(P,X),
+	log(2,Y),
+	Log2ris is X/Y.
+
+somma_entropie([],S , S).
+somma_entropie([P|Ps], PartS, S) :-
+	log2(P, Log2ris), 
+	NewPartS is PartS + entropia(P),
+	somma_entropie(Ps, NewPartSm, S).
+
+/* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
+entropia(Q, H):-
+	InvQ is 1-Q,
+	log2(Q, LogQ),
+	log2(InvQ, LogInvQ),
+	H is -((Q * LogQ) + (InvQ * LogInvQ)).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
 induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori
