@@ -71,7 +71,7 @@ partizionati dai valori dell'Attributo
 
 disuguaglianza( Esempi, Attributo, Dis) :-
 	a( Attributo, AttVals),
-	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).
+	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).    
 
 /*
 somma_pesata( +Esempi, +Attributo, +AttVals, +SommaParziale, -Somma)
@@ -87,15 +87,25 @@ somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
 	NVal > 0, !,						% almeno uno!
 	findall(P,							% trova tutte le P robabilità
-			(bagof(1, member(_,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			ClDst),
-	gini(ClDst,Gini),
-	NuovaSommaParziale is SommaParziale + Gini*NVal/N,
+			(bagof(1, member(healthy,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
+			Qattr),
+
+	gini(Qattr,Gini),
+	%goliardia(Qattr),
+
+	%NuovaSommaParziale is SommaParziale + entropia(Qattr) * (NVal/N),% Entropia attributo
+	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
 	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
 	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
 
 
+goliardia(Q):-
+	open('goliardia.txt', append, Out),
+	write(Out,Q),
+	writeln(Out, ' '),
+	writeln(Out, ' '),
+	close(Out).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,12 +123,14 @@ somma_quadrati([P|Ps],PartS,S)  :-
 	somma_quadrati(Ps,NewPartS,S).
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /* 
 shannon(ListaProbabilità,Shannon) :-
 	somma_entropie(ListaProbabilità,0,SommaEntropie),
 	Shannon is SommaEntropie.
- */
+*/
 log2(P, Log2ris):-
 	log(P,X),
 	log(2,Y),
