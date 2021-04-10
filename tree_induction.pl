@@ -83,7 +83,7 @@ entropiaDataset(Esempi, EntropiaDataset) :-
 	length(EsempiSick, NSick),
 	N > 0, !,
 	NSick > 0, !,
-	Psick is Nsick/N,
+	Psick is NSick/N,
 	goliardia(Psick).
 
 	% goliardia(N).
