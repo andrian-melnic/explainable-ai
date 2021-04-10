@@ -63,6 +63,16 @@ sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
 		[_/MigliorAttributo|_] ).
 		/*MinorDisuguaglianza -> _ (Singleton var.)*/
 
+entropiaDataset(Esempi, EntropiaDataset) :-
+	length(Esempi, N),
+	findall(C,
+			(member(e(C,Desc),Esempi)),
+			ClassiDataset),
+	goliardia(ClassiDataset),
+	findall(P,
+		(bagof(1, member(sick,ClassiDataset), L), length(L,Nsick), P is NSick/N),
+		Q_DS),
+	entropia(Q_D, EntropiaDataset).
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):
 Dis è la disuguaglianza combinata dei sottoinsiemi degli esempi
@@ -71,6 +81,7 @@ partizionati dai valori dell'Attributo
 
 disuguaglianza( Esempi, Attributo, Dis) :-
 	a( Attributo, AttVals),
+	% entropiaDataset(Esempi, EntropiaDataset),
 	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).    
 
 /*
@@ -87,17 +98,16 @@ somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
 	NVal > 0, !,						% almeno uno!
 	findall(P,							% trova tutte le P robabilità
-			(bagof(1, member(healthy,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
+			(bagof(1, member(_,EsempiSoddisfatti), L), length(L,Nsick), P is NSick/NVal),
 			Qattr),
 
 	gini(Qattr,Gini),
-	%goliardia(Qattr),
-
 	%NuovaSommaParziale is SommaParziale + entropia(Qattr) * (NVal/N),% Entropia attributo
 	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
 	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
 	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
+
 
 
 goliardia(Q):-
