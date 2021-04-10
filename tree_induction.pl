@@ -71,55 +71,76 @@ partizionati dai valori dell'Attributo
 
 disuguaglianza( Esempi, Attributo, Dis) :-
 	a( Attributo, AttVals),
+
 	entropiaDataset(Esempi, EntropiaDataset),
-	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).    
+	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
 
-entropiaDataset(_, EntropiaDataset).
+	Dis is EntropiaDataset - SpShannon,
+
+	goliardia3(EntropiaDataset),
+	goliardia4(Dis).
+	% somma_pesata( Esempi, Attributo, AttVals, 0, Dis).
+
+% entropiaDataset(_, EntropiaDataset).
 entropiaDataset(Esempi, EntropiaDataset) :-
-	length(Esempi, N),
 	findall(sick,
-		(member(e(sick,Desc),Esempi)),
-		EsempiSick),
+			(member(e(sick,Desc),Esempi)), EsempiSick),
+	length(Esempi, N),
 	length(EsempiSick, NSick),
-	N > 0, !,
-	NSick > 0, !,
-	Psick is Nsick/N,
-	goliardia(Psick).
-
-	% goliardia(N).
-	% EntropiaDataset is Psick.
-	% entropia(Psick, EntropiaDataset).
+	PSick is NSick/N,
+	entropia(PSick, EntropiaDataset).
+	
 	% goliardia(EntropiaDataset).
 
-/*
-somma_pesata( +Esempi, +Attributo, +AttVals, +SommaParziale, -Somma)
-restituisce la Somma pesata delle disuguaglianze
-Gini = sum from{v} P(v) * sum from{i <> j} P(i|v)*P(j|v)
-*/
-somma_pesata( _, _, [], Somma, Somma).
-somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
+
+somma_pesata_shannon( _, _, [], Somma, Somma).
+somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	length(Esempi,N),												% quanti sono gli esempi
 	findall(C,														% EsempiSoddisfatti: lista delle classi ..
 			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	% .. degli esempi (con ripetizioni)..
 			EsempiSoddisfatti),				     					% .. per cui Att=Val
 	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
-	NVal > 0, !,						% almeno uno!
+						% almeno uno!
 	findall(P,							% trova tutte le P robabilità
-			(bagof(1, member(healthy,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			Qattr),
-
-	gini(Qattr,Gini),
-
-	%NuovaSommaParziale is SommaParziale + entropia(Qattr) * (NVal/N),% Entropia attributo
-	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
-	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
+			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
+			Q),
+	nth0(0, Q, Qattr),
+	% Q = 0, !,
+	% Q = 0, EntropiaAttr is 0, goliardia(EntropiaAttr), !,
+	entropia(Qattr, EntropiaAttr),
+	goliardia(Qattr),
+	goliardia2(EntropiaAttr),
+	NuovaSommaParziale is SommaParziale + EntropiaAttr * (NVal/N),% Entropia attributo
+	% NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
+	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
-	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
+	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
 
 
 
 goliardia(Q):-
-	open('goliardia.txt', append, Out),
+	open('q_attr.txt', append, Out),
+	write(Out,Q),
+	writeln(Out, ' '),
+	writeln(Out, ' '),
+	close(Out).
+
+goliardia2(Q):-
+	open('entropia_attr.txt', append, Out),
+	write(Out,Q),
+	writeln(Out, ' '),
+	writeln(Out, ' '),
+	close(Out).
+
+goliardia3(Q):-
+	open('entropia_ds.txt', append, Out),
+	write(Out,Q),
+	writeln(Out, ' '),
+	writeln(Out, ' '),
+	close(Out).
+
+goliardia4(Q):-
+	open('dis.txt', append, Out),
 	write(Out,Q),
 	writeln(Out, ' '),
 	writeln(Out, ' '),
@@ -127,6 +148,32 @@ goliardia(Q):-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/*
+somma_pesata( +Esempi, +Attributo, +AttVals, +SommaParziale, -Somma)
+restituisce la Somma pesata delle disuguaglianze
+Gini = sum from{v} P(v) * sum from{i <> j} P(i|v)*P(j|v)
+*/
+
+somma_pesata( _, _, [], Somma, Somma).
+somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
+	length(Esempi,N),												% quanti sono gli esempi
+	findall(C,														% EsempiSoddisfatti: lista delle classi ..
+			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	% .. degli esempi (con ripetizioni)..
+			EsempiSoddisfatti),				     					% .. per cui Att=Val
+	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
+						% almeno uno!
+	findall(P,							% trova tutte le P robabilità
+			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
+			Q),
+	% nth0(0, Q, Qattr),
+	gini(Qattr,Gini),
+	% entropia(Qattr, EntropiaAttr),
+	% NuovaSommaParziale is SommaParziale + EntropiaAttr * (NVal/N),% Entropia attributo
+	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
+	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
+	;
+	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
+
 /*
 gini(ListaProbabilità, IndiceGini)
     IndiceGini = SOMMATORIA Pi*Pj per tutti i,j tali per cui i\=j
@@ -160,12 +207,17 @@ somma_entropie([P|Ps], PartS, S) :-
 	NewPartS is PartS + entropia(P),
 	somma_entropie(Ps, NewPartSm, S).
 
+% entropia(0,H):-
+% 	goliardia(0),
+% 	H is 0.
 /* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
+
 entropia(Q, H):-
-	InvQ is 1-Q,
+	(Q = 1) -> H is 0 ;
+	(InvQ is 1-Q,
 	log2(Q, LogQ),
 	log2(InvQ, LogInvQ),
-	H is -((Q * LogQ) + (InvQ * LogInvQ)).
+	H is -((Q * LogQ) + (InvQ * LogInvQ))).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
