@@ -14,6 +14,7 @@ induce_albero( Albero ) :-
 	findall( Att,a(Att,_), Attributi),
 	induce_albero( Attributi, Esempi, Albero),
 	mostra( Albero ),
+	txt( Albero ),
 	assert(alb(Albero)),
 	stampa(Albero).
 
@@ -32,8 +33,6 @@ l'Albero indotto dipende da questi tre casi:
 (4) Albero = l(Classi): non abbiamo Attributi utili per
     discriminare ulteriormente
 */
-
-
 induce_albero( _, [], null ) :- !. % (1)
 
 induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :-           % (2)
@@ -65,14 +64,11 @@ sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
 		% [MinorDisuguaglianza/MigliorAttributo|_]
 		% goliardia(MaggiorDisuguaglianza/MigliorAttributo).
 
-		/*MinorDisuguaglianza -> _ (Singleton var.)*/
-
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):
 Dis è la disuguaglianza combinata dei sottoinsiemi degli esempi
 partizionati dai valori dell'Attributo
 */
-
 disuguaglianza( Esempi, Attributo, Dis) :-
 	a( Attributo, AttVals),
 
@@ -118,8 +114,6 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	;
 	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
 
-
-
 goliardia(Q):-
 	open('best.txt', append, Out),
 	write(Out,Q),
@@ -149,14 +143,6 @@ goliardia4(Q):-
 	close(Out).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-/* 
-shannon(ListaProbabilità,Shannon) :-
-	somma_entropie(ListaProbabilità,0,SommaEntropie),
-	Shannon is SommaEntropie.
-*/
 log2(P, Log2ris):-
 	log(P,X),
 	log(2,Y),
@@ -175,7 +161,6 @@ entropia(Q, H):-
 	log2(Q, LogQ),
 	log2(InvQ, LogInvQ),
 	H is -((Q * LogQ) + (InvQ * LogInvQ))).
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
@@ -207,27 +192,46 @@ soddisfa(Oggetto,Congiunzione) :-
 		ValX \== Val).
 
 del(T,[T|C],C) :- !.
-
 del(A,[T|C],[T|C1]) :-
 	del(A,C,C1).
 
 mostra(T) :-
 	mostra(T,0).
-
 mostra(null,_) :- writeln(' ==> ???').
-
 mostra(l(X),_) :- write(' ==> '),writeln(X).
-
 mostra(t(A,L),I) :-
 	nl,tab(I),write(A),nl,I1 is I+2,
 	mostratutto(L,I1).
 
 mostratutto([],_).
-
 mostratutto([V:T|C],I) :-
 	tab(I),write(V), I1 is I+2,
 	mostra(T,I1),
 	mostratutto(C,I).
+
+% Stampa albero formattato su file 
+txt(T) :-
+	open('output.txt', append, Out),
+	writeln(Out, 'Albero Formattato: '),
+	txt(Out, T,0),
+	close(Out).
+
+txt(Out, null,_) :- 
+	writeln(Out, ' ==> ???').
+txt(Out, l(X),_) :- 
+	write(Out, ' ==> '), writeln(Out, X).
+txt(Out, t(A,L),I) :-
+	writeln(Out, ' '),
+	tab(Out, I), write(Out, A),
+	writeln(Out, ' '), 
+	I1 is I+2,
+	txtTutto(Out, L,I1).
+
+txtTutto(_, [],_).
+txtTutto(Out, [V:T|C],I) :-
+	tab(Out, I),write(Out, V), I1 is I+2,
+	txt(Out, T,I1),
+	txtTutto(Out, C,I).
 
 
 /*
@@ -305,6 +309,12 @@ valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 
 
 stampa(Albero):-
-	open('output.txt',write,Out),
-	write(Out,Albero),
+	open('output.txt', append, Out),
+	writeln(Out, ' '), writeln(Out, ' '),
+	writeln(Out, 'Albero: '),
+	write(Out, Albero),
 	close(Out).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
