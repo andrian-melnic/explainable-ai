@@ -75,9 +75,8 @@ disuguaglianza( Esempi, Attributo, Dis) :-
 	entropiaDataset(Esempi, EntropiaDataset),
 	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
 
-	Dis is EntropiaDataset - SpShannon,
-
-	goliardia4(Dis).
+	Dis is EntropiaDataset - SpShannon.
+	%goliardia4(Dis).
 
 % entropiaDataset(_, EntropiaDataset).
 entropiaDataset(Esempi, EntropiaDataset) :-
@@ -211,8 +210,7 @@ mostratutto([V:T|C],I) :-
 
 % Stampa albero formattato su file 
 txt(T) :-
-	open('output.txt', append, Out),
-	writeln(Out, 'Albero Formattato: '),
+	open('output_formattato.txt', append, Out),
 	txt(Out, T,0),
 	close(Out).
 
@@ -310,8 +308,6 @@ valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 
 stampa(Albero):-
 	open('output.txt', append, Out),
-	writeln(Out, ' '), writeln(Out, ' '),
-	writeln(Out, 'Albero: '),
 	write(Out, Albero),
 	close(Out).
 
