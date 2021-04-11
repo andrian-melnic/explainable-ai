@@ -159,7 +159,28 @@ mostratutto([V:T|C],I) :-
 	mostra(T,I1),
 	mostratutto(C,I).
 
+% Stampa albero formattato su file 
+txt(T) :-
+	open('output_formattato.txt', append, Out),
+	txt(Out, T,0),
+	close(Out).
 
+txt(Out, null,_) :- 
+	writeln(Out, ' ==> ???').
+txt(Out, l(X),_) :- 
+	write(Out, ' ==> '), writeln(Out, X).
+txt(Out, t(A,L),I) :-
+	writeln(Out, ' '),
+	tab(Out, I), write(Out, A),
+	writeln(Out, ' '), 
+	I1 is I+2,
+	txtTutto(Out, L,I1).
+
+txtTutto(_, [],_).
+txtTutto(Out, [V:T|C],I) :-
+	tab(Out, I),write(Out, V), I1 is I+2,
+	txt(Out, T,I1),
+	txtTutto(Out, C,I).
 /*
 ==============================================================================
 classifica( +Oggetto, -Classe, t(+Att,+Valori))
