@@ -60,9 +60,7 @@ sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
 	setof( Disuguaglianza/A,
 		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
 		Disuguaglianze),
-		last(Disuguaglianze, MaggiorDisuguaglianza/MigliorAttributo).
-		% [MinorDisuguaglianza/MigliorAttributo|_]
-		% goliardia(MaggiorDisuguaglianza/MigliorAttributo).
+		last(Disuguaglianze, _/MigliorAttributo).
 
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):
@@ -76,18 +74,15 @@ disuguaglianza( Esempi, Attributo, Dis) :-
 	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
 
 	Dis is EntropiaDataset - SpShannon.
-	%goliardia4(Dis).
 
-% entropiaDataset(_, EntropiaDataset).
+% entropiaDataset(_, EntropiaDataset)
 entropiaDataset(Esempi, EntropiaDataset) :-
 	findall(sick,
-			(member(e(sick,Desc),Esempi)), EsempiSick),
+			(member(e(sick, _),Esempi)), EsempiSick),
 	length(Esempi, N),
 	length(EsempiSick, NSick),
 	PSick is NSick/N,
 	entropia(PSick, EntropiaDataset).
-	
-	% goliardia(EntropiaDataset).
 
 
 somma_pesata_shannon( _, _, [], Somma, Somma).
@@ -97,61 +92,30 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	% .. degli esempi (con ripetizioni)..
 			EsempiSoddisfatti),				     					% .. per cui Att=Val
 	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
-						% almeno uno!
+										% almeno uno!
 	findall(P,							% trova tutte le P robabilità
 			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
 			Q),
 	nth0(0, Q, Qattr),
-	% Q = 0, !,
-	% Q = 0, EntropiaAttr is 0, goliardia(EntropiaAttr), !,
 	entropia(Qattr, EntropiaAttr),
-	% goliardia(Qattr),
-	% goliardia2(EntropiaAttr),
-	NuovaSommaParziale is SommaParziale + EntropiaAttr * (NVal/N),% Entropia attributo
-	% NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
+	NuovaSommaParziale is SommaParziale + EntropiaAttr * (NVal/N),	% Entropia attributo
 	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
-	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
+	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma). 	% nessun esempio soddisfa Att = Val
 
 goliardia(Q):-
-	open('best.txt', append, Out),
+	open('prova.txt', append, Out),
 	write(Out,Q),
 	writeln(Out, ' '),
 	writeln(Out, ' '),
 	close(Out).
 
-goliardia2(Q):-
-	open('entropia_attr.txt', append, Out),
-	write(Out,Q),
-	writeln(Out, ' '),
-	writeln(Out, ' '),
-	close(Out).
-
-goliardia3(Q):-
-	open('entropia_ds.txt', append, Out),
-	write(Out,Q),
-	writeln(Out, ' '),
-	writeln(Out, ' '),
-	close(Out).
-
-goliardia4(Q):-
-	open('dis.txt', append, Out),
-	write(Out,Q),
-	writeln(Out, ' '),
-	writeln(Out, ' '),
-	close(Out).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 log2(P, Log2ris):-
 	log(P,X),
 	log(2,Y),
 	Log2ris is X/Y.
-
-somma_entropie([],S , S).
-somma_entropie([P|Ps], PartS, S) :-
-	log2(P, Log2ris), 
-	NewPartS is PartS + entropia(P),
-	somma_entropie(Ps, NewPartSm, S).
 
 /* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
 entropia(Q, H):-
@@ -243,7 +207,6 @@ classifica( +Oggetto, -Classe, t(+Att,+Valori))
 t(-Att,-Valori): Albero di Decisione
 presuppone sia stata effettuata l'induzione dell'Albero di Decisione
 */
-
 classifica(Oggetto,nc,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
 	member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
     member(Val:null,Valori). 			% e Val:null è in Valori
@@ -310,7 +273,6 @@ stampa(Albero):-
 	open('output.txt', append, Out),
 	write(Out, Albero),
 	close(Out).
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
