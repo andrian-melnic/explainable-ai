@@ -14,6 +14,7 @@ induce_albero( Albero ) :-
 	findall( Att,a(Att,_), Attributi),
 	induce_albero( Attributi, Esempi, Albero),
 	mostra( Albero ),
+	txt(Albero),
 	assert(alb(Albero)),
 	stampa(Albero).
 
