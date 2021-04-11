@@ -30,7 +30,7 @@ l'Albero indotto dipende da questi tre casi:
     SubAlb1, SubAlb2,... sono i corrispondenti sottoalberi di
     decisione.
 (4) Albero = l(Classi): non abbiamo Attributi utili per
-     discriminare ulteriormente
+    discriminare ulteriormente
 */
 
 
@@ -60,7 +60,11 @@ usare il setof per far questo è dispendioso e si può fare di meglio ..
 sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
 	setof( Disuguaglianza/A,
 		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
-		[_/MigliorAttributo|_] ).
+		Disuguaglianze),
+		last(Disuguaglianze, MaggiorDisuguaglianza/MigliorAttributo).
+		% [MinorDisuguaglianza/MigliorAttributo|_]
+		% goliardia(MaggiorDisuguaglianza/MigliorAttributo).
+
 		/*MinorDisuguaglianza -> _ (Singleton var.)*/
 
 /*
@@ -77,9 +81,7 @@ disuguaglianza( Esempi, Attributo, Dis) :-
 
 	Dis is EntropiaDataset - SpShannon,
 
-	goliardia3(EntropiaDataset),
 	goliardia4(Dis).
-	% somma_pesata( Esempi, Attributo, AttVals, 0, Dis).
 
 % entropiaDataset(_, EntropiaDataset).
 entropiaDataset(Esempi, EntropiaDataset) :-
@@ -108,8 +110,8 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	% Q = 0, !,
 	% Q = 0, EntropiaAttr is 0, goliardia(EntropiaAttr), !,
 	entropia(Qattr, EntropiaAttr),
-	goliardia(Qattr),
-	goliardia2(EntropiaAttr),
+	% goliardia(Qattr),
+	% goliardia2(EntropiaAttr),
 	NuovaSommaParziale is SommaParziale + EntropiaAttr * (NVal/N),% Entropia attributo
 	% NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
 	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
@@ -119,7 +121,7 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 
 
 goliardia(Q):-
-	open('q_attr.txt', append, Out),
+	open('best.txt', append, Out),
 	write(Out,Q),
 	writeln(Out, ' '),
 	writeln(Out, ' '),
@@ -148,47 +150,6 @@ goliardia4(Q):-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-/*
-somma_pesata( +Esempi, +Attributo, +AttVals, +SommaParziale, -Somma)
-restituisce la Somma pesata delle disuguaglianze
-Gini = sum from{v} P(v) * sum from{i <> j} P(i|v)*P(j|v)
-*/
-
-somma_pesata( _, _, [], Somma, Somma).
-somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
-	length(Esempi,N),												% quanti sono gli esempi
-	findall(C,														% EsempiSoddisfatti: lista delle classi ..
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	% .. degli esempi (con ripetizioni)..
-			EsempiSoddisfatti),				     					% .. per cui Att=Val
-	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
-						% almeno uno!
-	findall(P,							% trova tutte le P robabilità
-			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			Q),
-	% nth0(0, Q, Qattr),
-	gini(Qattr,Gini),
-	% entropia(Qattr, EntropiaAttr),
-	% NuovaSommaParziale is SommaParziale + EntropiaAttr * (NVal/N),% Entropia attributo
-	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),   
-	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
-	;
-	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
-
-/*
-gini(ListaProbabilità, IndiceGini)
-    IndiceGini = SOMMATORIA Pi*Pj per tutti i,j tali per cui i\=j
-    E' equivalente a 1 - SOMMATORIA Pi*Pi su tutti gli i
-*/
-gini(ListaProbabilità,Gini) :-
-	somma_quadrati(ListaProbabilità,0,SommaQuadrati),
-	Gini is 1-SommaQuadrati.
-somma_quadrati([],S,S).
-somma_quadrati([P|Ps],PartS,S)  :-
-	NewPartS is PartS + P*P,
-	somma_quadrati(Ps,NewPartS,S).
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /* 
@@ -207,11 +168,7 @@ somma_entropie([P|Ps], PartS, S) :-
 	NewPartS is PartS + entropia(P),
 	somma_entropie(Ps, NewPartSm, S).
 
-% entropia(0,H):-
-% 	goliardia(0),
-% 	H is 0.
 /* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
-
 entropia(Q, H):-
 	(Q = 1) -> H is 0 ;
 	(InvQ is 1-Q,
