@@ -235,6 +235,23 @@ stampa_matrice_di_confusione :-
 	write('Accuratezza: '), writeln(A),
 	write('Errore: '), writeln(E).
 
+stampa_matrice_di_confusione_txt :-
+	open('matrice_di_confusione_shannon.txt', append, Out),
+	write(Out, Albero),
+	alb(Albero),
+	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
+	length(TestSet,N),
+	valuta(Albero,TestSet,VN,0,VP,0,FN,0,FP,0,NC,0),
+	A is (VP + VN) / (N - NC),							% Accuratezza
+	E is 1 - A,											% Errore
+	write(Out, 'Test effettuati :'),  writeln(Out, N),
+	write(Out, 'Test non classificati :'),  writeln(Out, NC),
+	write(Out, 'Veri Negativi  '), write(Out, VN), write(Out, '   Falsi Positivi '), writeln(Out, FP),
+	write(Out, 'Falsi Negativi '), write(Out, FN), write(Out, '   Veri Positivi  '), writeln(Out, VP),
+	write(Out, 'Accuratezza: '), writeln(Out, A),
+	write(Out, 'Errore: '), writeln(Out, E),
+	close(Out).
+
 % testset vuoto -> valutazioni finali
 valuta(_,[],VN,VN,VP,VP,FN,FN,FP,FP,NC,NC).            
 
