@@ -3,6 +3,10 @@ programma per apprendere inducendo Alberi di Decisione testandone
 l' efficacia
 */
 
+% :- ensure_loaded(old_stroke_dataset).
+% :- ensure_loaded(old_stroke_training_set).
+% :- ensure_loaded(old_stroke_test_set).
+
 :- ensure_loaded(stroke_dataset).
 :- ensure_loaded(stroke_training_set).
 :- ensure_loaded(stroke_test_set).
@@ -230,8 +234,15 @@ presuppone sia stata effettuata l'induzione dell'Albero di Decisione
 */
 
 classifica(Oggetto,nc,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
+
 	member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
-    member(Val:null,Valori). 			% e Val:null è in Valori
+	% write(' { '),
+	% write(Valori),
+	% write(' } '),
+	member(Val:null,Valori);			% e Val:null è in Valori
+	%  stampa_matrice_di_confusione dava false perché incontrava dei valori con
+	%  [healthy, sick]
+	member(Val:l([_,_]), Valori). 			
 
 classifica(Oggetto,Classe,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
 	member(Att=Val,Oggetto),  				% se Att=Val è elemento della lista Oggetto
@@ -247,6 +258,7 @@ stampa_matrice_di_confusione :-
 	alb(Albero),
 	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
 	length(TestSet,N),
+	% write('valuto'),
 	valuta(Albero,TestSet,VN,0,VP,0,FN,0,FP,0,NC,0),
 	A is (VP + VN) / (N - NC),							% Accuratezza
 	E is 1 - A,											% Errore
@@ -275,28 +287,33 @@ stampa_matrice_di_confusione_txt :-
 	close(Out).
 
 % testset vuoto -> valutazioni finali
-valuta(_,[],VN,VN,VP,VP,FN,FN,FP,FP,NC,NC).            
+valuta(_,[],VN,VN,VP,VP,FN,FN,FP,FP,NC,NC).
+	% write('0 -> ').           
 
 % prevede correttamente che il paziente � healthy
 valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,healthy,Albero), !,      
+	% write('1 -> '),
+	classifica(Oggetto,healthy,Albero), !,
 	VNA1 is VNA + 1,
 	valuta(Albero,Coda,VN,VNA1,VP,VPA,FN,FNA,FP,FPA,NC,NCA).
 
 % prevede correttamente che il paziente � sick
 valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	% write('2 -> '),
 	classifica(Oggetto,sick,Albero), !, 
 	VPA1 is VPA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA1,FN,FNA,FP,FPA,NC,NCA).
 
 % prevede erroneamente che il paziente � healthy
 valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	% write('3 -> '),
 	classifica(Oggetto,healthy,Albero), !,      
 	FNA1 is FNA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA1,FP,FPA,NC,NCA).
 
 % prevede erroneamente che il paziente � sick
 valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
+	% write('4 -> '),
 	classifica(Oggetto,sick,Albero), !, 
 	FPA1 is FPA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA1,NC,NCA).
