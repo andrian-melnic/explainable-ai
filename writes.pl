@@ -13,7 +13,7 @@ goliardia(A):-
 	close(Out).
 
 goliardia_due(A, B):-
-	open('attr_dis.txt', append, Out),
+	open('goliardia_due.txt', append, Out),
 	write(Out,A),
 	write(Out,' '),
 	write(Out,B),

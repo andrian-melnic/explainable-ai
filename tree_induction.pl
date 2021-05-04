@@ -47,6 +47,7 @@ induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :-           % (2)
 induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 	sceglie_attributo( Attributi, Esempi, Attributo), !,	    % implementa la politica di scelta
 	del( Attributo, Attributi, Rimanenti ),					    % elimina Attributo scelto
+	%goliardia(Rimanenti),
 	a( Attributo, Valori ),					 				    % ne preleva i valori
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
 
@@ -79,8 +80,20 @@ disuguaglianza( Esempi, Attributo, Dis) :-
 	entropiaDataset(Esempi, EntropiaDataset),
 	% fino a qui va bene arriva tutto
 	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
-	Dis is EntropiaDataset - SpShannon,
+	somma_gain_ratio(Esempi, Attributo, AttVals, 0, SpGain),
+	Gain is EntropiaDataset - SpShannon,
+	controllo(Gain, SpGain, Dis),
 	goliardia_due(Attributo, Dis).
+
+% procedura per evitare la divisione con lo 0
+% ottenuto nel momento in cui la lista e' vuota
+controllo(Gain, Sp, GainRatio):-
+	(Sp = 0.0) -> GainRatio is 0 ;
+	(
+		% Dis is Gain Ratio xP
+		GainRatio is Gain/(-Sp)
+	).
+
 
 % entropiaDataset(_, EntropiaDataset)
 entropiaDataset(Esempi, EntropiaDataset) :-
@@ -99,7 +112,6 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
 			EsempiSoddisfatti),				     					
 	length(EsempiSoddisfatti, NVal),	
-	% goliardia_due(Att, Val),
 	
 	findall(P,							
 			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
@@ -111,7 +123,31 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	NuovaSommaParziale is SommaParziale + (NVal/N) * EntropiaAttr ,	
 	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
-	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma). 	
+	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
+
+	%sommatoria gain ratio
+	somma_gain_ratio( _, _, [], Somma_g, Somma_g).
+	somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
+	length(Esempi,N),												
+	findall(C,														
+			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
+			EsempiSoddisfatti),				     					
+	length(EsempiSoddisfatti, NVal),
+	
+	findall(P,							
+			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
+			Q),
+	nth0(0, Q, Qattr),
+	Qattr > 0, !,
+	entropia(Qattr, EntropiaAttr),
+
+	P_va is (NVal/N),
+	log2(P_va, X),
+	NuovaSommaParziale_g is SommaParziale_g + P_va * X,
+	
+	somma_gain_ratio(Esempi,Att,Valori,NuovaSommaParziale_g,Somma_g)
+	;
+	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g). 	 	
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
