@@ -139,7 +139,7 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 			Q),
 	nth0(0, Q, Qattr),
 	Qattr > 0, !,
-	entropia(Qattr, EntropiaAttr),
+	%entropia(Qattr, EntropiaAttr),
 
 	P_va is (NVal/N),
 	log2(P_va, X),
