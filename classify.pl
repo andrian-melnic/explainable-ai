@@ -9,18 +9,17 @@ t(-Att,-Valori): Albero di Decisione
 presuppone sia stata effettuata l'induzione dell'Albero di Decisione
 */
 
-/*
 classifica(Oggetto,nc,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
-
 	member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
+	member(Val:null,Valori).			% e Val:null è in Valori
+
 	% write(' { '),
 	% write(Valori),
 	% write(' } '),
-	member(Val:null,Valori);			% e Val:null è in Valori
 	%  stampa_matrice_di_confusione dava false perché incontrava dei valori con
 	%  [healthy, sick]
-	member(Val:l([_,_]), Valori). 			
-*/
+	% member(Val:l([_,_]), Valori). 			
+
 
 classifica(Oggetto,Classe,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
 	member(Att=Val,Oggetto),  				% se Att=Val è elemento della lista Oggetto
@@ -97,9 +96,14 @@ valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA1,NC,NCA).
 
 % non classifica
-%valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
-valuta(Albero,[_/_|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
-	% classifica(Oggetto,nc,Albero), !, 					% non classificato
+valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
+% valuta(Albero,[_/_|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
+	classifica(Oggetto,nc,Albero), !,	% non classificato
 	NCA1 is NCA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA1).
 
+% % non classifica
+% valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
+% 	classifica(Oggetto,nc,Albero), !, 					% non classificato
+% 	NCA1 is NCA + 1,
+% 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA1).

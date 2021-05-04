@@ -3,10 +3,8 @@ programma per apprendere inducendo Alberi di Decisione testandone
 l' efficacia
 */
 
-% :- ensure_loaded(old_stroke_dataset).
-% :- ensure_loaded(old_stroke_training_set).
-% :- ensure_loaded(old_stroke_test_set).
 
+%:- ensure_loaded(stroke_dataset_tot).
 :- ensure_loaded(stroke_dataset).
 :- ensure_loaded(stroke_training_set).
 :- ensure_loaded(stroke_test_set).
@@ -82,18 +80,23 @@ disuguaglianza( Esempi, Attributo, Dis) :-
 	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
 	somma_gain_ratio(Esempi, Attributo, AttVals, 0, SpGain),
 	Gain is EntropiaDataset - SpShannon,
-	controllo(Gain, SpGain, Dis),
-	goliardia_due(Attributo, Dis).
+	controllo(Gain, SpGain, Dis).
 
 % procedura per evitare la divisione con lo 0
 % ottenuto nel momento in cui la lista e' vuota
+controllo(_, 0.0, 0):- !.
+controllo(Gain, Sp, GainRatio):-
+	% Dis is Gain Ratio xP
+	GainRatio is Gain/(-Sp).
+
+/* TODO: da rimuovere e verifica
 controllo(Gain, Sp, GainRatio):-
 	(Sp = 0.0) -> GainRatio is 0 ;
 	(
 		% Dis is Gain Ratio xP
 		GainRatio is Gain/(-Sp)
 	).
-
+*/
 
 % entropiaDataset(_, EntropiaDataset)
 entropiaDataset(Esempi, EntropiaDataset) :-
@@ -125,7 +128,7 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	;
 	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
 
-	%sommatoria gain ratio
+	% Sommatoria gain ratio
 	somma_gain_ratio( _, _, [], Somma_g, Somma_g).
 	somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
 	length(Esempi,N),												
@@ -150,6 +153,9 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g). 	 	
 
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 log2(P, Log2ris):-
@@ -158,12 +164,21 @@ log2(P, Log2ris):-
 	Log2ris is X/Y.
 
 /* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
+entropia(1, 0):- !.
+entropia(Q, H):-
+	InvQ is 1-Q,
+	log2(Q, LogQ),
+	log2(InvQ, LogInvQ),
+	H is -((Q * LogQ) + (InvQ * LogInvQ)).
+
+/* TODO: Rimuovi e verifica
 entropia(Q, H):-
 	(Q = 1) -> H is 0 ;
 	(InvQ is 1-Q,
 	log2(Q, LogQ),
 	log2(InvQ, LogInvQ),
 	H is -((Q * LogQ) + (InvQ * LogInvQ))).
+*/
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
