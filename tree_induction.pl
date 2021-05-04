@@ -5,9 +5,9 @@ l' efficacia
 
 
 %:- ensure_loaded(stroke_dataset_tot).
-:- ensure_loaded(stroke_dataset).
-:- ensure_loaded(stroke_training_set).
-:- ensure_loaded(stroke_test_set).
+:- ensure_loaded(aa_stroke_dataset).
+:- ensure_loaded(aa_training_set).
+:- ensure_loaded(aa_test_set).
 :- ensure_loaded(classify).
 :- ensure_loaded(writes).
 

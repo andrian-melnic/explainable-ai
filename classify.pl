@@ -98,7 +98,7 @@ valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 % non classifica
 valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
 % valuta(Albero,[_/_|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
-	classifica(Oggetto,nc,Albero), !,	% non classificato
+	% classifica(Oggetto,nc,Albero), !,	% non classificato
 	NCA1 is NCA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA1).
 
