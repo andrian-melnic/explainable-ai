@@ -85,11 +85,12 @@ disuguaglianza( Esempi, Attributo, Dis) :-
 % procedura per evitare la divisione con lo 0
 % ottenuto nel momento in cui la lista e' vuota
 controllo(_, 0.0, 0):- !.
+controllo(_, 0, 0):- !.
 controllo(Gain, Sp, GainRatio):-
 	% Dis is Gain Ratio xP
 	GainRatio is Gain/(-Sp).
 
-/* TODO: da rimuovere e verifica
+/* TODO: Da rimuovere ma verifica
 controllo(Gain, Sp, GainRatio):-
 	(Sp = 0.0) -> GainRatio is 0 ;
 	(
@@ -108,6 +109,48 @@ entropiaDataset(Esempi, EntropiaDataset) :-
 	entropia(PSick, EntropiaDataset).
 
 
+sommatoria(Esempi, Att, Val, Qattr, P_va):-
+	length(Esempi,N),												
+	findall(C,														
+			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
+			EsempiSoddisfatti),				     					
+	length(EsempiSoddisfatti, NVal),	
+	
+	findall(P,							
+			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
+			Q),
+	nth0(0, Q, Qattr),
+	P_va is (NVal/N).
+
+
+somma_pesata_shannon( _, _, [], Somma, Somma).
+somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
+	sommatoria(Esempi, Att, Val, Qattr, P_va),
+	Qattr > 0, !,
+
+	entropia(Qattr, EntropiaAttr),
+	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,	
+	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
+	;
+	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
+
+% Sommatoria gain ratio
+somma_gain_ratio( _, _, [], Somma_g, Somma_g).
+somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
+	sommatoria(Esempi, Att, Val, Qattr, P_va),
+	Qattr > 0, !,
+
+	log2(P_va, X),
+	NuovaSommaParziale_g is SommaParziale_g + P_va * X,
+	
+	somma_gain_ratio(Esempi,Att,Valori,NuovaSommaParziale_g,Somma_g)
+	;
+	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).
+
+
+
+
+/* TODO: Da rimuovere ma verifica
 somma_pesata_shannon( _, _, [], Somma, Somma).
 somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	length(Esempi,N),												
@@ -123,14 +166,15 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	Qattr > 0, !,
 	entropia(Qattr, EntropiaAttr),
 
-	NuovaSommaParziale is SommaParziale + (NVal/N) * EntropiaAttr ,	
+	P_va is (NVal/N),
+	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,	
 	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
 	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
 
-	% Sommatoria gain ratio
-	somma_gain_ratio( _, _, [], Somma_g, Somma_g).
-	somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
+% Sommatoria gain ratio
+somma_gain_ratio( _, _, [], Somma_g, Somma_g).
+somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
 	length(Esempi,N),												
 	findall(C,														
 			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
@@ -142,15 +186,15 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 			Q),
 	nth0(0, Q, Qattr),
 	Qattr > 0, !,
-	%entropia(Qattr, EntropiaAttr),
 
 	P_va is (NVal/N),
+
 	log2(P_va, X),
 	NuovaSommaParziale_g is SommaParziale_g + P_va * X,
 	
 	somma_gain_ratio(Esempi,Att,Valori,NuovaSommaParziale_g,Somma_g)
 	;
-	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g). 	 	
+	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).*/	 	
 
 
 
@@ -171,7 +215,7 @@ entropia(Q, H):-
 	log2(InvQ, LogInvQ),
 	H is -((Q * LogQ) + (InvQ * LogInvQ)).
 
-/* TODO: Rimuovi e verifica
+/* TODO: Da rimuovere ma verifica
 entropia(Q, H):-
 	(Q = 1) -> H is 0 ;
 	(InvQ is 1-Q,
