@@ -44,8 +44,8 @@ induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :-           % (2)
 
 induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 	sceglie_attributo( Attributi, Esempi, Attributo), !,	    % implementa la politica di scelta
+	%sceglie_attributo( Attributi, Esempi, 0, Attributo), !,	
 	del( Attributo, Attributi, Rimanenti ),					    % elimina Attributo scelto
-	%goliardia(Rimanenti),
 	a( Attributo, Valori ),					 				    % ne preleva i valori
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
 
@@ -56,17 +56,21 @@ induce_albero( _, Esempi, l(Classi)) :-
 
 /*
 sceglie_attributo( +Attributi, +Esempi, -MigliorAttributo):
-seleziona l'Attributo che meglio discrimina le classi; si basa sul
-concetto della "Gini-disuguaglianza"; utilizza il setof per ordinare
-gli attributi in base al valore crescente della loro disuguaglianza
-usare il setof per far questo è dispendioso e si può fare di meglio ..
+seleziona l'Attributo che meglio discrimina le classi
 */
-sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
-	setof( Disuguaglianza/A,
-		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
-		Disuguaglianze),
-		% goliardia_attr(Disuguaglianze),
-		last(Disuguaglianze, _/MigliorAttributo).
+sceglie_attributo( Attributi, Esempi, MigliorAttributo) :-
+	bagof( Dis/At,
+		(member(At,Attributi) , disuguaglianza(Esempi,At,Dis)),
+		Disis),
+		max_dis(Disis, _, MigliorAttributo).
+
+%TODO: verifica cosa fa '=' perche non lo sappiamo 
+max_dis([(H/A)|T], Y, Best):-  
+	max_dis(T, X, Best_X),
+    (H > X ->
+    	(H = Y, A = Best);
+    	(Y = X, Best = Best_X)).
+max_dis([(X/A)], X, A).
 
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):
@@ -76,7 +80,6 @@ partizionati dai valori dell'Attributo
 disuguaglianza( Esempi, Attributo, Dis) :-
 	a( Attributo, AttVals),
 	entropiaDataset(Esempi, EntropiaDataset),
-	% fino a qui va bene arriva tutto
 	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
 	somma_gain_ratio(Esempi, Attributo, AttVals, 0, SpGain),
 	Gain is EntropiaDataset - SpShannon,
@@ -147,7 +150,8 @@ somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
 	;
 	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).
 
-
+% TODO: IDEA accorpare sommatorie in un unico predicato
+% perchè per il momento non è ottimizzato.
 
 
 /* TODO: Da rimuovere ma verifica
