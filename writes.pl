@@ -21,6 +21,17 @@ goliardia_due(A, B):-
 	writeln(Out, ' '),
 	close(Out).
 
+goliardia_tre(A, B, C):-
+	open('goliardia_tre.txt', append, Out),
+	write(Out,A),
+	write(Out,' '),
+	write(Out,B),
+	write(Out,' '),
+	write(Out,C),
+	writeln(Out, ' '),
+	writeln(Out, ' '),
+	close(Out).
+
 
 mostra(T) :-
 	mostra(T,0).

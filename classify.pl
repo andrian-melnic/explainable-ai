@@ -13,6 +13,14 @@ classifica(Oggetto,nc,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della
 	member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
 	member(Val:null,Valori).			% e Val:null è in Valori
 
+	% WIP --->
+	% member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
+	% member(Val:X,Valori),			% e Val:null è in Valori
+	
+	% writeln(X),
+	% write('\n').
+	% <---
+
 	% write(' { '),
 	% write(Valori),
 	% write(' } '),
@@ -67,28 +75,28 @@ stampa_matrice_di_confusione_txt :-
 valuta(_,[],VN,VN,VP,VP,FN,FN,FP,FP,NC,NC).
 	% write('0 -> ').           
 
-% prevede correttamente che il paziente � healthy
+% prevede correttamente che il paziente e' healthy
 valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	% write('1 -> '),
 	classifica(Oggetto,healthy,Albero), !,
 	VNA1 is VNA + 1,
 	valuta(Albero,Coda,VN,VNA1,VP,VPA,FN,FNA,FP,FPA,NC,NCA).
 
-% prevede correttamente che il paziente � sick
+% prevede correttamente che il paziente e' sick
 valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	% write('2 -> '),
 	classifica(Oggetto,sick,Albero), !, 
 	VPA1 is VPA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA1,FN,FNA,FP,FPA,NC,NCA).
 
-% prevede erroneamente che il paziente � healthy
+% prevede erroneamente che il paziente e' healthy
 valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	% write('3 -> '),
 	classifica(Oggetto,healthy,Albero), !,      
 	FNA1 is FNA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA1,FP,FPA,NC,NCA).
 
-% prevede erroneamente che il paziente � sick
+% prevede erroneamente che il paziente e' sick
 valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	% write('4 -> '),
 	classifica(Oggetto,sick,Albero), !, 
@@ -96,9 +104,9 @@ valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA1,NC,NCA).
 
 % non classifica
-valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
-% valuta(Albero,[_/_|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
-	% classifica(Oggetto,nc,Albero), !,	% non classificato
+valuta(Albero,[_/_|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
+% valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
+	%classifica(Oggetto,nc,Albero), !,	% non classificato
 	NCA1 is NCA + 1,
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA1).
 

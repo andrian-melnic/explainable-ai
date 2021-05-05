@@ -50,9 +50,47 @@ induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
 
 %finiti gli attributi utili (KO!!)
-induce_albero( _, Esempi, l(Classi)) :-
-	findall( Classe, member(e(Classe,_),Esempi), Classi).
+induce_albero( _, Esempi, l(ClasseDominante)) :-
+	findall( Classe, member(e(Classe,_), Esempi), Classi),
+	% calcolo prob. classe dominante
+	calc_prob_classi(Classi, ClasseDominante).
+	%verifica(Occorrenze, ClasseDominante, ClasseX).
 
+	% TODO: idea sotto probabilmente da droppare 
+	% genero subset di esempi solamente della classe dominante
+	%examples_subset(ClasseDominante, Esempi, Sottoinsieme),
+	% rilancio il predicato con nuovo sottoinsieme e classe dominante 
+	%induce_albero( _, Sottoinsieme, l(ClasseDominante)).
+
+% ################## Utility ##################
+% conteggio del numero di istanze N di X in una lista L
+conteggio_elementi(X,N,L) :-
+    aggregate(count, member(X,L),N).
+% ricava l'istanza con il maggior numero di occorrenze di X in una lista L
+calc_prob_classi(L, X) :-
+    aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N1,X)).
+% versione con Occorrenze come output
+%calc_prob_classi(L, N, X) :-
+%   aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N,X)).
+
+/*
+% "funzionerebbe" la distinzione dei casi [healty,sick] ma non è corretto, da evitare assolutamente
+verifica(A, B, C) :-
+	(A = 1) -> C = null
+	;
+	(C = B).
+
+% genera nuovo subset di esempi filtrato solo la classe passata
+examples_subset(Classe,Esempi,Sottoinsieme) :-
+	findall(e(C,O),
+			(member(e(C,O),Esempi),
+			verifica_classe(C,Classe)),
+			Sottoinsieme).
+% verifica che le due classi coincidano
+verifica_classe(ClasseX,Classe) :-
+	\+ (ClasseX \== Classe).
+% ##############################################
+*/
 
 /*
 sceglie_attributo( +Attributi, +Esempi, -MigliorAttributo):
