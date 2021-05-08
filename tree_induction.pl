@@ -52,45 +52,40 @@ induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 %finiti gli attributi utili (KO!!)
 induce_albero( _, Esempi, l(ClasseDominante)) :-
 	findall( Classe, member(e(Classe,_), Esempi), Classi),
-	% calcolo prob. classe dominante
-	calc_prob_classi(Classi, ClasseDominante).
-	%verifica(Occorrenze, ClasseDominante, ClasseX).
+	verify_occurrences(Classi, ClasseDominante).
 
-	% TODO: idea sotto probabilmente da droppare 
-	% genero subset di esempi solamente della classe dominante
-	%examples_subset(ClasseDominante, Esempi, Sottoinsieme),
-	% rilancio il predicato con nuovo sottoinsieme e classe dominante 
-	%induce_albero( _, Sottoinsieme, l(ClasseDominante)).
+verify_occurrences(Classi, X):-
+	(occurrences(Classi, sick, healthy)) -> 
+	(calc_classe_dominante(true, Classi, X));
+	(calc_classe_dominante(false, Classi, X)).
+
+calc_classe_dominante(true, _, [sick, healthy]).
+calc_classe_dominante(false, Classi, ClasseDominante):- 
+	calc_prob_classi(Classi, ClasseDominante).
 
 % ################## Utility ##################
-% conteggio del numero di istanze N di X in una lista L
-conteggio_elementi(X,N,L) :-
-    aggregate(count, member(X,L),N).
-% ricava l'istanza con il maggior numero di occorrenze di X in una lista L
-calc_prob_classi(L, X) :-
-    aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N1,X)).
 % versione con Occorrenze come output
 %calc_prob_classi(L, N, X) :-
 %   aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N,X)).
 
-/*
-% "funzionerebbe" la distinzione dei casi [healty,sick] ma non è corretto, da evitare assolutamente
-verifica(A, B, C) :-
-	(A = 1) -> C = null
-	;
-	(C = B).
+% ricava l'istanza con il maggior numero di occorrenze di X in una lista 
+calc_prob_classi(List, X) :-
+    aggregate(max(N1, X1), conteggio_elementi(X1, N1, List), max(N1, X)).
+% conteggio del numero di istanze Count di X in una lista 
+conteggio_elementi(X, Count, List) :-
+    aggregate(count, member(X, List), Count).
 
-% genera nuovo subset di esempi filtrato solo la classe passata
-examples_subset(Classe,Esempi,Sottoinsieme) :-
-	findall(e(C,O),
-			(member(e(C,O),Esempi),
-			verifica_classe(C,Classe)),
-			Sottoinsieme).
-% verifica che le due classi coincidano
-verifica_classe(ClasseX,Classe) :-
-	\+ (ClasseX \== Classe).
-% ##############################################
-*/
+occurrences([],_A,_B,N,N).
+occurrences([H|T],A,B,N0,M0) :-
+	elem_x_count(H,A,N1,N0),
+	elem_x_count(H,B,M1,M0),
+	occurrences(T,A,B,N1,M1).
+occurrences(List,A,B) :-
+	dif(A,B),
+	occurrences(List,A,B,0,0).
+
+elem_x_count(X,X,(Old+1),Old):- !.
+elem_x_count(_,_,Old,Old):- !.
 
 /*
 sceglie_attributo( +Attributi, +Esempi, -MigliorAttributo):
