@@ -55,12 +55,12 @@ induce_albero( _, Esempi, l(ClasseDominante)) :-
 	verify_occurrences(Classi, ClasseDominante).
 
 verify_occurrences(Classi, X):-
-	(occurrences(Classi, sick, healthy)) -> 
+	(occurrences(Classi, sick, healthy)) ->
 	(calc_classe_dominante(true, Classi, X));
 	(calc_classe_dominante(false, Classi, X)).
 
 calc_classe_dominante(true, _, [sick, healthy]).
-calc_classe_dominante(false, Classi, ClasseDominante):- 
+calc_classe_dominante(false, Classi, ClasseDominante):-
 	calc_prob_classi(Classi, ClasseDominante).
 
 % ################## Utility ##################
@@ -97,14 +97,21 @@ sceglie_attributo( Attributi, Esempi, MigliorAttributo) :-
 		Disis),
 		max_dis(Disis, _, MigliorAttributo).
 
-%TODO: verifica cosa fa '=' perche non lo sappiamo 
-max_dis([(H/A)|T], Y, Best):-  
-	max_dis(T, X, Best_X),
-    (H > X ->
-    	(H = Y, A = Best);
-    	(Y = X, Best = Best_X)).
-max_dis([(X/A)], X, A).
+%TODO: verifica cosa fa '=' perche non lo sappiamo
+%NON FUNZIONA SU WINDOWS :(
+% max_dis([(H/A)|T], Y, Best):-
+% 	max_dis(T, X, Best_X),
+%     (H > X ->
+%     	(H = Y, A = Best);
+%     	(Y = X, Best = Best_X)).
+% max_dis([(X/A)], X, A).
 
+max_dis([ (X/A) ], X, A).
+max_dis([ (H/A)|T ], Y, Best):-
+	max_dis(T, X, Best_X),
+	(H>X ->
+		(H=Y, A = Best);
+		(Y=X, Best = Best_X)).
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):
 Dis è la disuguaglianza combinata dei sottoinsiemi degli esempi
@@ -146,13 +153,13 @@ entropiaDataset(Esempi, EntropiaDataset) :-
 
 
 sommatoria(Esempi, Att, Val, Qattr, P_va):-
-	length(Esempi,N),												
-	findall(C,														
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
-			EsempiSoddisfatti),				     					
-	length(EsempiSoddisfatti, NVal),	
-	
-	findall(P,							
+	length(Esempi,N),
+	findall(C,
+			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
+			EsempiSoddisfatti),
+	length(EsempiSoddisfatti, NVal),
+
+	findall(P,
 			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
 			Q),
 	nth0(0, Q, Qattr),
@@ -165,7 +172,7 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	Qattr > 0, !,
 
 	entropia(Qattr, EntropiaAttr),
-	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,	
+	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,
 	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
 	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
@@ -178,7 +185,7 @@ somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
 
 	log2(P_va, X),
 	NuovaSommaParziale_g is SommaParziale_g + P_va * X,
-	
+
 	somma_gain_ratio(Esempi,Att,Valori,NuovaSommaParziale_g,Somma_g)
 	;
 	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).
