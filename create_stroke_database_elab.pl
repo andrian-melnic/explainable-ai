@@ -37,12 +37,12 @@ start :-
     a(Gender,Age,Hypertension,Heart_disease,Ever_married,Work_type,Residence_type,Avg_glucose_level,Bmi,Smoking_status,Target),
     write('aa('), write(Gender),
     write(','),   ( number(Age),           Age =< 30, write('\'0-30\'');
-                    number(Age), Age > 30, Age =< 40, write('\'30-40\'');
-                    number(Age), Age > 40, Age =< 50, write('\'40-50\'');
-                    number(Age), Age > 50, Age =< 60, write('\'50-60\'');
-				    number(Age), Age > 60, Age =< 70, write('\'60-70\'');
-				    number(Age), Age > 70, Age =< 80, write('\'70-80\'');
-				    number(Age), Age > 80,            write('\'80+\'')),  
+                    number(Age), Age > 30, Age =< 40, write('\'31-40\'');
+                    number(Age), Age > 40, Age =< 50, write('\'41-50\'');
+                    number(Age), Age > 50, Age =< 60, write('\'51-60\'');
+				    number(Age), Age > 60, Age =< 70, write('\'61-70\'');
+				    number(Age), Age > 70, Age =< 80, write('\'71-80\'');
+				    number(Age), Age > 80,            write('\'81+\'')),  
     write(','),   write(Hypertension),
     write(','),   write(Heart_disease), 
     write(','),   write(Ever_married), 

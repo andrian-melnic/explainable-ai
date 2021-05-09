@@ -3,9 +3,13 @@ programma per apprendere inducendo Alberi di Decisione testandone
 l' efficacia
 */
 
-:- ensure_loaded(stroke_dataset).
-:- ensure_loaded(stroke_training_set).
-:- ensure_loaded(stroke_test_set).
+
+%:- ensure_loaded(stroke_dataset_tot).
+:- ensure_loaded(aa_stroke_dataset).
+:- ensure_loaded(aa_training_set).
+:- ensure_loaded(aa_test_set).
+:- ensure_loaded(classify).
+:- ensure_loaded(writes).
 
 :- dynamic alb/1.
 
@@ -14,7 +18,7 @@ induce_albero( Albero ) :-
 	findall( Att,a(Att,_), Attributi),
 	induce_albero( Attributi, Esempi, Albero),
 	mostra( Albero ),
-	txt(Albero),
+	txt( Albero ),
 	assert(alb(Albero)),
 	stampa(Albero).
 
@@ -42,28 +46,74 @@ induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :-           % (2)
 
 induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 	sceglie_attributo( Attributi, Esempi, Attributo), !,	    % implementa la politica di scelta
+	%sceglie_attributo( Attributi, Esempi, 0, Attributo), !,	
 	del( Attributo, Attributi, Rimanenti ),					    % elimina Attributo scelto
 	a( Attributo, Valori ),					 				    % ne preleva i valori
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
 
 %finiti gli attributi utili (KO!!)
-induce_albero( _, Esempi, l(Classi)) :-
-	findall( Classe, member(e(Classe,_),Esempi), Classi).
+induce_albero( _, Esempi, l(ClasseDominante)) :-
+	findall( Classe, member(e(Classe,_), Esempi), Classi),
+	verify_occurrences(Classi, ClasseDominante).
 
+verify_occurrences(Classi, X):-
+	(occurrences(Classi, sick, healthy)) ->
+	(calc_classe_dominante(true, Classi, X));
+	(calc_classe_dominante(false, Classi, X)).
+
+calc_classe_dominante(true, _, [sick, healthy]).
+calc_classe_dominante(false, Classi, ClasseDominante):-
+	calc_prob_classi(Classi, ClasseDominante).
+
+% ################## Utility ##################
+% versione con Occorrenze come output
+%calc_prob_classi(L, N, X) :-
+%   aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N,X)).
+
+% ricava l'istanza con il maggior numero di occorrenze di X in una lista 
+calc_prob_classi(List, X) :-
+    aggregate(max(N1, X1), conteggio_elementi(X1, N1, List), max(N1, X)).
+% conteggio del numero di istanze Count di X in una lista 
+conteggio_elementi(X, Count, List) :-
+    aggregate(count, member(X, List), Count).
+
+occurrences([],_A,_B,N,N).
+occurrences([H|T],A,B,N0,M0) :-
+	elem_x_count(H,A,N1,N0),
+	elem_x_count(H,B,M1,M0),
+	occurrences(T,A,B,N1,M1).
+occurrences(List,A,B) :-
+	dif(A,B),
+	occurrences(List,A,B,0,0).
+
+elem_x_count(X,X,(Old+1),Old):- !.
+elem_x_count(_,_,Old,Old):- !.
 
 /*
 sceglie_attributo( +Attributi, +Esempi, -MigliorAttributo):
-seleziona l'Attributo che meglio discrimina le classi; si basa sul
-concetto della "Gini-disuguaglianza"; utilizza il setof per ordinare
-gli attributi in base al valore crescente della loro disuguaglianza
-usare il setof per far questo è dispendioso e si può fare di meglio ..
+seleziona l'Attributo che meglio discrimina le classi
 */
-sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
-	setof( Disuguaglianza/A,
-		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
-		[_/MigliorAttributo|_] ).
-		/*MinorDisuguaglianza -> _ (Singleton var.)*/
+sceglie_attributo( Attributi, Esempi, MigliorAttributo) :-
+	bagof( Dis/At,
+		(member(At,Attributi) , disuguaglianza(Esempi,At,Dis)),
+		Disis),
+		max_dis(Disis, _, MigliorAttributo).
 
+%TODO: verifica cosa fa '=' perche non lo sappiamo
+%NON FUNZIONA SU WINDOWS :(
+% max_dis([(H/A)|T], Y, Best):-
+% 	max_dis(T, X, Best_X),
+%     (H > X ->
+%     	(H = Y, A = Best);
+%     	(Y = X, Best = Best_X)).
+% max_dis([(X/A)], X, A).
+
+max_dis([ (X/A) ], X, A).
+max_dis([ (H/A)|T ], Y, Best):-
+	max_dis(T, X, Best_X),
+	(H>X ->
+		(H=Y, A = Best);
+		(Y=X, Best = Best_X)).
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):
 Dis è la disuguaglianza combinata dei sottoinsiemi degli esempi
@@ -72,7 +122,8 @@ partizionati dai valori dell'Attributo
 
 disuguaglianza( Esempi, Attributo, Dis) :-
 	a( Attributo, AttVals),
-	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).
+	% entropiaDataset(Esempi, EntropiaDataset),
+	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).    
 
 /*
 somma_pesata( +Esempi, +Attributo, +AttVals, +SommaParziale, -Somma)
@@ -88,14 +139,27 @@ somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
 	NVal > 0, !,						% almeno uno!
 	findall(P,							% trova tutte le P robabilità
-			(bagof(1, member(_,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			ClDst),
-	gini(ClDst,Gini),
-	NuovaSommaParziale is SommaParziale + Gini*NVal/N,
+			(bagof(1, member(_,EsempiSoddisfatti), L), length(L,Nsick), P is NSick/NVal),
+			Qattr),
+
+	gini(Qattr,Gini),
+	%NuovaSommaParziale is SommaParziale + entropia(Qattr) * (NVal/N),% Entropia attributo
+	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),
 	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
 	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
 
+
+
+goliardia(Q):-
+	open('goliardia.txt', append, Out),
+	write(Out,Q),
+	writeln(Out, ' '),
+	writeln(Out, ' '),
+	close(Out).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 gini(ListaProbabilità, IndiceGini)
     IndiceGini = SOMMATORIA Pi*Pj per tutti i,j tali per cui i\=j
@@ -109,6 +173,35 @@ somma_quadrati([P|Ps],PartS,S)  :-
 	NewPartS is PartS + P*P,
 	somma_quadrati(Ps,NewPartS,S).
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+/*
+shannon(ListaProbabilità,Shannon) :-
+	somma_entropie(ListaProbabilità,0,SommaEntropie),
+	Shannon is SommaEntropie.
+*/
+log2(P, Log2ris):-
+	log(P,X),
+	log(2,Y),
+	Log2ris is X/Y.
+
+somma_entropie([],S , S).
+somma_entropie([P|Ps], PartS, S) :-
+	log2(P, Log2ris),
+	NewPartS is PartS + entropia(P),
+	somma_entropie(Ps, NewPartSm, S).
+
+/* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
+entropia(Q, H):-
+	InvQ is 1-Q,
+	log2(Q, LogQ),
+	log2(InvQ, LogInvQ),
+	H is -((Q * LogQ) + (InvQ * LogInvQ)).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
 induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori
@@ -138,125 +231,5 @@ soddisfa(Oggetto,Congiunzione) :-
 		ValX \== Val).
 
 del(T,[T|C],C) :- !.
-
 del(A,[T|C],[T|C1]) :-
 	del(A,C,C1).
-
-mostra(T) :-
-	mostra(T,0).
-
-mostra(null,_) :- writeln(' ==> ???').
-
-mostra(l(X),_) :- write(' ==> '),writeln(X).
-
-mostra(t(A,L),I) :-
-	nl,tab(I),write(A),nl,I1 is I+2,
-	mostratutto(L,I1).
-
-mostratutto([],_).
-
-mostratutto([V:T|C],I) :-
-	tab(I),write(V), I1 is I+2,
-	mostra(T,I1),
-	mostratutto(C,I).
-
-% Stampa albero formattato su file 
-txt(T) :-
-	open('output_formattato.txt', append, Out),
-	txt(Out, T,0),
-	close(Out).
-
-txt(Out, null,_) :- 
-	writeln(Out, ' ==> ???').
-txt(Out, l(X),_) :- 
-	write(Out, ' ==> '), writeln(Out, X).
-txt(Out, t(A,L),I) :-
-	writeln(Out, ' '),
-	tab(Out, I), write(Out, A),
-	writeln(Out, ' '), 
-	I1 is I+2,
-	txtTutto(Out, L,I1).
-
-txtTutto(_, [],_).
-txtTutto(Out, [V:T|C],I) :-
-	tab(Out, I),write(Out, V), I1 is I+2,
-	txt(Out, T,I1),
-	txtTutto(Out, C,I).
-/*
-==============================================================================
-classifica( +Oggetto, -Classe, t(+Att,+Valori))
-	Oggetto: [Attributo1=Valore1, .. , AttributoN=ValoreN]
-	Classe: classe a cui potrebbe appartenere un oggetto caratterizzato
-			da quelle coppie
-	Attributo=Valore
-
-t(-Att,-Valori): Albero di Decisione
-presuppone sia stata effettuata l'induzione dell'Albero di Decisione
-*/
-
-classifica(Oggetto,nc,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
-	member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
-    member(Val:null,Valori). 			% e Val:null è in Valori
-
-classifica(Oggetto,Classe,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
-	member(Att=Val,Oggetto),  				% se Att=Val è elemento della lista Oggetto
-	member(Val:l(Classe),Valori). 			% e Val:l(Classe) è in Valori
-
-classifica(Oggetto,Classe,t(Att,Valori)) :-
-	member(Att=Val,Oggetto),  		% se Att=Val è elemento della lista Oggetto
-	delete(Oggetto,Att=Val,Resto),
-	member(Val:t(AttFiglio,ValoriFiglio),Valori),
-	classifica(Resto,Classe,t(AttFiglio,ValoriFiglio)).
-
-stampa_matrice_di_confusione :-
-	alb(Albero),
-	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
-	length(TestSet,N),
-	valuta(Albero,TestSet,VN,0,VP,0,FN,0,FP,0,NC,0),
-	A is (VP + VN) / (N - NC),							% Accuratezza
-	E is 1 - A,											% Errore
-	write('Test effettuati :'),  writeln(N),
-	write('Test non classificati :'),  writeln(NC),
-	write('Veri Negativi  '), write(VN), write('   Falsi Positivi '), writeln(FP),
-	write('Falsi Negativi '), write(FN), write('   Veri Positivi  '), writeln(VP),
-	write('Accuratezza: '), writeln(A),
-	write('Errore: '), writeln(E).
-
-% testset vuoto -> valutazioni finali
-valuta(_,[],VN,VN,VP,VP,FN,FN,FP,FP,NC,NC).            
-
-% prevede correttamente che il paziente � healthy
-valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,healthy,Albero), !,      
-	VNA1 is VNA + 1,
-	valuta(Albero,Coda,VN,VNA1,VP,VPA,FN,FNA,FP,FPA,NC,NCA).
-
-% prevede correttamente che il paziente � sick
-valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,sick,Albero), !, 
-	VPA1 is VPA + 1,
-	valuta(Albero,Coda,VN,VNA,VP,VPA1,FN,FNA,FP,FPA,NC,NCA).
-
-% prevede erroneamente che il paziente � healthy
-valuta(Albero,[sick/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,healthy,Albero), !,      
-	FNA1 is FNA + 1,
-	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA1,FP,FPA,NC,NCA).
-
-% prevede erroneamente che il paziente � sick
-valuta(Albero,[healthy/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
-	classifica(Oggetto,sick,Albero), !, 
-	FPA1 is FPA + 1,
-	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA1,NC,NCA).
-
-% non classifica
-valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :- 
-	classifica(Oggetto,nc,Albero), !, 					% non classificato
-	NCA1 is NCA + 1,
-	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA1).
-
-
-stampa(Albero):-
-	open('output.txt',write,Out),
-	write(Out,Albero),
-	close(Out).
