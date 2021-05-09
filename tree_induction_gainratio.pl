@@ -3,13 +3,16 @@ programma per apprendere inducendo Alberi di Decisione testandone
 l' efficacia
 */
 
-
-%:- ensure_loaded(stroke_dataset_tot).
-:- ensure_loaded(aa_stroke_dataset).
-:- ensure_loaded(aa_training_set).
-:- ensure_loaded(aa_test_set).
 :- ensure_loaded(classify).
 :- ensure_loaded(writes).
+:- ensure_loaded(utility).
+% :- ensure_loaded(data/old_stroke_dataset).
+% :- ensure_loaded(data/old_stroke_training_set).
+% :- ensure_loaded(data/old_stroke_test_set).
+
+:- ensure_loaded(data/stroke_dataset).
+:- ensure_loaded(data/stroke_training_set).
+:- ensure_loaded(data/stroke_test_set).
 
 :- dynamic alb/1.
 
@@ -18,9 +21,9 @@ induce_albero( Albero ) :-
 	findall( Att,a(Att,_), Attributi),
 	induce_albero( Attributi, Esempi, Albero),
 	mostra( Albero ),
-	txt( Albero ),
+	txt( Albero, './alberi/albero_gainratio.txt' ),
 	assert(alb(Albero)),
-	stampa(Albero).
+	stampa_matrice_di_confusione_txt('./matrici/matrice_gainratio.txt').
 
 
 /*
@@ -44,7 +47,7 @@ induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :-           % (2)
 
 induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 	sceglie_attributo( Attributi, Esempi, Attributo), !,	    % implementa la politica di scelta
-	%sceglie_attributo( Attributi, Esempi, 0, Attributo), !,	
+	%sceglie_attributo( Attributi, Esempi, 0, Attributo), !,
 	del( Attributo, Attributi, Rimanenti ),					    % elimina Attributo scelto
 	a( Attributo, Valori ),					 				    % ne preleva i valori
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
@@ -54,38 +57,6 @@ induce_albero( _, Esempi, l(ClasseDominante)) :-
 	findall( Classe, member(e(Classe,_), Esempi), Classi),
 	verify_occurrences(Classi, ClasseDominante).
 
-verify_occurrences(Classi, X):-
-	(occurrences(Classi, sick, healthy)) ->
-	(calc_classe_dominante(true, Classi, X));
-	(calc_classe_dominante(false, Classi, X)).
-
-calc_classe_dominante(true, _, [sick, healthy]).
-calc_classe_dominante(false, Classi, ClasseDominante):-
-	calc_prob_classi(Classi, ClasseDominante).
-
-% ################## Utility ##################
-% versione con Occorrenze come output
-%calc_prob_classi(L, N, X) :-
-%   aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N,X)).
-
-% ricava l'istanza con il maggior numero di occorrenze di X in una lista 
-calc_prob_classi(List, X) :-
-    aggregate(max(N1, X1), conteggio_elementi(X1, N1, List), max(N1, X)).
-% conteggio del numero di istanze Count di X in una lista 
-conteggio_elementi(X, Count, List) :-
-    aggregate(count, member(X, List), Count).
-
-occurrences([],_A,_B,N,N).
-occurrences([H|T],A,B,N0,M0) :-
-	elem_x_count(H,A,N1,N0),
-	elem_x_count(H,B,M1,M0),
-	occurrences(T,A,B,N1,M1).
-occurrences(List,A,B) :-
-	dif(A,B),
-	occurrences(List,A,B,0,0).
-
-elem_x_count(X,X,(Old+1),Old):- !.
-elem_x_count(_,_,Old,Old):- !.
 
 /*
 sceglie_attributo( +Attributi, +Esempi, -MigliorAttributo):
@@ -197,13 +168,13 @@ somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
 /* TODO: Da rimuovere ma verifica
 somma_pesata_shannon( _, _, [], Somma, Somma).
 somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
-	length(Esempi,N),												
-	findall(C,														
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
-			EsempiSoddisfatti),				     					
-	length(EsempiSoddisfatti, NVal),	
-	
-	findall(P,							
+	length(Esempi,N),
+	findall(C,
+			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
+			EsempiSoddisfatti),
+	length(EsempiSoddisfatti, NVal),
+
+	findall(P,
 			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
 			Q),
 	nth0(0, Q, Qattr),
@@ -211,7 +182,7 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	entropia(Qattr, EntropiaAttr),
 
 	P_va is (NVal/N),
-	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,	
+	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,
 	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
 	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
@@ -219,13 +190,13 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 % Sommatoria gain ratio
 somma_gain_ratio( _, _, [], Somma_g, Somma_g).
 somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
-	length(Esempi,N),												
-	findall(C,														
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
-			EsempiSoddisfatti),				     					
+	length(Esempi,N),
+	findall(C,
+			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
+			EsempiSoddisfatti),
 	length(EsempiSoddisfatti, NVal),
-	
-	findall(P,							
+
+	findall(P,
 			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
 			Q),
 	nth0(0, Q, Qattr),
@@ -235,10 +206,10 @@ somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
 
 	log2(P_va, X),
 	NuovaSommaParziale_g is SommaParziale_g + P_va * X,
-	
+
 	somma_gain_ratio(Esempi,Att,Valori,NuovaSommaParziale_g,Somma_g)
 	;
-	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).*/	 	
+	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).*/
 
 
 
@@ -282,8 +253,8 @@ induce_alberi(Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
 
 /*
 attval_subset( Attributo = Valore, Esempi, Subset):
-   Subset è il sottoinsieme di Examples che soddisfa la condizione
-   Attributo = Valore
+	Subset è il sottoinsieme di Examples che soddisfa la condizione
+	Attributo = Valore
 */
 attval_subset(AttributoValore,Esempi,Sottoinsieme) :-
 	findall(e(C,O),

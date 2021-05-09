@@ -3,15 +3,16 @@ programma per apprendere inducendo Alberi di Decisione testandone
 l' efficacia
 */
 
-% :- ensure_loaded(old_stroke_dataset).
-% :- ensure_loaded(old_stroke_training_set).
-% :- ensure_loaded(old_stroke_test_set).
-
-:- ensure_loaded(stroke_dataset).
-:- ensure_loaded(stroke_training_set).
-:- ensure_loaded(stroke_test_set).
 :- ensure_loaded(classify).
 :- ensure_loaded(writes).
+:- ensure_loaded(utility).
+% :- ensure_loaded(data/old_stroke_dataset).
+% :- ensure_loaded(data/old_stroke_training_set).
+% :- ensure_loaded(data/old_stroke_test_set).
+
+:- ensure_loaded(data/stroke_dataset).
+:- ensure_loaded(data/stroke_training_set).
+:- ensure_loaded(data/stroke_test_set).
 
 :- dynamic alb/1.
 
@@ -20,9 +21,9 @@ induce_albero( Albero ) :-
 	findall( Att,a(Att,_), Attributi),
 	induce_albero( Attributi, Esempi, Albero),
 	mostra( Albero ),
-	txt( Albero ),
+	txt( Albero, './alberi/albero_gain.txt' ),
 	assert(alb(Albero)),
-	stampa(Albero).
+    stampa_matrice_di_confusione_txt('./matrici/matrice_gain.txt').
 
 
 /*
@@ -79,8 +80,7 @@ disuguaglianza( Esempi, Attributo, Dis) :-
 	entropiaDataset(Esempi, EntropiaDataset),
 	% fino a qui va bene arriva tutto
 	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
-	Dis is EntropiaDataset - SpShannon,
-	goliardia_due(Attributo, Dis).
+	Dis is EntropiaDataset - SpShannon.
 
 % entropiaDataset(_, EntropiaDataset)
 entropiaDataset(Esempi, EntropiaDataset) :-
@@ -94,24 +94,24 @@ entropiaDataset(Esempi, EntropiaDataset) :-
 
 somma_pesata_shannon( _, _, [], Somma, Somma).
 somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
-	length(Esempi,N),												
-	findall(C,														
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	
-			EsempiSoddisfatti),				     					
-	length(EsempiSoddisfatti, NVal),	
-	% goliardia_due(Att, Val),
-	
-	findall(P,							
+
+	length(Esempi,N),
+	findall(C,
+			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
+			EsempiSoddisfatti),
+	length(EsempiSoddisfatti, NVal),
+
+	findall(P,
 			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
 			Q),
 	nth0(0, Q, Qattr),
 	Qattr > 0, !,
 	entropia(Qattr, EntropiaAttr),
 
-	NuovaSommaParziale is SommaParziale + (NVal/N) * EntropiaAttr ,	
+	NuovaSommaParziale is SommaParziale + (NVal/N) * EntropiaAttr ,
 	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
-	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma). 	
+	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -143,8 +143,8 @@ induce_alberi(Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
 
 /*
 attval_subset( Attributo = Valore, Esempi, Subset):
-   Subset è il sottoinsieme di Examples che soddisfa la condizione
-   Attributo = Valore
+    Subset è il sottoinsieme di Examples che soddisfa la condizione
+    Attributo = Valore
 */
 attval_subset(AttributoValore,Esempi,Sottoinsieme) :-
 	findall(e(C,O),

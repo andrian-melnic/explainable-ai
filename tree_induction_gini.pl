@@ -3,13 +3,16 @@ programma per apprendere inducendo Alberi di Decisione testandone
 l' efficacia
 */
 
-
-%:- ensure_loaded(stroke_dataset_tot).
-:- ensure_loaded(aa_stroke_dataset).
-:- ensure_loaded(aa_training_set).
-:- ensure_loaded(aa_test_set).
 :- ensure_loaded(classify).
 :- ensure_loaded(writes).
+:- ensure_loaded(utility).
+% :- ensure_loaded(old_stroke_dataset).
+% :- ensure_loaded(old_stroke_training_set).
+% :- ensure_loaded(old_stroke_test_set).
+
+:- ensure_loaded(data/stroke_dataset).
+:- ensure_loaded(data/stroke_training_set).
+:- ensure_loaded(data/stroke_test_set).
 
 :- dynamic alb/1.
 
@@ -18,9 +21,9 @@ induce_albero( Albero ) :-
 	findall( Att,a(Att,_), Attributi),
 	induce_albero( Attributi, Esempi, Albero),
 	mostra( Albero ),
-	txt( Albero ),
+	txt( Albero, './alberi/albero_gini.txt' ),
 	assert(alb(Albero)),
-	stampa(Albero).
+	stampa_matrice_di_confusione_txt('./matrici/matrice_gini.txt').
 
 
 /*
@@ -54,39 +57,6 @@ induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 induce_albero( _, Esempi, l(ClasseDominante)) :-
 	findall( Classe, member(e(Classe,_), Esempi), Classi),
 	verify_occurrences(Classi, ClasseDominante).
-
-verify_occurrences(Classi, X):-
-	(occurrences(Classi, sick, healthy)) ->
-	(calc_classe_dominante(true, Classi, X));
-	(calc_classe_dominante(false, Classi, X)).
-
-calc_classe_dominante(true, _, [sick, healthy]).
-calc_classe_dominante(false, Classi, ClasseDominante):-
-	calc_prob_classi(Classi, ClasseDominante).
-
-% ################## Utility ##################
-% versione con Occorrenze come output
-%calc_prob_classi(L, N, X) :-
-%   aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N,X)).
-
-% ricava l'istanza con il maggior numero di occorrenze di X in una lista
-calc_prob_classi(List, X) :-
-    aggregate(max(N1, X1), conteggio_elementi(X1, N1, List), max(N1, X)).
-% conteggio del numero di istanze Count di X in una lista
-conteggio_elementi(X, Count, List) :-
-    aggregate(count, member(X, List), Count).
-
-occurrences([],_A,_B,N,N).
-occurrences([H|T],A,B,N0,M0) :-
-	elem_x_count(H,A,N1,N0),
-	elem_x_count(H,B,M1,M0),
-	occurrences(T,A,B,N1,M1).
-occurrences(List,A,B) :-
-	dif(A,B),
-	occurrences(List,A,B,0,0).
-
-elem_x_count(X,X,(Old+1),Old):- !.
-elem_x_count(_,_,Old,Old):- !.
 
 /*
 sceglie_attributo( +Attributi, +Esempi, -MigliorAttributo):
