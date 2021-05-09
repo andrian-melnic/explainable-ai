@@ -35,7 +35,7 @@ l'Albero indotto dipende da questi tre casi:
     SubAlb1, SubAlb2,... sono i corrispondenti sottoalberi di
     decisione.
 (4) Albero = l(Classi): non abbiamo Attributi utili per
-     discriminare ulteriormente
+	discriminare ulteriormente
 */
 
 
@@ -46,7 +46,6 @@ induce_albero( _, [e(Classe,_)|Esempi], l(Classe)) :-           % (2)
 
 induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 	sceglie_attributo( Attributi, Esempi, Attributo), !,	    % implementa la politica di scelta
-	%sceglie_attributo( Attributi, Esempi, 0, Attributo), !,	
 	del( Attributo, Attributi, Rimanenti ),					    % elimina Attributo scelto
 	a( Attributo, Valori ),					 				    % ne preleva i valori
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
@@ -70,10 +69,10 @@ calc_classe_dominante(false, Classi, ClasseDominante):-
 %calc_prob_classi(L, N, X) :-
 %   aggregate(max(N1,X1), conteggio_elementi(X1,N1,L), max(N,X)).
 
-% ricava l'istanza con il maggior numero di occorrenze di X in una lista 
+% ricava l'istanza con il maggior numero di occorrenze di X in una lista
 calc_prob_classi(List, X) :-
     aggregate(max(N1, X1), conteggio_elementi(X1, N1, List), max(N1, X)).
-% conteggio del numero di istanze Count di X in una lista 
+% conteggio del numero di istanze Count di X in una lista
 conteggio_elementi(X, Count, List) :-
     aggregate(count, member(X, List), Count).
 
@@ -97,21 +96,21 @@ sceglie_attributo( Attributi, Esempi, MigliorAttributo) :-
 	bagof( Dis/At,
 		(member(At,Attributi) , disuguaglianza(Esempi,At,Dis)),
 		Disis),
-		max_dis(Disis, _, MigliorAttributo).
+		min_dis(Disis, _, MigliorAttributo).
 
 %TODO: verifica cosa fa '=' perche non lo sappiamo
 %NON FUNZIONA SU WINDOWS :(
-% max_dis([(H/A)|T], Y, Best):-
-% 	max_dis(T, X, Best_X),
+% min_dis([(H/A)|T], Y, Best):-
+% 	min_dis(T, X, Best_X),
 %     (H > X ->
 %     	(H = Y, A = Best);
 %     	(Y = X, Best = Best_X)).
-% max_dis([(X/A)], X, A).
+% min_dis([(X/A)], X, A).
 
-max_dis([ (X/A) ], X, A).
-max_dis([ (H/A)|T ], Y, Best):-
-	max_dis(T, X, Best_X),
-	(H>X ->
+min_dis([ (X/A) ], X, A).
+min_dis([ (H/A)|T ], Y, Best):-
+	min_dis(T, X, Best_X),
+	(H<X ->
 		(H=Y, A = Best);
 		(Y=X, Best = Best_X)).
 /*
@@ -122,8 +121,7 @@ partizionati dai valori dell'Attributo
 
 disuguaglianza( Esempi, Attributo, Dis) :-
 	a( Attributo, AttVals),
-	% entropiaDataset(Esempi, EntropiaDataset),
-	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).    
+	somma_pesata( Esempi, Attributo, AttVals, 0, Dis).
 
 /*
 somma_pesata( +Esempi, +Attributo, +AttVals, +SommaParziale, -Somma)
@@ -139,27 +137,15 @@ somma_pesata( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	length(EsempiSoddisfatti, NVal),	% quanti sono questi esempi
 	NVal > 0, !,						% almeno uno!
 	findall(P,							% trova tutte le P robabilità
-			(bagof(1, member(_,EsempiSoddisfatti), L), length(L,Nsick), P is NSick/NVal),
-			Qattr),
+			(bagof(1, member(_,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
+			ClDst),
 
-	gini(Qattr,Gini),
-	%NuovaSommaParziale is SommaParziale + entropia(Qattr) * (NVal/N),% Entropia attributo
+	gini(ClDst,Gini),
 	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),
 	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
 	;
 	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			% nessun esempio soddisfa Att = Val
 
-
-
-goliardia(Q):-
-	open('goliardia.txt', append, Out),
-	write(Out,Q),
-	writeln(Out, ' '),
-	writeln(Out, ' '),
-	close(Out).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 gini(ListaProbabilità, IndiceGini)
     IndiceGini = SOMMATORIA Pi*Pj per tutti i,j tali per cui i\=j
@@ -173,50 +159,21 @@ somma_quadrati([P|Ps],PartS,S)  :-
 	NewPartS is PartS + P*P,
 	somma_quadrati(Ps,NewPartS,S).
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-/*
-shannon(ListaProbabilità,Shannon) :-
-	somma_entropie(ListaProbabilità,0,SommaEntropie),
-	Shannon is SommaEntropie.
-*/
-log2(P, Log2ris):-
-	log(P,X),
-	log(2,Y),
-	Log2ris is X/Y.
-
-somma_entropie([],S , S).
-somma_entropie([P|Ps], PartS, S) :-
-	log2(P, Log2ris),
-	NewPartS is PartS + entropia(P),
-	somma_entropie(Ps, NewPartSm, S).
-
-/* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
-entropia(Q, H):-
-	InvQ is 1-Q,
-	log2(Q, LogQ),
-	log2(InvQ, LogInvQ),
-	H is -((Q * LogQ) + (InvQ * LogInvQ)).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
 induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori
 degli Attributi
 */
-induce_alberi(_,[],_,_,[]).     												% nessun valore, nessun sotto albero
+induce_alberi(_,[],_,_,[]).    % nessun valore, nessun sotto albero
 induce_alberi(Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
 	attval_subset(Att=Val1,Esempi,SottoinsiemeEsempi),
 	induce_albero(AttRimasti,SottoinsiemeEsempi,Alb1),
 	induce_alberi(Att,Valori,AttRimasti,Esempi,Alberi).
 
 /*
-attval_subset( Attributo = Valore, Esempi, Subset):
-   Subset è il sottoinsieme di Examples che soddisfa la condizione
-   Attributo = Valore
+	attval_subset( Attributo = Valore, Esempi, Subset):
+	Subset è il sottoinsieme di Examples che soddisfa la condizione
+	Attributo = Valore
 */
 attval_subset(AttributoValore,Esempi,Sottoinsieme) :-
 	findall(e(C,O),
