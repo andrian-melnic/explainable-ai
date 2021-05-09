@@ -13,10 +13,21 @@ goliardia(A):-
 	close(Out).
 
 goliardia_due(A, B):-
-	open('attr_dis.txt', append, Out),
+	open('goliardia_due.txt', append, Out),
 	write(Out,A),
 	write(Out,' '),
 	write(Out,B),
+	writeln(Out, ' '),
+	writeln(Out, ' '),
+	close(Out).
+
+goliardia_tre(A, B, C):-
+	open('goliardia_tre.txt', append, Out),
+	write(Out,A),
+	write(Out,' '),
+	write(Out,B),
+	write(Out,' '),
+	write(Out,C),
 	writeln(Out, ' '),
 	writeln(Out, ' '),
 	close(Out).
