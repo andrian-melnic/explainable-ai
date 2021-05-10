@@ -50,7 +50,7 @@ induce_albero(Parametro, Albero) :-
     % scrittura matrice di confusione su file .txt
     atom_concat('./matrici/matrice_', Parametro, PMatrixFileName),
     atom_concat(PMatrixFileName, '.txt', MatrixFileName),
-    stampa_matrice_confusione_txt(Albero, MatrixFileName).
+    stampa_matrice_confusione_txt(MatrixFileName).
 
 
 /*
