@@ -77,8 +77,8 @@ valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA1).
 
 
-stampa_matrice_di_confusione :-
-	alb(Albero),
+stampa_matrice_confusione(Albero) :-
+	%alb(Albero),
 	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
 	length(TestSet,N),
 	% write('valuto'),
@@ -92,8 +92,8 @@ stampa_matrice_di_confusione :-
 	write('Accuratezza: '), writeln(A),
 	write('Errore: '), writeln(E).
 
-stampa_matrice_di_confusione_txt(File) :-
-	alb(Albero),
+stampa_matrice_confusione_txt(Albero, File) :-
+	%alb(Albero),
 	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
 	length(TestSet,N),
 	valuta(Albero,TestSet,VN,0,VP,0,FN,0,FP,0,NC,0),
