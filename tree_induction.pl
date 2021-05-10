@@ -4,9 +4,15 @@
  * <autori>
  ***/
 
+:- ensure_loaded(tree_induction_gini).
+:- ensure_loaded(tree_induction_gain).
+:- ensure_loaded(tree_induction_gainratio).
+
 :- ensure_loaded(classify).
 :- ensure_loaded(writes).
 :- ensure_loaded(utility).
+
+
 
 % :- ensure_loaded(data/old_stroke_dataset).
 % :- ensure_loaded(data/old_stroke_training_set).
@@ -15,31 +21,37 @@
 :- ensure_loaded(data/stroke_training_set).
 :- ensure_loaded(data/stroke_test_set).
 
-%:- dynamic alb/1.
+:- dynamic alb/1.
 
 /*
  * @Parametro = gini|gain|gainratio -> induzione albero con politica di scelta dell'attributo indicata
 */
+% Rimozione delle clausole di alb precedentemente asserite
 induce_albero(Parametro, Albero) :-
+    alb(_),
+    retractall(alb(_)),
+    induce_albero(Parametro, Albero).
+
+induce_albero(Parametro, Albero) :-
+    \+ alb(_),
 	findall( e(Classe,Oggetto), e(Classe,  Oggetto), Esempi),
 	findall( Att,a(Att,_), Attributi),
 	induce_albero(Parametro, Attributi, Esempi, Albero),
 
     % output albero su terminale e assert
 	mostra( Albero ),
-    % TODO: verificare se si può reimplementare l'assert con lo stato attuale del programma
-    %assert(alb(Albero)),
+    assert(alb(Albero)),
 
-    % scrittura albero su file .txt 
+    % scrittura albero su file .txt
     atom_concat('./alberi/albero_', Parametro, PTreeFileName),
     atom_concat(PTreeFileName, '.txt', TreeFileName),
     txt( Albero, TreeFileName ),
-	
-    % scrittura matrice di confusione su file .txt 
+
+    % scrittura matrice di confusione su file .txt
     atom_concat('./matrici/matrice_', Parametro, PMatrixFileName),
     atom_concat(PMatrixFileName, '.txt', MatrixFileName),
     stampa_matrice_confusione_txt(Albero, MatrixFileName).
-    
+
 
 /*
 induce_albero( +Attributi, +Esempi, -Albero):
@@ -97,142 +109,6 @@ min_dis([ (H/A)|T ], Y, Best):-
 	(H<X ->
 		(H=Y, A = Best);
 		(Y=X, Best = Best_X)).
-
-% #################################################### INIZIO: Gini ####################################################
-% da commentare
-disuguaglianza_gini(Esempi, Attributo, Dis) :-
-	a(Attributo, AttVals),
-	somma_pesata(Esempi, Attributo, AttVals, 0, Dis).
-
-% da commentare
-somma_pesata(_, _, [], Somma, Somma).
-somma_pesata(Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
-	length(Esempi,N),												        % quanti sono gli esempi
-	findall(C,														        % EsSodd: lista delle classi ..
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),	        % .. degli esempi (con ripetizioni)..
-			EsSodd),				     					                % .. per cui Att=Val
-	length(EsSodd, NVal),	                                                % quanti sono questi esempi
-	NVal > 0, !,						                                    % almeno uno!
-	findall(P,							                                    % trova tutte le P probabilità
-			(bagof(1, member(_,EsSodd), L), length(L,NVC), P is NVC/NVal),
-			ClDst),
-    gini(ClDst,Gini),
-	NuovaSommaParziale is SommaParziale + Gini * (NVal/N),
-	somma_pesata(Esempi,Att,Valori,NuovaSommaParziale,Somma)
-	;
-	somma_pesata(Esempi,Att,Valori,SommaParziale,Somma). 			        % nessun esempio soddisfa Att = Val
-
-% da commentare
-gini(ListaProbabilità, Gini) :-
-	somma_quadrati(ListaProbabilità, 0, SommaQuadrati),
-	Gini is 1 - SommaQuadrati.
-
-% da commentare
-somma_quadrati([],S,S).
-somma_quadrati([P|Ps],PartS,S)  :-
-	NewPartS is PartS + P*P,
-	somma_quadrati(Ps,NewPartS,S).
-% #################################################### FINE: Gini ######################################################
-
-
-
-% #################################################### INIZIO: Gain ####################################################
-% da commentare
-disuguaglianza_gain(Esempi, Attributo, Dis) :-
-	a(Attributo, AttVals),
-	entropiaDataset(Esempi, EntropiaDataset),
-	somma_pesata_shannon(Esempi, Attributo, AttVals, 0, SpShannon),
-	Dis is EntropiaDataset - SpShannon.
-
-% da commentare
-entropiaDataset(Esempi, EntropiaDataset) :-
-	findall(sick, (member(e(sick, _),Esempi)), EsempiSick),
-	length(Esempi, N),
-	length(EsempiSick, NSick),
-	PSick is NSick/N,
-	entropia(PSick, EntropiaDataset).
-
-% da commentare
-somma_pesata_shannon( _, _, [], Somma, Somma).
-somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
-	length(Esempi,N),
-	findall(C,
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
-			EsempiSoddisfatti),
-	length(EsempiSoddisfatti, NVal),
-	findall(P,
-			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			Q),
-	nth0(0, Q, Qattr),
-    Qattr > 0, !,
-	entropia(Qattr, EntropiaAttr),
-	NuovaSommaParziale is SommaParziale + (NVal/N) * EntropiaAttr ,
-	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
-	;
-	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
-
-% B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] 
-entropia(1, 0):- !.
-entropia(Q, H):-
-	InvQ is 1-Q,
-	log2(Q, LogQ),
-	log2(InvQ, LogInvQ),
-	H is -((Q * LogQ) + (InvQ * LogInvQ)).
-% #################################################### INIZIO: Gain ####################################################
-
-
-
-% ################################################## INIZIO: GainRatio #################################################
-% da commentare
-disuguaglianza_gainratio( Esempi, Attributo, Dis) :-
-	a( Attributo, AttVals),
-	entropiaDataset(Esempi, EntropiaDataset),
-	somma_pesata_shannon_gr(Esempi, Attributo, AttVals, 0, SpShannon),
-	somma_gain_ratio(Esempi, Attributo, AttVals, 0, SpGain),
-	Gain is EntropiaDataset - SpShannon,
-	controllo(Gain, SpGain, Dis).
-
-% procedura per evitare la divisione per zero nell'iterazione in cui la lista risulta vuota
-controllo(_, 0.0, 0):- !.
-controllo(_, 0, 0):- !.
-controllo(Gain, Sp, GainRatio):-
-	GainRatio is Gain/(-Sp).
-
-% da commentare
-sommatoria(Esempi, Att, Val, Qattr, P_va):-
-	length(Esempi,N),
-	findall(C,
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
-			EsempiSoddisfatti),
-	length(EsempiSoddisfatti, NVal),
-	findall(P,
-			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			Q),
-	nth0(0, Q, Qattr),
-	P_va is (NVal/N).
-
-% da commentare
-somma_pesata_shannon_gr(_, _, [], Somma, Somma).
-somma_pesata_shannon_gr(Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
-	sommatoria(Esempi, Att, Val, Qattr, P_va),
-	Qattr > 0, !,
-	entropia(Qattr, EntropiaAttr),
-	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,
-	somma_pesata_shannon_gr(Esempi,Att,Valori,NuovaSommaParziale,Somma)
-	;
-	somma_pesata_shannon_gr(Esempi,Att,Valori,SommaParziale,Somma).
-
-% da commentare
-somma_gain_ratio(_, _, [], Somma_g, Somma_g).
-somma_gain_ratio(Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
-	sommatoria(Esempi, Att, Val, Qattr, P_va),
-	Qattr > 0, !,
-	log2(P_va, X),
-	NuovaSommaParziale_g is SommaParziale_g + P_va * X,
-	somma_gain_ratio(Esempi,Att,Valori,NuovaSommaParziale_g,Somma_g)
-	;
-	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).
-% ################################################## INIZIO: GainRatio #################################################
 
 /*
 induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
