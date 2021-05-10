@@ -52,8 +52,9 @@ induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 	induce_alberi( Attributo, Valori, Rimanenti, Esempi, SAlberi).
 
 %finiti gli attributi utili (KO!!)
-induce_albero( _, Esempi, l(Classi)) :-
-	findall( Classe, member(e(Classe,_),Esempi), Classi).
+induce_albero( _, Esempi, l(ClasseDominante)) :-
+	findall( Classe, member(e(Classe,_), Esempi), Classi),
+	calc_classe_dominante(Classi, ClasseDominante).
 
 
 /*
@@ -63,12 +64,19 @@ concetto della "Gini-disuguaglianza"; utilizza il setof per ordinare
 gli attributi in base al valore crescente della loro disuguaglianza
 usare il setof per far questo è dispendioso e si può fare di meglio ..
 */
-sceglie_attributo( Attributi, Esempi, MigliorAttributo ) :-
-	setof( Disuguaglianza/A,
-		(member(A,Attributi) , disuguaglianza(Esempi,A,Disuguaglianza)),
-		Disuguaglianze),
-		% goliardia_attr(Disuguaglianze),
-		last(Disuguaglianze, _/MigliorAttributo).
+
+sceglie_attributo( Attributi, Esempi, MigliorAttributo) :-
+	bagof( Dis/At,
+		(member(At,Attributi) , disuguaglianza(Esempi,At,Dis)),
+		Disis),
+		max_dis(Disis, _, MigliorAttributo).
+
+max_dis([ (X/A) ], X, A).
+max_dis([ (H/A)|T ], Y, Best):-
+	max_dis(T, X, Best_X),
+	(H>X ->
+		(H=Y, A = Best);
+		(Y=X, Best = Best_X)).
 
 /*
 disuguaglianza(+Esempi, +Attributo, -Dis):
@@ -113,29 +121,21 @@ somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
 	;
 	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-log2(P, Log2ris):-
-	log(P,X),
-	log(2,Y),
-	Log2ris is X/Y.
-
 /* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
+entropia(1, 0):- !.
 entropia(Q, H):-
-	(Q = 1) -> H is 0 ;
-	(InvQ is 1-Q,
+	InvQ is 1-Q,
 	log2(Q, LogQ),
 	log2(InvQ, LogInvQ),
-	H is -((Q * LogQ) + (InvQ * LogInvQ))).
+	H is -((Q * LogQ) + (InvQ * LogInvQ)).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 /*
 induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
 induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori
 degli Attributi
 */
-induce_alberi(_,[],_,_,[]).     												% nessun valore, nessun sotto albero
+induce_alberi(_,[],_,_,[]).   % nessun valore, nessun sotto albero
 induce_alberi(Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
 	attval_subset(Att=Val1,Esempi,SottoinsiemeEsempi),
 	induce_albero(AttRimasti,SottoinsiemeEsempi,Alb1),

@@ -21,15 +21,15 @@ age
                           0-18 ==> ???
                           19-25 ==> ???
                           26-30 
-                            heart_disease 
-                              0 
-                                gender 
+                            ever_married 
+                              0 ==> ???
+                              1 
+                                heart_disease 
                                   0 
-                                    ever_married 
-                                      0 ==> ???
-                                      1 ==> [healthy,sick]
+                                    gender 
+                                      0 ==> [sick,healthy]
+                                      1 ==> ???
                                   1 ==> ???
-                              1 ==> ???
                           31+ ==> healthy
                       1 ==> sick
               Self employed ==> sick
@@ -44,11 +44,11 @@ age
         smoking_status 
           Formerly smoked ==> ???
           Never smoked 
-            work_type 
-              Children ==> ???
-              Govt job ==> sick
-              Private ==> sick
-              Self employed ==> healthy
+            avg_glucose_level 
+              0-110 ==> sick
+              111-119 ==> ???
+              120-125 ==> ???
+              126+ ==> healthy
           Smokes ==> healthy
       31+ 
         avg_glucose_level 
@@ -63,26 +63,26 @@ age
                       Rural ==> healthy
                   1 ==> healthy
               Smokes 
-                gender 
-                  0 
-                    work_type 
-                      Children ==> ???
-                      Govt job ==> ???
-                      Private 
-                        residence_type 
-                          City ==> ???
-                          Rural 
-                            hypertension 
+                ever_married 
+                  0 ==> sick
+                  1 
+                    residence_type 
+                      City ==> ???
+                      Rural 
+                        work_type 
+                          Children ==> ???
+                          Govt job ==> ???
+                          Private 
+                            heart_disease 
                               0 
-                                heart_disease 
+                                hypertension 
                                   0 
-                                    ever_married 
-                                      0 ==> ???
-                                      1 ==> [healthy,sick]
+                                    gender 
+                                      0 ==> [sick,healthy]
+                                      1 ==> ???
                                   1 ==> ???
                               1 ==> ???
-                      Self employed ==> ???
-                  1 ==> sick
+                          Self employed ==> ???
           111-119 ==> healthy
           120-125 ==> ???
           126+ 
@@ -90,14 +90,12 @@ age
               Formerly smoked ==> healthy
               Never smoked ==> sick
               Smokes 
-                work_type 
-                  Children ==> ???
-                  Govt job ==> ???
-                  Private 
+                residence_type 
+                  City 
                     gender 
                       0 ==> sick
                       1 ==> healthy
-                  Self employed ==> healthy
+                  Rural ==> healthy
   51-60 
     residence_type 
       City 
@@ -120,12 +118,12 @@ age
                       Private 
                         smoking_status 
                           Formerly smoked 
-                            hypertension 
+                            heart_disease 
                               0 
-                                heart_disease 
+                                hypertension 
                                   0 
                                     gender 
-                                      0 ==> [healthy,healthy,sick]
+                                      0 ==> [sick,healthy]
                                       1 ==> ???
                                   1 ==> ???
                               1 ==> ???
@@ -154,15 +152,15 @@ age
                 gender 
                   0 ==> sick
                   1 
-                    work_type 
-                      Children ==> ???
-                      Govt job ==> healthy
-                      Private 
-                        smoking_status 
-                          Formerly smoked ==> healthy
-                          Never smoked ==> ???
-                          Smokes ==> sick
-                      Self employed ==> ???
+                    smoking_status 
+                      Formerly smoked ==> healthy
+                      Never smoked ==> ???
+                      Smokes 
+                        work_type 
+                          Children ==> ???
+                          Govt job ==> healthy
+                          Private ==> sick
+                          Self employed ==> ???
               111-119 ==> healthy
               120-125 ==> ???
               126+ ==> healthy
@@ -185,12 +183,12 @@ age
                               Children ==> ???
                               Govt job ==> ???
                               Private 
-                                heart_disease 
-                                  0 
-                                    ever_married 
-                                      0 ==> ???
-                                      1 ==> [sick,healthy]
-                                  1 ==> ???
+                                ever_married 
+                                  0 ==> ???
+                                  1 
+                                    heart_disease 
+                                      0 ==> [sick,healthy]
+                                      1 ==> ???
                               Self employed ==> ???
                           Smokes ==> ???
   61-70 
@@ -265,25 +263,23 @@ age
                       0 
                         hypertension 
                           0 
-                            residence_type 
-                              City 
-                                gender 
-                                  0 ==> ???
-                                  1 
-                                    bmi 
-                                      0-18 ==> ???
-                                      19-25 ==> ???
-                                      26-30 ==> [sick,healthy]
-                                      31+ ==> ???
-                              Rural 
-                                gender 
-                                  0 
-                                    bmi 
-                                      0-18 ==> ???
-                                      19-25 ==> ???
-                                      26-30 ==> ???
-                                      31+ ==> [sick,healthy]
-                                  1 ==> ???
+                            bmi 
+                              0-18 ==> ???
+                              19-25 ==> ???
+                              26-30 
+                                residence_type 
+                                  City 
+                                    gender 
+                                      0 ==> ???
+                                      1 ==> [sick,healthy]
+                                  Rural ==> ???
+                              31+ 
+                                residence_type 
+                                  City ==> ???
+                                  Rural 
+                                    gender 
+                                      0 ==> [sick,healthy]
+                                      1 ==> ???
                           1 ==> healthy
                       1 ==> sick
           Never smoked 
@@ -293,27 +289,27 @@ age
                   0-18 ==> ???
                   19-25 ==> sick
                   26-30 
-                    hypertension 
+                    heart_disease 
                       0 
-                        heart_disease 
+                        hypertension 
                           0 ==> healthy
                           1 ==> sick
                       1 ==> sick
                   31+ 
                     avg_glucose_level 
                       0-110 
-                        hypertension 
-                          0 
+                        ever_married 
+                          0 ==> sick
+                          1 
                             heart_disease 
                               0 
-                                gender 
+                                hypertension 
                                   0 
-                                    ever_married 
-                                      0 ==> ???
-                                      1 ==> [healthy,sick,sick]
+                                    gender 
+                                      0 ==> [sick,healthy]
+                                      1 ==> ???
                                   1 ==> ???
                               1 ==> ???
-                          1 ==> sick
                       111-119 ==> ???
                       120-125 ==> ???
                       126+ ==> healthy
@@ -328,44 +324,45 @@ age
                 heart_disease 
                   0 ==> sick
                   1 
-                    hypertension 
-                      0 ==> sick
-                      1 ==> healthy
+                    bmi 
+                      0-18 ==> ???
+                      19-25 ==> ???
+                      26-30 ==> healthy
+                      31+ ==> sick
           Never smoked 
             avg_glucose_level 
               0-110 
-                residence_type 
-                  City ==> sick
-                  Rural 
-                    gender 
-                      0 
-                        hypertension 
-                          0 
+                bmi 
+                  0-18 ==> ???
+                  19-25 ==> sick
+                  26-30 ==> sick
+                  31+ 
+                    residence_type 
+                      City ==> sick
+                      Rural 
+                        ever_married 
+                          0 ==> ???
+                          1 
                             heart_disease 
                               0 
-                                ever_married 
-                                  0 ==> ???
-                                  1 
-                                    bmi 
-                                      0-18 ==> ???
-                                      19-25 ==> ???
-                                      26-30 ==> ???
-                                      31+ ==> [sick,healthy,sick]
+                                hypertension 
+                                  0 
+                                    gender 
+                                      0 ==> [sick,healthy]
+                                      1 ==> ???
+                                  1 ==> ???
                               1 ==> ???
-                          1 ==> ???
-                      1 ==> sick
               111-119 ==> healthy
               120-125 ==> sick
               126+ 
-                residence_type 
-                  City 
-                    hypertension 
-                      0 ==> sick
-                      1 
-                        gender 
-                          0 ==> healthy
-                          1 ==> sick
-                  Rural ==> sick
+                bmi 
+                  0-18 ==> ???
+                  19-25 ==> sick
+                  26-30 ==> sick
+                  31+ 
+                    gender 
+                      0 ==> healthy
+                      1 ==> sick
           Smokes ==> healthy
   81+ 
     ever_married 

@@ -1,19 +1,19 @@
-goliardia_attr(A) :-
+debug_attr(A) :-
 	open('attr.txt', append, Out),
 	write(Out,A),
 	writeln(Out, ' '),
 	writeln(Out, ' '),
 	close(Out).
 
-goliardia(A):-
-	open('goliardia.txt', append, Out),
+debug(A):-
+	open('debug.txt', append, Out),
 	write(Out,A),
 	writeln(Out, ' '),
 	writeln(Out, ' '),
 	close(Out).
 
-goliardia_due(A, B):-
-	open('goliardia_due.txt', append, Out),
+debug_due(A, B):-
+	open('debug_due.txt', append, Out),
 	write(Out,A),
 	write(Out,' '),
 	write(Out,B),
@@ -21,8 +21,8 @@ goliardia_due(A, B):-
 	writeln(Out, ' '),
 	close(Out).
 
-goliardia_tre(A, B, C):-
-	open('goliardia_tre.txt', append, Out),
+debug_tre(A, B, C):-
+	open('debug_tre.txt', append, Out),
 	write(Out,A),
 	write(Out,' '),
 	write(Out,B),
@@ -48,11 +48,15 @@ mostratutto([V:T|C],I) :-
 	mostratutto(C,I).
 
 % Stampa albero formattato su file
+txt(T,File) :-
+	exists_file(File),
+	delete_file(File),
+	txt(T, File).
 txt(T, File) :-
-	(exists_file(File))->(delete_file(File));
-	(open(File, append, Out),
+	\+ exists_file(File),
+	open(File, append, Out),
 	txt(Out, T,0),
-	close(Out)).
+	close(Out).
 
 txt(Out, null,_) :-
 	writeln(Out, ' ==> ???').

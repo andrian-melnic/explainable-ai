@@ -123,7 +123,7 @@ age
                                 hypertension 
                                   0 
                                     gender 
-                                      0 ==> healthy
+                                      0 ==> [sick,healthy]
                                       1 ==> ???
                                   1 ==> ???
                               1 ==> ???
@@ -328,7 +328,7 @@ age
                                   0 ==> ???
                                   1 
                                     heart_disease 
-                                      0 ==> sick
+                                      0 ==> [sick,healthy]
                                       1 ==> ???
                               Smokes ==> ???
                           Self employed ==> sick
@@ -345,7 +345,7 @@ age
                                   0 ==> ???
                                   1 
                                     heart_disease 
-                                      0 ==> sick
+                                      0 ==> [sick,healthy]
                                       1 ==> ???
                           Smokes ==> ???
                   1 ==> sick

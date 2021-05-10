@@ -55,7 +55,7 @@ induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 %finiti gli attributi utili (KO!!)
 induce_albero( _, Esempi, l(ClasseDominante)) :-
 	findall( Classe, member(e(Classe,_), Esempi), Classi),
-	verify_occurrences(Classi, ClasseDominante).
+	calc_classe_dominante(Classi, ClasseDominante).
 
 
 /*
@@ -67,15 +67,6 @@ sceglie_attributo( Attributi, Esempi, MigliorAttributo) :-
 		(member(At,Attributi) , disuguaglianza(Esempi,At,Dis)),
 		Disis),
 		max_dis(Disis, _, MigliorAttributo).
-
-%TODO: verifica cosa fa '=' perche non lo sappiamo
-%NON FUNZIONA SU WINDOWS :(
-% max_dis([(H/A)|T], Y, Best):-
-% 	max_dis(T, X, Best_X),
-%     (H > X ->
-%     	(H = Y, A = Best);
-%     	(Y = X, Best = Best_X)).
-% max_dis([(X/A)], X, A).
 
 max_dis([ (X/A) ], X, A).
 max_dis([ (H/A)|T ], Y, Best):-
@@ -165,62 +156,6 @@ somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
 % perchè per il momento non è ottimizzato.
 
 
-/* TODO: Da rimuovere ma verifica
-somma_pesata_shannon( _, _, [], Somma, Somma).
-somma_pesata_shannon( Esempi, Att, [Val|Valori], SommaParziale, Somma) :-
-	length(Esempi,N),
-	findall(C,
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
-			EsempiSoddisfatti),
-	length(EsempiSoddisfatti, NVal),
-
-	findall(P,
-			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			Q),
-	nth0(0, Q, Qattr),
-	Qattr > 0, !,
-	entropia(Qattr, EntropiaAttr),
-
-	P_va is (NVal/N),
-	NuovaSommaParziale is SommaParziale + (P_va) * EntropiaAttr ,
-	somma_pesata_shannon(Esempi,Att,Valori,NuovaSommaParziale,Somma)
-	;
-	somma_pesata_shannon(Esempi,Att,Valori,SommaParziale,Somma).
-
-% Sommatoria gain ratio
-somma_gain_ratio( _, _, [], Somma_g, Somma_g).
-somma_gain_ratio( Esempi, Att, [Val|Valori], SommaParziale_g, Somma_g) :-
-	length(Esempi,N),
-	findall(C,
-			(member(e(C,Desc),Esempi) , soddisfa(Desc,[Att=Val])),
-			EsempiSoddisfatti),
-	length(EsempiSoddisfatti, NVal),
-
-	findall(P,
-			(bagof(1, member(sick,EsempiSoddisfatti), L), length(L,NVC), P is NVC/NVal),
-			Q),
-	nth0(0, Q, Qattr),
-	Qattr > 0, !,
-
-	P_va is (NVal/N),
-
-	log2(P_va, X),
-	NuovaSommaParziale_g is SommaParziale_g + P_va * X,
-
-	somma_gain_ratio(Esempi,Att,Valori,NuovaSommaParziale_g,Somma_g)
-	;
-	somma_gain_ratio(Esempi,Att,Valori,SommaParziale_g,Somma_g).*/
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-log2(P, Log2ris):-
-	log(P,X),
-	log(2,Y),
-	Log2ris is X/Y.
 
 /* B(q) = -[(q)log_2(q) + (1-q)log_2(1-q)] */
 entropia(1, 0):- !.
@@ -230,22 +165,12 @@ entropia(Q, H):-
 	log2(InvQ, LogInvQ),
 	H is -((Q * LogQ) + (InvQ * LogInvQ)).
 
-/* TODO: Da rimuovere ma verifica
-entropia(Q, H):-
-	(Q = 1) -> H is 0 ;
-	(InvQ is 1-Q,
-	log2(Q, LogQ),
-	log2(InvQ, LogInvQ),
-	H is -((Q * LogQ) + (InvQ * LogInvQ))).
-*/
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 /*
 induce_alberi(Attributi, Valori, AttRimasti, Esempi, SAlberi):
 induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori
 degli Attributi
 */
-induce_alberi(_,[],_,_,[]).     												% nessun valore, nessun sotto albero
+induce_alberi(_,[],_,_,[]).    % nessun valore, nessun sotto albero
 induce_alberi(Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
 	attval_subset(Att=Val1,Esempi,SottoinsiemeEsempi),
 	induce_albero(AttRimasti,SottoinsiemeEsempi,Alb1),

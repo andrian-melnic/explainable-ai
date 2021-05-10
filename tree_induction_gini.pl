@@ -56,7 +56,7 @@ induce_albero( Attributi, Esempi, t(Attributo,SAlberi) ) :-	    % (3)
 %finiti gli attributi utili (KO!!)
 induce_albero( _, Esempi, l(ClasseDominante)) :-
 	findall( Classe, member(e(Classe,_), Esempi), Classi),
-	verify_occurrences(Classi, ClasseDominante).
+	calc_classe_dominante(Classi, ClasseDominante).
 
 /*
 sceglie_attributo( +Attributi, +Esempi, -MigliorAttributo):
@@ -67,15 +67,6 @@ sceglie_attributo( Attributi, Esempi, MigliorAttributo) :-
 		(member(At,Attributi) , disuguaglianza(Esempi,At,Dis)),
 		Disis),
 		min_dis(Disis, _, MigliorAttributo).
-
-%TODO: verifica cosa fa '=' perche non lo sappiamo
-%NON FUNZIONA SU WINDOWS :(
-% min_dis([(H/A)|T], Y, Best):-
-% 	min_dis(T, X, Best_X),
-%     (H > X ->
-%     	(H = Y, A = Best);
-%     	(Y = X, Best = Best_X)).
-% min_dis([(X/A)], X, A).
 
 min_dis([ (X/A) ], X, A).
 min_dis([ (H/A)|T ], Y, Best):-
