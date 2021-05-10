@@ -4,6 +4,10 @@
  * <autori>
  ***/
 
+:- ensure_loaded(data/stroke_dataset).
+:- ensure_loaded(data/stroke_training_set).
+:- ensure_loaded(data/stroke_test_set).
+
 :- ensure_loaded(tree_induction_gini).
 :- ensure_loaded(tree_induction_gain).
 :- ensure_loaded(tree_induction_gainratio).
@@ -12,28 +16,15 @@
 :- ensure_loaded(writes).
 :- ensure_loaded(utility).
 
-
-
-% :- ensure_loaded(data/old_stroke_dataset).
-% :- ensure_loaded(data/old_stroke_training_set).
-% :- ensure_loaded(data/old_stroke_test_set).
-:- ensure_loaded(data/stroke_dataset).
-:- ensure_loaded(data/stroke_training_set).
-:- ensure_loaded(data/stroke_test_set).
-
 :- dynamic alb/1.
 
 /*
+ * induce_albero(+Parametro, -Albero) 
  * @Parametro = gini|gain|gainratio -> induzione albero con politica di scelta dell'attributo indicata
 */
-% Rimozione delle clausole di alb precedentemente asserite
 induce_albero(Parametro, Albero) :-
-    alb(_),
-    retractall(alb(_)),
-    induce_albero(Parametro, Albero).
-
-induce_albero(Parametro, Albero) :-
-    \+ alb(_),
+	% Rimozione di 'alb' dal database se precedentemente asserito
+	retractall(alb(_)),											
 	findall( e(Classe,Oggetto), e(Classe,  Oggetto), Esempi),
 	findall( Att,a(Att,_), Attributi),
 	induce_albero(Parametro, Attributi, Esempi, Albero),
@@ -43,12 +34,12 @@ induce_albero(Parametro, Albero) :-
     assert(alb(Albero)),
 
     % scrittura albero su file .txt
-    atom_concat('./alberi/albero_', Parametro, PTreeFileName),
+    atom_concat('./output/tree/tree_', Parametro, PTreeFileName),
     atom_concat(PTreeFileName, '.txt', TreeFileName),
     txt( Albero, TreeFileName ),
 
     % scrittura matrice di confusione su file .txt
-    atom_concat('./matrici/matrice_', Parametro, PMatrixFileName),
+    atom_concat('./output/matrix/matrix_', Parametro, PMatrixFileName),
     atom_concat(PMatrixFileName, '.txt', MatrixFileName),
     stampa_matrice_confusione_txt(MatrixFileName).
 
@@ -67,7 +58,7 @@ l'Albero indotto dipende da questi tre casi:
 (4) Albero = l(Classi): non abbiamo Attributi utili per
     discriminare ulteriormente
 */
-induce_albero(_, _, [], null ) :- !. % (1)
+induce_albero(_, _, [], null ) :- !. 											% (1)
 induce_albero(_, _, [e(Classe,_)|Esempi], l(Classe)) :-                         % (2)
 	\+ ( member(e(ClassX,_),Esempi), ClassX \== Classe ), !.	                % no esempi di altre classi (OK!!)
 induce_albero(Parametro, Attributi, Esempi, t(Attributo,SAlberi) ) :-	        % (3)
