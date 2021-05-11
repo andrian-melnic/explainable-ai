@@ -4,9 +4,9 @@
  * <autori>
  ***/
 
-:- ensure_loaded(data/stroke_dataset).
-:- ensure_loaded(data/stroke_training_set).
-:- ensure_loaded(data/stroke_test_set).
+:- ensure_loaded(data/cardio_dataset).
+:- ensure_loaded(data/cardio_training_set).
+:- ensure_loaded(data/cardio_test_set).
 
 :- ensure_loaded(tree_induction_gini).
 :- ensure_loaded(tree_induction_gain).
@@ -19,12 +19,12 @@
 :- dynamic alb/1.
 
 /*
- * induce_albero(+Parametro, -Albero) 
+ * induce_albero(+Parametro, -Albero)
  * @Parametro = gini|gain|gainratio -> induzione albero con politica di scelta dell'attributo indicata
 */
 induce_albero(Parametro, Albero) :-
 	% Rimozione di 'alb' dal database se precedentemente asserito
-	retractall(alb(_)),											
+	retractall(alb(_)),
 	findall( e(Classe,Oggetto), e(Classe,  Oggetto), Esempi),
 	findall( Att,a(Att,_), Attributi),
 	induce_albero(Parametro, Attributi, Esempi, Albero),
@@ -128,4 +128,3 @@ soddisfa(Oggetto,Congiunzione) :-
 	\+ (member(Att=Val,Congiunzione),
 		member(Att=ValX,Oggetto),
 		ValX \== Val).
-	
