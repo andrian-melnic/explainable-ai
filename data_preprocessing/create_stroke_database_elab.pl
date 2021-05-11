@@ -1,6 +1,7 @@
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+a(id, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active, cardio, age).
 a(Gender, Age, Hypertension, Heart_disease, Ever_married, Work_type, Residence_type, Avg_glucose_level, Bmi, Smoking_status, Target).
 
 id                   : numerico, indice univoco del paziente
@@ -29,9 +30,54 @@ a(Male,67.0,0,1,Yes,Private,Urban,228.69,36.6,formerly_smoked,1).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+:- ensure_loaded(cardio_database).
+start :-
+    tell('cardio_database_ela.pl'),
+    a(Gender, Height, Weight, ApHi, ApLo, Cholesterol, Gluc, Smoke, Alco, Active, Age, Cardio),
+    write('aa('), write(Gender),
+    write(','),   ( number(Height),               Height =< 135, write('\'0-135\'');
+                    number(Height), Height > 135, Height =< 160, write('\'136-160\'');
+                    number(Height), Height > 160, Height =< 165, write('\'161-165\'');
+                    number(Height), Height > 165, Height =< 170, write('\'166-170\'');
+				    number(Height), Height > 170, Height =< 200, write('\'171-200\'');
+				    number(Height), Height > 200,                write('\'201+\'')),
+    write(','),   ( number(Weight),               Weight =< 20,   write('\'0-20\'');
+                    number(Weight), Weight > 20,  Weight =< 40,   write('\'21-40\'');
+                    number(Weight), Weight > 40,  Weight =< 60,   write('\'41-60\'');
+                    number(Weight), Weight > 60,  Weight =< 80,   write('\'61-80\'');
+                    number(Weight), Weight > 80,  Weight =< 100,  write('\'81-100\'');
+                    number(Weight), Weight > 100, Weight =< 120, write('\'101-120\'');
+				    number(Weight), Weight > 120,                write('\'121+\'')), 
+    write(','),   ( number(ApHi),             ApHi =< 120, write('\'0-120\'');
+                    number(ApHi), ApHi > 120, ApHi =< 130, write('\'121-130\'');
+                    number(ApHi), ApHi > 130, ApHi =< 140, write('\'131-140\'');
+                    number(ApHi), ApHi > 140, ApHi =< 160, write('\'141-160\'');
+                    number(ApHi), ApHi > 160, ApHi =< 180, write('\'161-180\'');
+				    number(ApHi), ApHi > 180,              write('\'181+\'')), 
+    write(','),   ( number(ApLo),             ApLo =< 80,   write('\'0-80\'');
+                    number(ApLo), ApLo > 80,  ApLo =< 85,   write('\'81-85\'');
+                    number(ApLo), ApLo > 85,  ApLo =< 90,   write('\'86-90\'');
+                    number(ApLo), ApLo > 90,  ApLo =< 100,   write('\'91-100\'');
+                    number(ApLo), ApLo > 100, ApLo =< 110, write('\'101-110\'');
+				    number(ApLo), ApLo > 110,              write('\'111+\'')), 
+    write(','),   write(Cholesterol),
+    write(','),   write(Gluc),
+    write(','),   write(Smoke),
+    write(','),   write(Alco),
+    write(','),   write(Active),
+    write(','),   ( number(Age),           Age =< 30, write('\'0-30\'');
+                    number(Age), Age > 30, Age =< 40, write('\'31-40\'');
+                    number(Age), Age > 40, Age =< 50, write('\'41-50\'');
+                    number(Age), Age > 50, Age =< 60, write('\'51-60\'');
+				    number(Age), Age > 60, Age =< 70, write('\'61-70\'');
+				    number(Age), Age > 70, Age =< 80, write('\'71-80\'');
+				    number(Age), Age > 80,            write('\'81+\'')),   
+    write(','),   write(Cardio),  
+        writeln(').'),
+    fail.
+start :- told.
 
-:- ensure_loaded(stroke_database).
-
+/*
 start :-
     tell('stroke_database_ela.pl'),
     a(Gender,Age,Hypertension,Heart_disease,Ever_married,Work_type,Residence_type,Avg_glucose_level,Bmi,Smoking_status,Target),
@@ -71,3 +117,4 @@ start :-
     fail.
 
 start :- told.
+*/

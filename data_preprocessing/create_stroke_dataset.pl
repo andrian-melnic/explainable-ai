@@ -1,5 +1,75 @@
-:- ensure_loaded(stroke_database_ela).
+:- ensure_loaded(cardio_database_ela).
 
+startt :-
+    tell('cardio_dataset.pl'),
+    setof(Gender,A^B^C^D^E^F^G^H^I^L^M^aa(Gender,A,B,C,D,E,F,G,H,I,L,M),AttributesGender),
+    write('a(gender,'), writeq(AttributesGender), writeln(').'),
+
+    setof(Height,A^B^C^D^E^F^G^H^I^L^M^aa(A,Height,B,C,D,E,F,G,H,I,L,M),AttributesHeight),
+    write('a(height,'), writeq(AttributesHeight), writeln(').'),
+
+    setof(Weight,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,Weight,C,D,E,F,G,H,I,L,M),AttributesWeight),
+    write('a(weight,'), writeq(AttributesWeight), writeln(').'),
+
+    setof(ApHi,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,ApHi,D,E,F,G,H,I,L,M),AttributesApHi),
+    write('a(apHi,'), writeq(AttributesApHi), writeln(').'),
+
+    setof(ApLo,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,ApLo,E,F,G,H,I,L,M),AttributesApLo),
+    write('a(apLo,'), writeq(AttributesApLo), writeln(').'),
+
+    setof(Cholesterol,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,Cholesterol,F,G,H,I,L,M),AttributesCholesterol),
+    write('a(cholesterol,'), writeq(AttributesCholesterol), writeln(').'),
+
+    setof(Gluc,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,Gluc,G,H,I,L,M),AttributesGluc),
+    write('a(gluc,'), writeq(AttributesGluc), writeln(').'),
+
+    setof(Smoke,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,Smoke,H,I,L,M),AttributesSmoke),
+    write('a(smoke,'), writeq(AttributesSmoke), writeln(').'),
+
+    setof(Alco,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,H,Alco,I,L,M),AttributesAlco),
+    write('a(alco,'), writeq(AttributesAlco), writeln(').'),
+
+    setof(Active,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,H,I,Active,L,M),AttributesActive),
+    write('a(active,'), writeq(AttributesActive), writeln(').'),
+
+    setof(Age,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,H,I,L,Age,M),AttributesAge),
+    write('a(age,'), writeq(AttributesAge), writeln(').'),
+    starttt.
+
+starttt :-
+    aa(Gender, Height, Weight, ApHi, ApLo, Cholesterol, Gluc, Smoke, Alco, Active, Age, 0),
+    write('e(healthy,['),
+    write('gender = '),             writeq(Gender),          write(', '),
+    write('height = '),             writeq(Height),          write(', '),
+    write('weight = '),             writeq(Weight),          write(', '),
+    write('apHi = '),               writeq(ApHi),            write(', '),
+    write('apLo = '),               writeq(ApLo),            write(', '),
+    write('cholesterol = '),        writeq(Cholesterol),     write(', '),
+    write('gluc = '),               writeq(Gluc),            write(', '),
+    write('smoke = '),              writeq(Smoke),           write(', '),
+	write('alco = '),               writeq(Alco),            write(', '),
+    write('active = '),             writeq(Active),          write(', '),
+    write('age = '),                writeq(Age),             writeln(']).'),
+    fail.
+starttt :-
+    aa(Gender, Height, Weight, ApHi, ApLo, Cholesterol, Gluc, Smoke, Alco, Active, Age, 1),
+    write('e(sick,['),
+    write('gender = '),             writeq(Gender),          write(', '),
+    write('height = '),             writeq(Height),          write(', '),
+    write('weight = '),             writeq(Weight),          write(', '),
+    write('apHi = '),               writeq(ApHi),            write(', '),
+    write('apLo = '),               writeq(ApLo),            write(', '),
+    write('cholesterol = '),        writeq(Cholesterol),     write(', '),
+    write('gluc = '),               writeq(Gluc),            write(', '),
+    write('smoke = '),              writeq(Smoke),           write(', '),
+    write('alco = '),               writeq(Alco),            write(', '),
+    write('active = '),             writeq(Active),          write(', '),
+    write('age = '),                writeq(Age),             writeln(']).'),
+    fail.
+starttt :- told.
+
+
+/*
 startt :-
     tell('stroke_dataset.pl'),
     setof(Gender,A^B^C^D^E^F^G^H^I^L^aa(Gender,A,B,C,D,E,F,G,H,I,L),AttributesGender),
@@ -62,3 +132,4 @@ starttt :-
     write('smoking_status = '),     writeq(Smoking_status),     writeln(']).'),
     fail.
 starttt :- told.
+*/
