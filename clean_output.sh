@@ -3,6 +3,13 @@ if [ $# -eq 0 ]
 then
     rm ./output/tree/*.txt
     rm ./output/matrix/*.txt
+elif [ "$1" = "swipl" ]; 
+then
+    printf 'deleting /output/tree|matrix/*.txt ...\n'
+    rm ./output/tree/*.txt
+    rm ./output/matrix/*.txt
+    printf 'entering swipl ...\n'
+    swipl
 elif [ "$1" = "tree" ]; 
 then
     rm ./output/tree/*.txt

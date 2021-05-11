@@ -128,5 +128,4 @@ soddisfa(Oggetto,Congiunzione) :-
 	\+ (member(Att=Val,Congiunzione),
 		member(Att=ValX,Oggetto),
 		ValX \== Val).
-
-
+	
