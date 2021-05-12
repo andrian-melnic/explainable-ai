@@ -1,9 +1,9 @@
-:- ensure_loaded(cardio_database_ela).
+:- ensure_loaded('./data_preprocessing/cardio_data/cardio_database_ela').
 
 % ['gender', 'height', 'weight', 'ap_hi', 'ap_lo', 'smoke', 'alco', 'active', 'age', 'gluc_norm', 'gluc_above_norm', 'gluc_wabove_norm', 'chol_norm', 'chol_above_norm', 'chol_wabove_norm', 'bmi', CARDIO]
 
 startt :-
-    tell('cardio_dataset.pl'),
+    tell('./data_preprocessing/cardio_data/cardio_dataset.pl'),
     setof(Gender,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(Gender,A,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributesGender),
     write('a(gender,'), writeq(AttributesGender), writeln(').'),
 

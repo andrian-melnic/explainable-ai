@@ -1,6 +1,6 @@
-Test effettuati :16651
-Test non classificati :13009
-Veri Negativi  568   Falsi Positivi 603
-Falsi Negativi 454   Veri Positivi  2017
-Accuratezza: 0.7097748489840747
-Errore: 0.2902251510159253
+Test effettuati :2000
+Test non classificati :966
+Veri Negativi  230   Falsi Positivi 191
+Falsi Negativi 163   Veri Positivi  450
+Accuratezza: 0.6576402321083172
+Errore: 0.34235976789168276

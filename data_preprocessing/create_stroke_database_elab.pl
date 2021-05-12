@@ -30,17 +30,27 @@ a(Male,67.0,0,1,Yes,Private,Urban,228.69,36.6,formerly_smoked,1).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+/* ['gender', 'height', 'weight', 'ap_hi', 'ap_lo', 'smoke', 'alco', 'active', 
+'age', 'gluc_norm', 'gluc_above_norm', 'gluc_wabove_norm', 'chol_norm', 
+'chol_above_norm', 'chol_wabove_norm', 'bmi',CARDIO] */
+
 :- ensure_loaded(cardio_database).
 start :-
-    tell('cardio_database_ela.pl'),
-    a(Gender, Height, Weight, ApHi, ApLo, Cholesterol, Gluc, Smoke, Alco, Active, Age, Cardio),
+    tell('./data_preprocessing/cardio_data/cardio_database_ela.pl'),
+    a(Gender, Height, Weight, ApHi, ApLo, Smoke, Alco, Active, Age, GlucNorm, GlucAboveNorm, GlucWaboveNorm, CholNorm, CholAboveNorm, CholWaboveNorm, Bmi, Cardio),
+
     write('aa('), write(Gender),
+
     write(','),   ( number(Height),               Height =< 135, write('\'0-135\'');
-                    number(Height), Height > 135, Height =< 160, write('\'136-160\'');
-                    number(Height), Height > 160, Height =< 165, write('\'161-165\'');
-                    number(Height), Height > 165, Height =< 170, write('\'166-170\'');
-				    number(Height), Height > 170, Height =< 200, write('\'171-200\'');
+                    number(Height), Height > 135, Height =< 145, write('\'136-145\'');
+                    number(Height), Height > 145, Height =< 155, write('\'146-155\'');
+                    number(Height), Height > 155, Height =< 165, write('\'156-165\'');
+				    number(Height), Height > 165, Height =< 175, write('\'166-175\'');
+				    number(Height), Height > 175, Height =< 185, write('\'176-185\'');
+				    number(Height), Height > 185, Height =< 195, write('\'186-195\'');
+				    number(Height), Height > 195, Height =< 200, write('\'196-200\'');
 				    number(Height), Height > 200,                write('\'201+\'')),
+
     write(','),   ( number(Weight),               Weight =< 20,   write('\'0-20\'');
                     number(Weight), Weight > 20,  Weight =< 40,   write('\'21-40\'');
                     number(Weight), Weight > 40,  Weight =< 60,   write('\'41-60\'');
@@ -48,30 +58,52 @@ start :-
                     number(Weight), Weight > 80,  Weight =< 100,  write('\'81-100\'');
                     number(Weight), Weight > 100, Weight =< 120, write('\'101-120\'');
 				    number(Weight), Weight > 120,                write('\'121+\'')), 
+
     write(','),   ( number(ApHi),             ApHi =< 120, write('\'0-120\'');
                     number(ApHi), ApHi > 120, ApHi =< 130, write('\'121-130\'');
                     number(ApHi), ApHi > 130, ApHi =< 140, write('\'131-140\'');
-                    number(ApHi), ApHi > 140, ApHi =< 160, write('\'141-160\'');
-                    number(ApHi), ApHi > 160, ApHi =< 180, write('\'161-180\'');
+                    number(ApHi), ApHi > 140, ApHi =< 150, write('\'141-150\'');
+                    number(ApHi), ApHi > 150, ApHi =< 160, write('\'151-160\'');
+                    number(ApHi), ApHi > 160, ApHi =< 170, write('\'161-170\'');
+                    number(ApHi), ApHi > 170, ApHi =< 180, write('\'171-180\'');
 				    number(ApHi), ApHi > 180,              write('\'181+\'')), 
+
     write(','),   ( number(ApLo),             ApLo =< 80,   write('\'0-80\'');
                     number(ApLo), ApLo > 80,  ApLo =< 85,   write('\'81-85\'');
                     number(ApLo), ApLo > 85,  ApLo =< 90,   write('\'86-90\'');
-                    number(ApLo), ApLo > 90,  ApLo =< 100,   write('\'91-100\'');
-                    number(ApLo), ApLo > 100, ApLo =< 110, write('\'101-110\'');
+                    number(ApLo), ApLo > 90,  ApLo =< 95,   write('\'91-95\'');
+                    number(ApLo), ApLo > 95,  ApLo =< 100,   write('\'96-100\'');
+                    number(ApLo), ApLo > 100, ApLo =< 105, write('\'101-105\'');
+                    number(ApLo), ApLo > 105, ApLo =< 110, write('\'106-110\'');
 				    number(ApLo), ApLo > 110,              write('\'111+\'')), 
-    write(','),   write(Cholesterol),
-    write(','),   write(Gluc),
+                    
     write(','),   write(Smoke),
     write(','),   write(Alco),
     write(','),   write(Active),
+
     write(','),   ( number(Age),           Age =< 30, write('\'0-30\'');
                     number(Age), Age > 30, Age =< 40, write('\'31-40\'');
                     number(Age), Age > 40, Age =< 50, write('\'41-50\'');
                     number(Age), Age > 50, Age =< 60, write('\'51-60\'');
-				    number(Age), Age > 60, Age =< 70, write('\'61-70\'');
-				    number(Age), Age > 70, Age =< 80, write('\'71-80\'');
-				    number(Age), Age > 80,            write('\'81+\'')),   
+                    number(Age), Age > 60, Age =< 70, write('\'61-70\'');
+                    number(Age), Age > 70, Age =< 80, write('\'71-80\'');
+                    number(Age), Age > 80,            write('\'81+\'')),
+
+    write(','),   write(GlucNorm),
+    write(','),   write(GlucAboveNorm),
+    write(','),   write(GlucWaboveNorm),
+
+    write(','),   write(CholNorm),
+    write(','),   write(CholAboveNorm),
+    write(','),   write(CholWaboveNorm),
+
+    write(','),   ( number(Bmi),          Bmi == 0.0, write('\'Unknown\'');
+                    number(Bmi), Bmi > 0, Bmi =< 15, write('\'0-15\'');
+                    number(Bmi), Bmi > 15, Bmi =< 20, write('\'16-20\'');
+                    number(Bmi), Bmi > 20, Bmi =< 25, write('\'21-25\'');
+                    number(Bmi), Bmi > 25, Bmi =< 30, write('\'26-30\'');
+				    number(Bmi), Bmi > 30,            write('\'31+\'')),
+
     write(','),   write(Cardio),  
         writeln(').'),
     fail.
