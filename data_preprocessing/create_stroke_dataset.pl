@@ -1,70 +1,100 @@
 :- ensure_loaded(cardio_database_ela).
 
+% ['gender', 'height', 'weight', 'ap_hi', 'ap_lo', 'smoke', 'alco', 'active', 'age', 'gluc_norm', 'gluc_above_norm', 'gluc_wabove_norm', 'chol_norm', 'chol_above_norm', 'chol_wabove_norm', 'bmi', CARDIO]
+
 startt :-
     tell('cardio_dataset.pl'),
-    setof(Gender,A^B^C^D^E^F^G^H^I^L^M^aa(Gender,A,B,C,D,E,F,G,H,I,L,M),AttributesGender),
+    setof(Gender,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(Gender,A,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributesGender),
     write('a(gender,'), writeq(AttributesGender), writeln(').'),
 
-    setof(Height,A^B^C^D^E^F^G^H^I^L^M^aa(A,Height,B,C,D,E,F,G,H,I,L,M),AttributesHeight),
+    setof(Height,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,Height,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributesHeight),
     write('a(height,'), writeq(AttributesHeight), writeln(').'),
 
-    setof(Weight,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,Weight,C,D,E,F,G,H,I,L,M),AttributesWeight),
+    setof(Weight,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,Weight,C,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributesWeight),
     write('a(weight,'), writeq(AttributesWeight), writeln(').'),
 
-    setof(ApHi,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,ApHi,D,E,F,G,H,I,L,M),AttributesApHi),
+    setof(ApHi,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,ApHi,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributesApHi),
     write('a(apHi,'), writeq(AttributesApHi), writeln(').'),
 
-    setof(ApLo,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,ApLo,E,F,G,H,I,L,M),AttributesApLo),
+    setof(ApLo,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,ApLo,E,F,G,H,I,L,M,N,O,P,Q,R),AttributesApLo),
     write('a(apLo,'), writeq(AttributesApLo), writeln(').'),
 
-    setof(Cholesterol,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,Cholesterol,F,G,H,I,L,M),AttributesCholesterol),
-    write('a(cholesterol,'), writeq(AttributesCholesterol), writeln(').'),
-
-    setof(Gluc,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,Gluc,G,H,I,L,M),AttributesGluc),
-    write('a(gluc,'), writeq(AttributesGluc), writeln(').'),
-
-    setof(Smoke,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,Smoke,H,I,L,M),AttributesSmoke),
+    setof(Smoke,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,Smoke,F,G,H,I,L,M,N,O,P,Q,R),AttributesSmoke),
     write('a(smoke,'), writeq(AttributesSmoke), writeln(').'),
 
-    setof(Alco,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,H,Alco,I,L,M),AttributesAlco),
+    setof(Alco,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,Alco,G,H,I,L,M,N,O,P,Q,R),AttributesAlco),
     write('a(alco,'), writeq(AttributesAlco), writeln(').'),
 
-    setof(Active,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,H,I,Active,L,M),AttributesActive),
+    setof(Active,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,Active,H,I,L,M,N,O,P,Q,R),AttributesActive),
     write('a(active,'), writeq(AttributesActive), writeln(').'),
 
-    setof(Age,A^B^C^D^E^F^G^H^I^L^M^aa(A,B,C,D,E,F,G,H,I,L,Age,M),AttributesAge),
+    setof(Age,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,Age,I,L,M,N,O,P,Q,R),AttributesAge),
     write('a(age,'), writeq(AttributesAge), writeln(').'),
+
+    setof(GlucNorm,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,GlucNorm,L,M,N,O,P,Q,R),AttributesGlucNorm),
+    write('a(glucNorm,'), writeq(AttributesGlucNorm), writeln(').'),
+
+    setof(GlucAboveNorm,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,GlucAboveNorm,M,N,O,P,Q,R),AttributesGlucAboveNorm),
+    write('a(glucAboveNorm,'), writeq(AttributesGlucAboveNorm), writeln(').'),
+
+    setof(GlucWaboveNorm,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,GlucWaboveNorm,N,O,P,Q,R),AttributesGlucWaboveNorm),
+    write('a(glucWaboveNorm,'), writeq(AttributesGlucWaboveNorm), writeln(').'),
+
+    setof(CholNorm,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,CholNorm,O,P,Q,R),AttributesCholNorm),
+    write('a(cholNorm,'), writeq(AttributesCholNorm), writeln(').'),
+
+    setof(CholAboveNorm,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,O,CholAboveNorm,P,Q,R),AttributesCholAboveNorm),
+    write('a(cholAboveNorm,'), writeq(AttributesCholAboveNorm), writeln(').'),
+
+    setof(CholWaboveNorm,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,O,P,CholWaboveNorm,Q,R),AttributesCholWaboveNorm),
+    write('a(cholWaboveNorm,'), writeq(AttributesCholWaboveNorm), writeln(').'),
+
+    setof(Bmi,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,Bmi,R),AttributesBmi),
+    write('a(bmi,'), writeq(AttributesBmi), writeln(').'),
+
     starttt.
 
+% ['gender', 'height', 'weight', 'ap_hi', 'ap_lo', 'smoke', 'alco', 'active', 'age', 'gluc_norm', 'gluc_above_norm', 'gluc_wabove_norm', 'chol_norm', 'chol_above_norm', 'chol_wabove_norm', 'bmi',CARDIO]
+
 starttt :-
-    aa(Gender, Height, Weight, ApHi, ApLo, Cholesterol, Gluc, Smoke, Alco, Active, Age, 0),
+    aa(Gender, Height, Weight, ApHi, ApLo, Smoke, Alco, Active, Age, GlucNorm, GlucAboveNorm, GlucWaboveNorm, CholNorm, CholAboveNorm, CholWaboveNorm, Bmi, 0),
     write('e(healthy,['),
-    write('gender = '),             writeq(Gender),          write(', '),
-    write('height = '),             writeq(Height),          write(', '),
-    write('weight = '),             writeq(Weight),          write(', '),
-    write('apHi = '),               writeq(ApHi),            write(', '),
-    write('apLo = '),               writeq(ApLo),            write(', '),
-    write('cholesterol = '),        writeq(Cholesterol),     write(', '),
-    write('gluc = '),               writeq(Gluc),            write(', '),
-    write('smoke = '),              writeq(Smoke),           write(', '),
-	write('alco = '),               writeq(Alco),            write(', '),
-    write('active = '),             writeq(Active),          write(', '),
-    write('age = '),                writeq(Age),             writeln(']).'),
+    write('gender = '),             writeq(Gender),             write(', '),
+    write('height = '),             writeq(Height),             write(', '),
+    write('weight = '),             writeq(Weight),             write(', '),
+    write('apHi = '),               writeq(ApHi),               write(', '),
+    write('apLo = '),               writeq(ApLo),               write(', '),
+    write('glucNorm = '),           writeq(GlucNorm),           write(', '),
+    write('glucAboveNorm = '),      writeq(GlucAboveNorm),      write(', '),
+    write('glucWaboveNorm = '),     writeq(GlucWaboveNorm),     write(', '),
+    write('cholNorm = '),           writeq(CholNorm),           write(', '),
+    write('cholAboveNorm = '),      writeq(CholAboveNorm),      write(', '),
+    write('cholWaboveNorm = '),     writeq(CholWaboveNorm),     write(', '),
+    write('bmi = '),                writeq(Bmi),                write(', '),
+    write('smoke = '),              writeq(Smoke),              write(', '),
+	write('alco = '),               writeq(Alco),               write(', '),
+    write('active = '),             writeq(Active),             write(', '),
+    write('age = '),                writeq(Age),                writeln(']).'),
     fail.
 starttt :-
-    aa(Gender, Height, Weight, ApHi, ApLo, Cholesterol, Gluc, Smoke, Alco, Active, Age, 1),
+    aa(Gender, Height, Weight, ApHi, ApLo, Smoke, Alco, Active, Age, GlucNorm, GlucAboveNorm, GlucWaboveNorm, CholNorm, CholAboveNorm, CholWaboveNorm, Bmi, 1),
     write('e(sick,['),
-    write('gender = '),             writeq(Gender),          write(', '),
-    write('height = '),             writeq(Height),          write(', '),
-    write('weight = '),             writeq(Weight),          write(', '),
-    write('apHi = '),               writeq(ApHi),            write(', '),
-    write('apLo = '),               writeq(ApLo),            write(', '),
-    write('cholesterol = '),        writeq(Cholesterol),     write(', '),
-    write('gluc = '),               writeq(Gluc),            write(', '),
-    write('smoke = '),              writeq(Smoke),           write(', '),
-    write('alco = '),               writeq(Alco),            write(', '),
-    write('active = '),             writeq(Active),          write(', '),
-    write('age = '),                writeq(Age),             writeln(']).'),
+    write('gender = '),             writeq(Gender),             write(', '),
+    write('height = '),             writeq(Height),             write(', '),
+    write('weight = '),             writeq(Weight),             write(', '),
+    write('apHi = '),               writeq(ApHi),               write(', '),
+    write('apLo = '),               writeq(ApLo),               write(', '),
+    write('glucNorm = '),           writeq(GlucNorm),           write(', '),
+    write('glucAboveNorm = '),      writeq(GlucAboveNorm),      write(', '),
+    write('glucWaboveNorm = '),     writeq(GlucWaboveNorm),     write(', '),
+    write('cholNorm = '),           writeq(CholNorm),           write(', '),
+    write('cholAboveNorm = '),      writeq(CholAboveNorm),      write(', '),
+    write('cholWaboveNorm = '),     writeq(CholWaboveNorm),     write(', '),
+    write('bmi = '),                writeq(Bmi),                write(', '),
+    write('smoke = '),              writeq(Smoke),              write(', '),
+	write('alco = '),               writeq(Alco),               write(', '),
+    write('active = '),             writeq(Active),             write(', '),
+    write('age = '),                writeq(Age),                writeln(']).'),
     fail.
 starttt :- told.
 
