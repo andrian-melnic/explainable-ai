@@ -10,10 +10,6 @@
  ***/	
 
 
-% sorgente: dataset CSV
-:- ensure_loaded(data/stroke_dataset).
-:- ensure_loaded(data/stroke_training_set).
-:- ensure_loaded(data/stroke_test_set).
 % import predicati per gestione politiche di scelta
 :- ensure_loaded(tree_induction_gini).
 :- ensure_loaded(tree_induction_gain).
@@ -24,6 +20,33 @@
 :- ensure_loaded(utility).
 
 :- dynamic alb/1.
+
+
+/*
+ *	carica_dataset(+dataset)
+ * 	+dataset = caricamento dataset indicato
+ */
+carica_dataset(stroke) :-
+	ensure_loaded(data/stroke/stroke_dataset),
+	ensure_loaded(data/stroke/stroke_training_set),
+	ensure_loaded(data/stroke/stroke_test_set).
+carica_dataset(stroke_ohe) :-
+	ensure_loaded(data/stroke_ohe/stroke_ohe_dataset),
+	ensure_loaded(data/stroke_ohe/stroke_ohe_training_set),
+	ensure_loaded(data/stroke_ohe/stroke_ohe_test_set).
+carica_dataset(heart) :-
+	ensure_loaded(data/heart/heart_dataset),
+	ensure_loaded(data/heart/heart_training_set),
+	ensure_loaded(data/heart/heart_test_set).
+
+/*
+ *	induci_alberi
+ * 	predicato per lanciare l'induzione degli alberi in un'unica soluzione
+ */
+induci :-
+	induce_albero(gini, _),
+	induce_albero(gain, _),
+	induce_albero(gainratio, _).
 
 /*
  *	induce_albero(+Parametro, -Albero) 
@@ -105,7 +128,7 @@ sceglie_attributo(gainratio, Attributi, Esempi, MigliorAttributo) :-
 max_dis([ (X/A) ], X, A).
 max_dis([ (H/A)|T ], Y, Best):-
 	max_dis(T, X, Best_X),
-	(H>X ->
+	(H>=X ->
 		(H=Y, A = Best);
 		(Y=X, Best = Best_X)).
 
@@ -117,7 +140,7 @@ max_dis([ (H/A)|T ], Y, Best):-
 min_dis([ (X/A) ], X, A).
 min_dis([ (H/A)|T ], Y, Best):-
 	min_dis(T, X, Best_X),
-	(H<X ->
+	(H=<X ->
 		(H=Y, A = Best);
 		(Y=X, Best = Best_X)).
 
