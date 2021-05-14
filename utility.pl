@@ -9,6 +9,7 @@
  * utility.pl
  ***/	
 
+
 /*
  *	calc_classe_dominante(+Classi, -ClasseDominante) 
  *	+Classi 			= lista di foglie risultanti (es. [sick, healthy, healthy])

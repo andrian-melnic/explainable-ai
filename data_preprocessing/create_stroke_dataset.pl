@@ -1,3 +1,15 @@
+/***
+ * UNIVPM - Intelligenza Artificiale (a.a. 2020/2021)
+ * Albero di Decisione binario con diverse politiche di scelta dell'attributo (Gini, Gain, Gainratio)
+ * 
+ * Conti Edoardo 		-	S1100649@studenti.univpm.it
+ * Federici Lorenzo 	- 	S1098086@studenti.univpm.it
+ * Andrian Melnic 		- 	S1098384@studenti.univpm.it
+ * 
+ * create_stroke_dataset.pl
+ ***/	
+
+
 :- ensure_loaded(stroke_database_ela).
 
 startt :-

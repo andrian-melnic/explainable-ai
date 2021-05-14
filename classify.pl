@@ -9,6 +9,7 @@
  * classify.pl
  ***/	
 
+
 /*
  * 	classifica(+Oggetto, -Classe, t(+Att,+Valori))
  *  +Oggetto		= 	[Attributo1=Valore1, .. , AttributoN=ValoreN]

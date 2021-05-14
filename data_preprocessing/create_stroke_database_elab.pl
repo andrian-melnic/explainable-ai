@@ -1,42 +1,50 @@
+/***
+ * UNIVPM - Intelligenza Artificiale (a.a. 2020/2021)
+ * Albero di Decisione binario con diverse politiche di scelta dell'attributo (Gini, Gain, Gainratio)
+ * 
+ * Conti Edoardo 		-	S1100649@studenti.univpm.it
+ * Federici Lorenzo 	- 	S1098086@studenti.univpm.it
+ * Andrian Melnic 		- 	S1098384@studenti.univpm.it
+ * 
+ * create_stroke_database_elab.pl
+ ***/	
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-a(Gender, Age, Hypertension, Heart_disease, Ever_married, Work_type, Residence_type, Avg_glucose_level, Bmi, Smoking_status, Target).
+a(  Gender,Age,Hypertension,Heart_disease,Ever_married,Work_type,
+    Residence_type,Avg_glucose_level,Bmi,Smoking_status,Target).
 
-id                   : numerico, indice univoco del paziente
-gender               : binario, sesso del paziente (0 = Femmina, 1 = Maschio)
-age                  : numerico, età del paziente
-hypertension         : binario, presenza di ipertenisone (0 = No, 1 = Si)
-heart_disease        : binario, presenza di cardiopatia, malattia caridaca (0 = No, 1 = Si)
-ever_married         : binario, sposato (0 = No, 1 = Si)
-work_type            : numerico, tipo di lavoro (0 = Never worked, 1= Children, 2 = Private, 3 = Self employed, 4 = Govt job)
-residence_type       : binario, dove abita (0 = Campagnia, 1 = Città)
-avg_glucose_level    : numerico, livello medio di gluccosio nel sangue, RANGE:
-                                                                                X < 110       Rischio Nullo
-                                                                                110 < X < 119 Rischio Moderato
-                                                                                119 < X < 125 Rischio Alto
-				                                                                X > 125       Rischio Molto Alto
-bmi                  : numerico, letteralmente body mass index, indice di massa corporea, RANGE:
-                                                                                                X < 18  	SOTTOPESO
-                                                                                                18 < X < 25	NORMOPESO
-                                                                                                25 < X < 30	SOVRAPPESO
-                                                                                                X > 30      OBESITÀ
-smoking_status       : numerico, tipo di fumatore (0 = Never smoked, 1 = Formerly smoked, 3 = Smokes)
-target               : booleano, indica se il passeggero ha avuto un ictus (0 = No, 1 = Si)
+gender               : sesso del paziente (Female, Male, Other)
+age                  : età del paziente
+hypertension         : presenza di ipertenisone (0 = No, 1 = Si)
+heart_disease        : presenza di cardiopatia, malattia caridaca (0 = No, 1 = Si)
+ever_married         : sposato (0 = No, 1 = Si)
+work_type            : tipo di lavoro (Never worked, Children, Private, Self employed, Govt job)
+residence_type       : residenza (Rural, Urban)
+avg_glucose_level    : livello medio di glucosio nel sangue, range:
+                        X < 110         Rischio Nullo
+                        110 < X < 119   Rischio Moderato
+                        119 < X < 125   Rischio Alto
+                        X > 125         Rischio Molto Alto
+bmi                  : indice di massa corporea (body mass index), range:
+                        X < 18  	    Sottopeso
+                        18 < X < 25	    Normopeso
+                        25 < X < 30	    Sovrappeso
+                        X > 30          Obesita'
+smoking_status       : tipo di fumatore (Never smoked, Formerly smoked, Smokes)
+target               : indica se il paziente ha avuto un ictus (0 = No, 1 = Si)
 
-es
-a(Male,67.0,0,1,Yes,Private,Urban,228.69,36.6,formerly_smoked,1).
+Nota:   Attraverso un processo di One Hot Encoding si sono generati nuovi 
+        attributi dummy a partire dalle features con valori categorici. 
+        es. gender(Female, Male, Other) -> Gender_female(0,1) , Gender_male(0,1) , Gender_other(0,1)
+       
+a(  Age,Hypertension,Heart_disease,Avg_glucose_level,Bmi,Gender_female,Gender_male,Gender_other,
+    Ever_married_no,Ever_married_yes,Residence_type_rural,Residence_type_urban,
+    Smoking_status_unknown,Smoking_status_formerly_smoked,Smoking_status_never_smoked,Smoking_status_smokes,
+    Work_type_govt_job,Work_type_never_worked,Work_type_private,Work_type_self_employed,Work_type_children,Target).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
-% ['age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi',
-%        'gender__Female', 'gender__Male', 'gender__Other',
-%        'ever_married__No', 'ever_married__Yes', 'Residence_type__Rural',
-%        'Residence_type__Urban', 'smoking_status__Unknown',
-%        'smoking_status__formerly smoked', 'smoking_status__never smoked',
-%        'smoking_status__smokes', 'work_type__Govt_job',
-%        'work_type__Never_worked', 'work_type__Private',
-%        'work_type__Self-employed', 'work_type__children','stroke']
 
 :- ensure_loaded(stroke_database).
 

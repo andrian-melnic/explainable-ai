@@ -9,6 +9,7 @@
  * tree_induction.pl
  ***/	
 
+
 % sorgente: dataset CSV
 :- ensure_loaded(data/stroke_dataset).
 :- ensure_loaded(data/stroke_training_set).
@@ -79,8 +80,9 @@ induce_albero(_, _, Esempi, l(ClasseDominante)) :-                              
 
 /*
  * sceglie_attributo(+Attributi, +Esempi, -MigliorAttributo):
- * seleziona l'Attributo che meglio discrimina le classi attraverso un listing tramite bagof e successivamente
- * attraverso la scelta del valore minore/maggiore sulla base della politica scelta
+ * seleziona l'Attributo che meglio discrimina le classi basandosi sul concetto di "disuguaglianza"
+ * utilizza il bagof per raccogliere gli attributi con i corrispettivi valori e si seleziona il valore 
+ * minore/maggiore in base alla politica di scelta dell'attributo. 
  * (1) sceglie_attributo(gini, ...) 		-> predicato per la scelta dell'attributo secondo indice di C. Gini
  * (2) sceglie_attributo(gain, ...) 		-> predicato per la scelta dell'attributo tramite entropia information gain
  * (3) sceglie_attributo(gainratio, ...) 	-> predicato per la scelta dell'attributo tramite entropia gain ratio
@@ -131,7 +133,7 @@ induce_alberi(Parametro, Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])
 
 /*
  * attval_subset(+AttributoValore, +Esempi, -Sottoinsieme):
- * il termine Sottoinsieme è il sottoinsieme di Esempi che soddisfa la condizione
+ * il termine Sottoinsieme è il sottoinsieme di Esempi che soddisfa la condizione Attributo = Valore
  */
 attval_subset(AttributoValore,Esempi,Sottoinsieme) :-
 	findall(e(C,O),
@@ -139,9 +141,6 @@ attval_subset(AttributoValore,Esempi,Sottoinsieme) :-
 			soddisfa(O,[AttributoValore])),
 			Sottoinsieme).
 
-/*
- * soddisfa(Oggetto, Descrizione)
- */
 soddisfa(Oggetto, Congiunzione) :-
 	\+ (member(Att=Val,Congiunzione),
 		member(Att=ValX,Oggetto),

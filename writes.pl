@@ -1,3 +1,16 @@
+/***
+ * UNIVPM - Intelligenza Artificiale (a.a. 2020/2021)
+ * Albero di Decisione binario con diverse politiche di scelta dell'attributo (Gini, Gain, Gainratio)
+ * 
+ * Conti Edoardo 		-	S1100649@studenti.univpm.it
+ * Federici Lorenzo 	- 	S1098086@studenti.univpm.it
+ * Andrian Melnic 		- 	S1098384@studenti.univpm.it
+ * 
+ * writes.pl
+ ***/
+
+
+% debug per stampare termini "in input" su file 
 debug_attr(A) :-
 	open('attr.txt', append, Out),
 	write(Out,A),
@@ -32,7 +45,7 @@ debug_tre(A, B, C):-
 	writeln(Out, ' '),
 	close(Out).
 
-
+% stampa albero formattato su terminale
 mostra(T) :-
 	mostra(T,0).
 mostra(null,_) :- writeln(' ==> ???').
@@ -47,8 +60,7 @@ mostratutto([V:T|C],I) :-
 	mostra(T,I1),
 	mostratutto(C,I).
 
-% Stampa albero formattato su file
-/*
+% stampa albero formattato su file
 txt(T,File) :-
 	exists_file(File),
 	delete_file(File),
@@ -58,36 +70,6 @@ txt(T, File) :-
 	open(File, append, Out),
 	txt(Out, T,0),
 	close(Out).
-
-txt(Out, null,_) :-
-	writeln(Out, ' ==> ???').
-txt(Out, l(X),_) :-
-	write(Out, ' ==> '), writeln(Out, X).
-txt(Out, t(A,L),I) :-
-	writeln(Out, ' '),
-	tab(Out, I), write(Out, A),
-	writeln(Out, ' '),
-	I1 is I+2,
-	txtTutto(Out, L,I1).
-
-txtTutto(_, [],_).
-txtTutto(Out, [V:T|C],I) :-
-	tab(Out, I),write(Out, V), I1 is I+2,
-	txt(Out, T,I1),
-	txtTutto(Out, C,I).
-*/
-
-% Stampa albero formattato su file
-txt(T,File) :-
-	exists_file(File),
-	delete_file(File),
-	txt(T, File).
-txt(T, File) :-
-	\+ exists_file(File),
-	open(File, append, Out),
-	txt(Out, T,0),
-	close(Out).
-
 txt(Out, null,_) :-
 	writeln(Out, ' ==> ???').
 txt(Out, l(X),_) :-
@@ -115,25 +97,3 @@ tabs(Out, I, Counter) :-
 	tab(Out, 2),
 	Counter2 is Counter+1,
 	(I > 0) -> (I2 is I-2, tabs(Out, I2, Counter2)); !.
-
-% rimozione .txt albero con parametro indicato da 'Version'
-deleteTreeFile(Version) :-
-	atom_concat('./output/tree/tree_', Version, TempTreeFileName),
-    atom_concat(TempTreeFileName, '.txt', EndTreeFileName),
-	exists_file(EndTreeFileName),
-	delete_file(EndTreeFileName).
-
-% rimozione .txt matrice con parametro indicato da 'Version'
-deleteMatrixFile(Version) :-
-	atom_concat('./output/matrix/matrix_', Version, TempMatrixFileName),
-    atom_concat(TempMatrixFileName, '.txt', EndMatrixFileName),
-	exists_file(EndMatrixFileName),
-	delete_file(EndMatrixFileName).
-
-/*
-TODO: non piu' in uso per il momento
-stampa(Albero):-
-	open('output.txt', write, Out),
-	write(Out, Albero),
-	close(Out).
-*/
