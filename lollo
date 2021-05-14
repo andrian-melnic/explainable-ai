@@ -45,3 +45,27 @@ data.smoking_status = data.smoking_status.replace('never smoked', 0)\
 data.bmi = data.bmi.fillna(0)   
  
 data 
+
+  
+
+% a(Age,
+Hypertension,
+Heart_disease,
+Avg_glucose_level,
+Bmi,
+Gender_female,
+Gender_male,
+Gender_other,
+Ever_married_no,
+Ever_married_yes,
+Residence_type_rural,
+Residence_type_urban,
+Smoking_status_unknown,
+Smoking_status_formerly_smoked,
+Smoking_status_never_smoked,
+Smoking_status_smokes,
+Work_type_govt_job,
+Work_type_never_worked,
+Work_type_private,
+Work_type_self_employed,
+Work_type_children,Target),
