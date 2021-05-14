@@ -64,7 +64,7 @@ start :-
                     number(Avg_glucose_level), Avg_glucose_level > 110, Avg_glucose_level =< 119, write('\'111-119\'');
                     number(Avg_glucose_level), Avg_glucose_level > 119, Avg_glucose_level =< 125, write('\'120-125\'');
 				    number(Avg_glucose_level), Avg_glucose_level > 125,                           write('\'126+\'')),
-    write(','),   ( number(Bmi),          Bmi == 0.0, write('\'Unknown\'');
+    write(','),   ( number(Bmi),          Bmi == 0, write('\'Unknown\'');
                     number(Bmi), Bmi > 0, Bmi =< 17, write('\'0-18\'');
                     number(Bmi), Bmi > 17, Bmi =< 25, write('\'19-25\'');
                     number(Bmi), Bmi > 25, Bmi =< 30, write('\'26-30\'');
