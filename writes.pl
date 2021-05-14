@@ -111,10 +111,16 @@ txtTutto(Out, [V:T|C], I) :-
 	txtTutto(Out, C,I).
 
 tabs(Out, I, Counter) :-
-	write(Out, '|'),
-	tab(Out, 2),
-	Counter2 is Counter+1,
-	(I > 0) -> (I2 is I-2, tabs(Out, I2, Counter2)); !.
+	((1 is mod(Counter,2)) ->
+	(
+		write(Out, '|'),
+		tab(Out, 2),
+		Counter2 is Counter+1,
+		(I > 0) -> (I2 is I-2, tabs(Out, I2, Counter2)); !);
+	(	tab(Out, 2),
+		Counter2 is Counter+1,
+		(I > 0) -> (I2 is I-2, tabs(Out, I2, Counter2)); !)
+	).
 
 % rimozione .txt albero con parametro indicato da 'Version'
 deleteTreeFile(Version) :-

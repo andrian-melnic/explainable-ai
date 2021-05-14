@@ -11,21 +11,8 @@ presuppone sia stata effettuata l'induzione dell'Albero di Decisione
 classifica(Oggetto,nc,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
 	member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
 	member(Val:_,Valori).			% e Val:null è in Valori
-
-	% WIP --->
-	% member(Att=Val,Oggetto),  			% se Att=Val è elemento della lista Oggetto
-	% member(Val:X,Valori),			% e Val:null è in Valori
-	% writeln(X),
-	% write('\n').
-	% <---
-
-	% write(' { '),
-	% write(Valori),
-	% write(' } '),
-	%  stampa_matrice_di_confusione dava false perché incontrava dei valori con
-	%  [healthy, sick]
-	% member(Val:l([_,_]), Valori).
-
+	% member(Val:X,Valori),
+	% debug(X).
 
 classifica(Oggetto,Classe,t(Att,Valori)) :- % dato t(+Att,+Valori), Oggetto è della Classe
 	member(Att=Val,Oggetto),  				% se Att=Val è elemento della lista Oggetto
