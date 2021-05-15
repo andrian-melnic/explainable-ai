@@ -1,0 +1,6 @@
+Test effettuati :1279
+Test non classificati :74
+Veri Negativi  1118   Falsi Positivi 31
+Falsi Negativi 47   Veri Positivi  9
+Accuratezza: 0.9352697095435685
+Errore: 0.06473029045643153

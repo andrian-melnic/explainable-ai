@@ -73,6 +73,13 @@ del(T,[T|C],C) :- !.
 del(A,[T|C],[T|C1]) :-
 	del(A,C,C1).
 
+/*
+ *	concat_path_dataset(+Dataset, -PathDataset, -PathTraining, -PathTest)
+ * 	+Dataset		= parametro di riferimento del dataset scelto
+ * 	-PathDataset 	= stringa contenente il path degli attributi del Dataset
+ * 	-PathTraining	= stringa contenente il path del Training Set
+ *  -PathTest		= stringa contenente il path del Test Set
+ */
 concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest) :-
 	atom_concat('data/', Dataset, Path1),
     atom_concat(Path1, '/', Path2),
