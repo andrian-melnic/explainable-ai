@@ -72,3 +72,11 @@ log2(P, Log2ris):-
 del(T,[T|C],C) :- !.
 del(A,[T|C],[T|C1]) :-
 	del(A,C,C1).
+
+concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest) :-
+	atom_concat('data/', Dataset, Path1),
+    atom_concat(Path1, '/', Path2),
+	atom_concat(Path2, Dataset, Path3),
+	atom_concat(Path3, '_dataset.pl', PathDataset),
+	atom_concat(Path3, '_training_set.pl', PathTraining),
+	atom_concat(Path3, '_test_set.pl', PathTest).
