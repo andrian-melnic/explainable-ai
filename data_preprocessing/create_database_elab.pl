@@ -6,7 +6,7 @@
  * Federici Lorenzo 	- 	S1098086@studenti.univpm.it
  * Andrian Melnic 		- 	S1098384@studenti.univpm.it
  * 
- * create_stroke_database_elab.pl
+ * create_database_elab.pl
  ***/	
 
 
@@ -46,10 +46,48 @@ a(  Age,Hypertension,Heart_disease,Avg_glucose_level,Bmi,Gender_female,Gender_ma
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-:- ensure_loaded(stroke_database).
+% database elaborato -> stroke
+start(stroke) :-
+    ensure_loaded(data_preprocessing/stroke/stroke_database),
+    tell('data_preprocessing/stroke/stroke_database_elab.pl'),
+    a(Gender,Age,Hypertension,Heart_disease,Ever_married,Work_type,Residence_type,Avg_glucose_level,Bmi,Smoking_status,Target),
+    write('aa('), write(Gender),
+    write(','),   ( number(Age),           Age =< 30, write('\'0-30\'');
+                    number(Age), Age > 30, Age =< 40, write('\'31-40\'');
+                    number(Age), Age > 40, Age =< 50, write('\'41-50\'');
+                    number(Age), Age > 50, Age =< 60, write('\'51-60\'');
+				    number(Age), Age > 60, Age =< 70, write('\'61-70\'');
+				    number(Age), Age > 70, Age =< 80, write('\'71-80\'');
+				    number(Age), Age > 80,            write('\'81+\'')),  
+    write(','),   write(Hypertension),
+    write(','),   write(Heart_disease), 
+    write(','),   write(Ever_married), 
+    write(','),   ( number(Work_type), Work_type == 0, write('\'Never worked\'');
+                    number(Work_type), Work_type == 1, write('\'Children\'');
+                    number(Work_type), Work_type == 2, write('\'Private\'');
+                    number(Work_type), Work_type == 3, write('\'Self employed\'');
+				    number(Work_type), Work_type == 4,  write('\'Govt job\'')),  
+    write(','),   ( number(Residence_type), Residence_type == 0, write('\'Rural\'');
+				    number(Residence_type), Residence_type == 1,  write('\'City\'')), 
+    write(','),   ( number(Avg_glucose_level),                          Avg_glucose_level =< 110, write('\'0-110\'');
+                    number(Avg_glucose_level), Avg_glucose_level > 110, Avg_glucose_level =< 119, write('\'111-119\'');
+                    number(Avg_glucose_level), Avg_glucose_level > 119, Avg_glucose_level =< 125, write('\'120-125\'');
+				    number(Avg_glucose_level), Avg_glucose_level > 125,                           write('\'126+\'')),
+    write(','),   ( number(Bmi),           Bmi =< 17, write('\'0-18\'');
+                    number(Bmi), Bmi > 17, Bmi =< 25, write('\'19-25\'');
+                    number(Bmi), Bmi > 25, Bmi =< 30, write('\'26-30\'');
+				    number(Bmi), Bmi > 30,            write('\'31+\'')), 
+    write(','),   ( number(Smoking_status), Smoking_status == 0, write('\'Never smoked\'');
+                    number(Smoking_status), Smoking_status == 1, write('\'Formerly smoked\'');
+				    number(Smoking_status), Smoking_status == 2,  write('\'Smokes\'')),  
+    write(','),   write(Target),
+        writeln(').'),
+    fail.
 
-start :-
-    tell('stroke_database_ela.pl'),
+% database elaborato -> stroke_ohe
+start(stroke_ohe) :-
+    ensure_loaded(data_preprocessing/stroke_ohe/stroke_ohe_database),
+    tell('data_preprocessing/stroke_ohe/stroke_ohe_database_elab.pl'),
     a(Age,Hypertension,Heart_disease,Avg_glucose_level,Bmi,Gender_female,Gender_male,Gender_other,Ever_married_no,Ever_married_yes,Residence_type_rural,Residence_type_urban,Smoking_status_unknown,Smoking_status_formerly_smoked,Smoking_status_never_smoked,Smoking_status_smokes,Work_type_govt_job,Work_type_never_worked,Work_type_private,Work_type_self_employed,Work_type_children,Target),
     write('aa('),   ( number(Age),           Age =< 30, write('\'0-30\'');
                     number(Age), Age > 30, Age =< 40, write('\'31-40\'');
@@ -89,4 +127,39 @@ start :-
         writeln(').'),
     fail.
 
-start :- told.
+% database elaborato -> heart
+start(heart) :-
+    ensure_loaded(data_preprocessing/heart/heart_database),
+    tell('data_preprocessing/heart/heart_database_elab.pl'),
+	a(Target,Age,Sex,Thalach,Exang,Oldpeak,Ca,Cp_0,Cp_1,Cp_2,Cp_3,Slope_0,Slope_1,Slope_2,Thal_1,Thal_2,Thal_3),
+	write('aa('), write(Target),
+	write(','),  ( number(Age), Age =< 40,  write('0-40') ;
+                   number(Age), Age > 40, Age =< 50, write('40-50') ;
+                   number(Age), Age > 50, Age =< 60, write('50-60') ;
+				   number(Age), Age > 60, Age =< 70, write('60-70') ;
+				   number(Age), Age > 70, Age =< 80, write('70-80');
+				   number(Age), Age > 80, write('80')),
+    write(','),  write(Sex),
+    write(','),(  number(Thalach), Thalach=<140, write('0-140');
+					number(Thalach), Thalach>140, Thalach=<170, write('140-170');
+					number(Thalach), Thalach>170, write('170')),
+	write(','), write(Exang),
+	write(','), (  number(Oldpeak), Oldpeak=<1, write('0-1');
+					number(Oldpeak), Oldpeak>1, Oldpeak=<2, write('1-2');
+					number(Oldpeak), Oldpeak>2, write('2')),
+	write(','), write(Ca),
+	write(','), write(Cp_0),
+	write(','), write(Cp_1),
+	write(','), write(Cp_2),
+	write(','), write(Cp_3),
+	write(','), write(Slope_0),
+	write(','), write(Slope_1),
+	write(','), write(Slope_2),
+	write(','), write(Thal_1),
+	write(','), write(Thal_2),
+	write(','), write(Thal_3),
+        writeln(').'),
+	fail.
+
+% told
+start(_) :- told.

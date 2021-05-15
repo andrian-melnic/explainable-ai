@@ -11,9 +11,9 @@
 
 
 % import predicati per gestione politiche di scelta
-:- ensure_loaded(tree_induction_gini).
-:- ensure_loaded(tree_induction_gain).
-:- ensure_loaded(tree_induction_gainratio).
+:- ensure_loaded(indexes_policy/gini_index).
+:- ensure_loaded(indexes_policy/information_gain).
+:- ensure_loaded(indexes_policy/gain_ratio).
 % imports utilities e predicati per la classificazione e verifica dell'accuratezza
 :- ensure_loaded(classify).
 :- ensure_loaded(writes).
@@ -26,18 +26,23 @@
  *	carica_dataset(+dataset)
  * 	+dataset = caricamento dataset indicato
  */
-carica_dataset(stroke) :-
-	ensure_loaded(data/stroke/stroke_dataset),
-	ensure_loaded(data/stroke/stroke_training_set),
-	ensure_loaded(data/stroke/stroke_test_set).
-carica_dataset(stroke_ohe) :-
-	ensure_loaded(data/stroke_ohe/stroke_ohe_dataset),
-	ensure_loaded(data/stroke_ohe/stroke_ohe_training_set),
-	ensure_loaded(data/stroke_ohe/stroke_ohe_test_set).
-carica_dataset(heart) :-
-	ensure_loaded(data/heart/heart_dataset),
-	ensure_loaded(data/heart/heart_training_set),
-	ensure_loaded(data/heart/heart_test_set).
+carica_dataset(Dataset) :-
+	concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest),
+
+	ensure_loaded(PathDataset),
+	ensure_loaded(PathTraining),
+	ensure_loaded(PathTest).
+
+/*
+ *	reset_dataset(+dataset)
+ * 	+dataset = rimozione dataset indicato
+ */
+reset_dataset(Dataset) :-
+	concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest),
+	
+	unload_file(PathDataset),
+	unload_file(PathTraining),
+	unload_file(PathTest).
 
 /*
  *	induci_alberi
