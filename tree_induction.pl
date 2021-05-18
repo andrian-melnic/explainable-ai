@@ -28,7 +28,6 @@
  */
 carica_dataset(Dataset) :-
 	concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest),
-
 	ensure_loaded(PathDataset),
 	ensure_loaded(PathTraining),
 	ensure_loaded(PathTest).
@@ -39,7 +38,6 @@ carica_dataset(Dataset) :-
  */
 reset_dataset(Dataset) :-
 	concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest),
-	
 	unload_file(PathDataset),
 	unload_file(PathTraining),
 	unload_file(PathTest).
