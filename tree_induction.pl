@@ -64,18 +64,26 @@ induce_albero(Parametro, Albero) :-
 	induce_albero(Parametro, Attributi, Esempi, Albero),
 
     % output albero su terminale e assert di quest'ultimo
-	mostra( Albero ),
+	% mostra( Albero ),
     assert(alb(Albero)),
 
     % scrittura albero su file .txt
     atom_concat('./output/tree/tree_', Parametro, PTreeFileName),
     atom_concat(PTreeFileName, '.txt', TreeFileName),
     txt( Albero, TreeFileName ),
+	
+	% log su terminale
+	atom_concat('Albero salvato in /output/tree/', Parametro, LogTree),
+	writeln(LogTree),
 
     % scrittura matrice di confusione su file .txt
     atom_concat('./output/matrix/matrix_', Parametro, PMatrixFileName),
     atom_concat(PMatrixFileName, '.txt', MatrixFileName),
-    stampa_matrice_confusione_txt(MatrixFileName).
+    stampa_matrice_confusione_txt(MatrixFileName),
+
+	% log su terminale
+	atom_concat('Matrice di confusione salvata in /output/tree/', Parametro, LogMatrix),
+	writeln(LogMatrix), write('\n').
 
 
 /*
