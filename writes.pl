@@ -11,36 +11,9 @@
 
 
 % debug per stampare termini "in input" su file 
-debug_attr(A) :-
-	open('attr.txt', append, Out),
-	write(Out,A),
-	writeln(Out, ' '),
-	writeln(Out, ' '),
-	close(Out).
-
 debug(A):-
 	open('debug.txt', append, Out),
 	write(Out,A),
-	writeln(Out, ' '),
-	writeln(Out, ' '),
-	close(Out).
-
-debug_due(A, B):-
-	open('debug_due.txt', append, Out),
-	write(Out,A),
-	write(Out,' '),
-	write(Out,B),
-	writeln(Out, ' '),
-	writeln(Out, ' '),
-	close(Out).
-
-debug_tre(A, B, C):-
-	open('debug_tre.txt', append, Out),
-	write(Out,A),
-	write(Out,' '),
-	write(Out,B),
-	write(Out,' '),
-	write(Out,C),
 	writeln(Out, ' '),
 	writeln(Out, ' '),
 	close(Out).

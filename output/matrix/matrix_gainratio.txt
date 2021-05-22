@@ -1,6 +1,6 @@
-Test effettuati :62
-Test non classificati :0
-Veri Negativi  27   Falsi Positivi 2
-Falsi Negativi 4   Veri Positivi  29
-Accuratezza: 0.9032258064516129
-Errore: 0.09677419354838712
+Performed tests: 62
+Unclassified tests: 0
+True negative  (TN): 27	 False positive (FP): 2
+False negative (FN): 4	 True positive  (TP): 29
+Accuracy (ACC): 0.9032258064516129
+Error: 0.09677419354838712

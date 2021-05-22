@@ -63,33 +63,43 @@ valuta(Albero,[_/Oggetto|Coda],VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA) :-
 	valuta(Albero,Coda,VN,VNA,VP,VPA,FN,FNA,FP,FPA,NC,NCA1).
 
 % stampa la matrice di confusione su terminale
-stampa_matrice_confusione :-
+confusion_matrix :-
 	alb(Albero),
 	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
 	length(TestSet,N),
 	valuta(Albero,TestSet,VN,0,VP,0,FN,0,FP,0,NC,0),
-	A is (VP + VN) / (N - NC),							% Accuratezza
-	E is 1 - A,											% Errore
-	write('Test effettuati :'),  writeln(N),
-	write('Test non classificati :'),  writeln(NC),
-	write('Veri Negativi  '), write(VN), write('   Falsi Positivi '), writeln(FP),
-	write('Falsi Negativi '), write(FN), write('   Veri Positivi  '), writeln(VP),
-	write('Accuratezza: '), writeln(A),
-	write('Errore: '), writeln(E).
+	ACC is (VP + VN) / (N - NC),							% accuracy
+	ERR is 1 - ACC,											% error
+	%TPR is VP / (VP + FN),									% true positive rate (TPR)
+	%TNR is VN / (VN + FP),									% true negative rate (TNR)
+	%PPV is VP / (VP + FP),									% precision (PPV)
+	%BA is (TPR + TNR) / 2,									% balanced accuracy
+	%FS is 2 * ((PPV * TPR) / (PPV + TPR)),					% harmonic mean of precision (PPV) and sensitivity (TPR)
+	write('Performed tests: '),  writeln(N),
+	write('Unclassified tests: '),  writeln(NC),
+	write('True negative  (TN): '), write(VN), write('\t False positive (FP): '), writeln(FP),
+	write('False negative (FN): '), write(FN), write('\t True positive  (TP): '), writeln(VP),
+	write('Accuracy (ACC): '), writeln(ACC),
+	write('Error: '), writeln(ERR).
 
 % stampa la matrice di confusione in output su file .txt
-stampa_matrice_confusione_txt(File) :-
+confusion_matrix_txt(File) :-
 	alb(Albero),
 	findall(Classe/Oggetto,s(Classe,Oggetto),TestSet),
 	length(TestSet,N),
 	valuta(Albero,TestSet,VN,0,VP,0,FN,0,FP,0,NC,0),
-	A is (VP + VN) / (N - NC),							% Accuratezza
-	E is 1 - A,											% Errore
+	ACC is (VP + VN) / (N - NC),							% accuracy
+	ERR is 1 - ACC,											% error
+	%TPR is VP / (VP + FN),									% true positive rate (TPR)
+	%TNR is VN / (VN + FP),									% true negative rate (TNR)
+	%PPV is VP / (VP + FP),									% positive predictive value (PPV)
+	%BA is (TPR + TNR) / 2,									% balanced accuracy
+	%FS is 2 * ((PPV * TPR) / (PPV + TPR)),					% harmonic mean of precision (PPV) and recall (TPR)
 	open(File, write, Out),
-	write(Out, 'Test effettuati :'),  writeln(Out, N),
-	write(Out, 'Test non classificati :'),  writeln(Out, NC),
-	write(Out, 'Veri Negativi  '), write(Out, VN), write(Out, '   Falsi Positivi '), writeln(Out, FP),
-	write(Out, 'Falsi Negativi '), write(Out, FN), write(Out, '   Veri Positivi  '), writeln(Out, VP),
-	write(Out, 'Accuratezza: '), writeln(Out, A),
-	write(Out, 'Errore: '), writeln(Out, E),
+	write(Out, 'Performed tests: '),  writeln(Out, N),
+	write(Out, 'Unclassified tests: '),  writeln(Out, NC),
+	write(Out, 'True negative  (TN): '), write(Out, VN), write(Out, '\t False positive (FP): '), writeln(Out, FP),
+	write(Out, 'False negative (FN): '), write(Out, FN), write(Out, '\t True positive  (TP): '), writeln(Out, VP),
+	write(Out, 'Accuracy (ACC): '), writeln(Out, ACC),
+	write(Out, 'Error: '), writeln(Out, ERR),
 	close(Out).

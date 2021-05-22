@@ -11,9 +11,9 @@
 
 
 % import predicati per gestione politiche di scelta
-:- ensure_loaded(indexes_policy/gini_index).
-:- ensure_loaded(indexes_policy/information_gain).
-:- ensure_loaded(indexes_policy/gain_ratio).
+:- ensure_loaded(splitting_criteria/gini_index).
+:- ensure_loaded(splitting_criteria/information_gain).
+:- ensure_loaded(splitting_criteria/gain_ratio).
 % imports utilities e predicati per la classificazione e verifica dell'accuratezza
 :- ensure_loaded(classify).
 :- ensure_loaded(writes).
@@ -23,45 +23,45 @@
 
 
 /*
- *	carica_dataset(+dataset)
+ *	load_dataset(+dataset)
  * 	+dataset = caricamento dataset indicato
  */
-carica_dataset(Dataset) :-
+load_dataset(Dataset) :-
 	concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest),
 	ensure_loaded(PathDataset),
 	ensure_loaded(PathTraining),
 	ensure_loaded(PathTest).
 
-/*
- *	reset_dataset(+dataset)
+/* 
+ *	unload_dataset(+dataset)
  * 	+dataset = rimozione dataset indicato
  */
-reset_dataset(Dataset) :-
+unload_dataset(Dataset) :-
 	concat_path_dataset(Dataset, PathDataset, PathTraining, PathTest),
 	unload_file(PathDataset),
 	unload_file(PathTraining),
 	unload_file(PathTest).
 
 /*
- *	induci_alberi
+ *	induce
  * 	predicato per lanciare l'induzione degli alberi in un'unica soluzione
  */
-induci :-
-	induce_albero(gini, _),
-	induce_albero(gain, _),
-	induce_albero(gainratio, _).
+induce :-
+	induce_tree(gini, _),
+	induce_tree(gain, _),
+	induce_tree(gainratio, _).
 
 /*
- *	induce_albero(+Parametro, -Albero) 
+ *	induce_tree(+Parametro, -Albero) 
  *	+Parametro 	= gini|gain|gainratio -> induzione albero con politica di scelta dell'attributo indicata
  *	-Albero		= albero indotto  
  */
-induce_albero(Parametro, Albero) :-
+induce_tree(Parametro, Albero) :-
 	% Rimozione di 'alb' dal database se precedentemente asserito
 	retractall(alb(_)),											
 	findall( e(Classe,Oggetto), e(Classe,  Oggetto), Esempi),
 	findall( Att,a(Att,_), Attributi),
-	induce_albero(Parametro, Attributi, Esempi, Albero),
+	induce_tree(Parametro, Attributi, Esempi, Albero),
 
     % output albero su terminale e assert di quest'ultimo
 	% mostra( Albero ),
@@ -73,21 +73,21 @@ induce_albero(Parametro, Albero) :-
     txt( Albero, TreeFileName ),
 	
 	% log su terminale
-	atom_concat('Albero salvato in /output/tree/', Parametro, LogTree),
+	atom_concat('Decision Tree stored in /output/tree/', Parametro, LogTree),
 	writeln(LogTree),
 
     % scrittura matrice di confusione su file .txt
     atom_concat('./output/matrix/matrix_', Parametro, PMatrixFileName),
     atom_concat(PMatrixFileName, '.txt', MatrixFileName),
-    stampa_matrice_confusione_txt(MatrixFileName),
+    confusion_matrix_txt(MatrixFileName),
 
 	% log su terminale
-	atom_concat('Matrice di confusione salvata in /output/tree/', Parametro, LogMatrix),
+	atom_concat('Confusion Matrix stored in /output/tree/', Parametro, LogMatrix),
 	writeln(LogMatrix), write('\n').
 
 
 /*
- * 	induce_albero(+Parametro, +Attributi, +Esempi, -Albero):
+ * 	induce_tree(+Parametro, +Attributi, +Esempi, -Albero):
  *	-Albero = 	(1) null 		-> 	l'insieme degli esempi è vuoto
  *				(2) l(Classe) 	-> 	tutti gli esempi sono della stessa classe
  * 				(3) t(Attributo,
@@ -100,15 +100,15 @@ induce_albero(Parametro, Albero) :-
  * 
  *				(4) l(Classi) 	->	non abbiamo Attributi utili per discriminare ulteriormente
  */
-induce_albero(_, _, [], null ) :- !. 											% (1)
-induce_albero(_, _, [e(Classe,_)|Esempi], l(Classe)) :-                         % (2)
+induce_tree(_, _, [], null ) :- !. 												% (1)
+induce_tree(_, _, [e(Classe,_)|Esempi], l(Classe)) :-                         	% (2)
 	\+ ( member(e(ClassX,_),Esempi), ClassX \== Classe ), !.	                % no esempi di altre classi (OK!!)
-induce_albero(Parametro, Attributi, Esempi, t(Attributo,SAlberi) ) :-	        % (3)
+induce_tree(Parametro, Attributi, Esempi, t(Attributo,SAlberi) ) :-	        	% (3)
 	sceglie_attributo(Parametro, Attributi, Esempi, Attributo), !,	            % implementa la politica di scelta
 	del( Attributo, Attributi, Rimanenti ),					                    % elimina Attributo scelto
 	a( Attributo, Valori ),					 				                    % ne preleva i valori
-	induce_alberi( Parametro, Attributo, Valori, Rimanenti, Esempi, SAlberi).
-induce_albero(_, _, Esempi, l(ClasseDominante)) :-                              %finiti gli attributi utili (KO!!)
+	induce_trees( Parametro, Attributo, Valori, Rimanenti, Esempi, SAlberi).
+induce_tree(_, _, Esempi, l(ClasseDominante)) :-                              	%finiti gli attributi utili (KO!!)
 	findall( Classe, member(e(Classe,_), Esempi), Classi),
 	calc_classe_dominante(Classi, ClasseDominante).
 
@@ -156,14 +156,14 @@ min_dis([ (H/A)|T ], Y, Best):-
 		(Y=X, Best = Best_X)).
 
 /*
- * induce_alberi(+Parametro, +Attributi, +Valori, +AttRimasti, +Esempi, -SAlberi)
+ * induce_trees(+Parametro, +Attributi, +Valori, +AttRimasti, +Esempi, -SAlberi)
  * induce decisioni SAlberi per sottoinsiemi di Esempi secondo i Valori degli Attributi
  */
-induce_alberi(_,_,[],_,_,[]). % nessun valore, nessun sotto albero
-induce_alberi(Parametro, Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
+induce_trees(_,_,[],_,_,[]). % nessun valore, nessun sotto albero
+induce_trees(Parametro, Att,[Val1|Valori],AttRimasti,Esempi,[Val1:Alb1|Alberi])  :-
 	attval_subset(Att=Val1,Esempi,SottoinsiemeEsempi),
-	induce_albero(Parametro,AttRimasti,SottoinsiemeEsempi,Alb1),
-	induce_alberi(Parametro,Att,Valori,AttRimasti,Esempi,Alberi).
+	induce_tree(Parametro,AttRimasti,SottoinsiemeEsempi,Alb1),
+	induce_trees(Parametro,Att,Valori,AttRimasti,Esempi,Alberi).
 
 /*
  * attval_subset(+AttributoValore, +Esempi, -Sottoinsieme):

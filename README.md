@@ -54,7 +54,7 @@ Datasets sources:
 |   |-- heart/...
 |   |-- stroke/...
 |   
-|-- indexes_policy
+|-- splitting_criteria
 |   |-- gini_index.pl
 |   |-- information_gain.pl
 |   |-- gain_ratio.pl
@@ -82,7 +82,7 @@ Datasets sources:
 <img src="https://latex.codecogs.com/gif.latex?Gini(A)&space;=&space;\sum_{v}P(v)\sum_{i&space;\neq&space;j}P(i|v)P(j|v)" />
 
 ### Information Gain
-<img src="https://latex.codecogs.com/gif.latex?Gain(A)&space;=&space;B\left(\frac{p}{p&plus;n}\right)&space;-&space;\sum_{k=1}^{d}P(TS_k)B(TS_k)!" />
+<img src="https://latex.codecogs.com/gif.latex?Gain(A)&space;=&space;B\left(\frac{p}{p&plus;n}\right)&space;-&space;\sum_{k=1}^{d}P(TS_k)B(TS_k)" />
 
 ### Gain Ratio
 <img src="https://latex.codecogs.com/gif.latex?GainRatio(A)&space;=&space;\frac{Gain(A)}{&space;-&space;\sum_{v_{A}}P(v_{A})\log_2P(v_{A})}" />
@@ -98,29 +98,29 @@ Load the tree induction program:
 ```
 Load the avaiable dataset:
 ```
-carica_dataset(stroke).
+load_dataset(stroke).
 ```
 Unload the dataset:
 ```
-reset_dataset(stroke).
+unload_dataset(stroke).
 ```
 Run all the tree inductions:
 ```
-induci.
+induce.
 ```
 or run a single tree induction for each splitting criteria:
 ```
-induce_albero(gini, Albero).
+induce_tree(gini, Tree).
 ```
 ```
-induce_albero(gain, Albero).
+induce_tree(gain, Tree).
 ```
 ```
-induce_albero(gainratio, Albero).
+induce_tree(gainratio, Tree).
 ```
 Print the Confusion Matrix:
 ```
-stampa_matrice_confusione.
+confusion_matrix.
 ```
 
 ## 🔖 Results <a name = "results"></a>
@@ -128,59 +128,59 @@ stampa_matrice_confusione.
 - ### Heart Dataset
   - #### Gini
     ```
-    Test effettuati :62
-    Test non classificati :0
-    Veri Negativi  26   Falsi Positivi 3
-    Falsi Negativi 0   Veri Positivi  33
-    Accuratezza: 0.9516129032258065
-    Errore: 0.048387096774193505
+    Performed tests: 62
+    Unclassified tests: 0
+    True negative  (TN): 26	 False positive (FP): 3
+    False negative (FN): 0	 True positive  (TP): 33
+    Accuracy (ACC): 0.9516129032258065
+    Error: 0.048387096774193505
     ```
   - #### Information Gain
     ```
-    Test effettuati :62
-    Test non classificati :0
-    Veri Negativi  26   Falsi Positivi 3
-    Falsi Negativi 1   Veri Positivi  32
-    Accuratezza: 0.9354838709677419
-    Errore: 0.06451612903225812
+    Performed tests: 62
+    Unclassified tests: 0
+    True negative  (TN): 26	 False positive (FP): 3
+    False negative (FN): 1	 True positive  (TP): 32
+    Accuracy (ACC): 0.9354838709677419
+    Error: 0.06451612903225812
     ```
   - #### Gain Ratio
     ```
-    Test effettuati :62
-    Test non classificati :0
-    Veri Negativi  27   Falsi Positivi 2
-    Falsi Negativi 4   Veri Positivi  29
-    Accuratezza: 0.9032258064516129
-    Errore: 0.09677419354838712
+    Performed tests: 62
+    Unclassified tests: 0
+    True negative  (TN): 27	 False positive (FP): 2
+    False negative (FN): 4	 True positive  (TP): 29
+    Accuracy (ACC): 0.9032258064516129
+    Error: 0.09677419354838712
     ```
 
 - ### Stroke Dataset
   - #### Gini
     ```
-    Test effettuati :77
-    Test non classificati :5
-    Veri Negativi  49   Falsi Positivi 10
-    Falsi Negativi 0   Veri Positivi  13
-    Accuratezza: 0.8611111111111112
-    Errore: 0.13888888888888884
+    Performed tests: 77
+    Unclassified tests: 5
+    True negative  (TN): 49	 False positive (FP): 10
+    False negative (FN): 0	 True positive  (TP): 13
+    Accuracy (ACC): 0.8611111111111112
+    Error: 0.13888888888888884
     ```
   - #### Information Gain
     ```
-    Test effettuati :77
-    Test non classificati :5
-    Veri Negativi  47   Falsi Positivi 12
-    Falsi Negativi 0   Veri Positivi  13
-    Accuratezza: 0.8333333333333334
-    Errore: 0.16666666666666663
+    Performed tests: 77
+    Unclassified tests: 5
+    True negative  (TN): 47	 False positive (FP): 12
+    False negative (FN): 0	 True positive  (TP): 13
+    Accuracy (ACC): 0.8333333333333334
+    Error: 0.16666666666666663
     ```
   - #### Gain Ratio
     ```
-    Test effettuati :77
-    Test non classificati :5
-    Veri Negativi  51   Falsi Positivi 10
-    Falsi Negativi 0   Veri Positivi  11
-    Accuratezza: 0.8611111111111112
-    Errore: 0.13888888888888884
+    Performed tests: 77
+    Unclassified tests: 5
+    True negative  (TN): 51	 False positive (FP): 10
+    False negative (FN): 0	 True positive  (TP): 11
+    Accuracy (ACC): 0.8611111111111112
+    Error: 0.13888888888888884
     ```
 
 ## ⛏️ Built Using <a name = "built_using"></a>
