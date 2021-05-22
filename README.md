@@ -20,6 +20,8 @@
 
 ## 👷‍♂️ Work in Progress... <a name = "wip"></a>
 
+<img width=300 src="https://i.imgur.com/AUljOwd.jpg" />
+
 ## 📝 Table of Contents
 - [About](#about)
 - [Project Topology](#project-topology)
