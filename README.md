@@ -92,17 +92,25 @@ Start <b>SWI-Prolog</b>:
 ```
 $ swipl
 ```
+Load the data pre-processing program:
+```
+[data_preprocessing/preprocessing].
+```
+Run the pre-process program:
+```
+preprocess(<stroke|stroke_ohe|heart>).
+```
 Load the tree induction program:
 ```
 [tree_induction].
 ```
 Load the avaiable dataset:
 ```
-load_dataset(stroke).
+load_dataset(<stroke|stroke_ohe|heart>).
 ```
 Unload the dataset:
 ```
-unload_dataset(stroke).
+unload_dataset(<stroke|stroke_ohe|heart>).
 ```
 Run all the tree inductions:
 ```
@@ -110,13 +118,7 @@ induce.
 ```
 or run a single tree induction for each splitting criteria:
 ```
-induce_tree(gini, Tree).
-```
-```
-induce_tree(gain, Tree).
-```
-```
-induce_tree(gainratio, Tree).
+induce_tree(<gini|gain|gainratio>, Tree).
 ```
 Print the Confusion Matrix:
 ```
