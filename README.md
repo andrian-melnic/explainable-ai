@@ -82,13 +82,13 @@ Datasets sources:
 ## 📊 Splitting Criteria <a name="splitting-criteria"></a>
 
 ### Gini Index
-<a href="#"><img src="https://latex.codecogs.com/gif.latex?Gini(A)&space;=&space;\sum_{v}P(v)\sum_{i&space;\neq&space;j}P(i|v)P(j|v)" /></a>
+<img src="https://latex.codecogs.com/gif.latex?Gini(A)&space;=&space;\sum_{v}P(v)\sum_{i&space;\neq&space;j}P(i|v)P(j|v)" />
 
 ### Information Gain
-<a href="#"><img src="https://latex.codecogs.com/gif.latex?Gain(A)&space;=&space;B\left(\frac{p}{p&plus;n}\right)&space;-&space;\sum_{k=1}^{d}P(TS_k)B(TS_k)" /></a>
+<img src="https://latex.codecogs.com/gif.latex?Gain(A)&space;=&space;B\left(\frac{p}{p&plus;n}\right)&space;-&space;\sum_{k=1}^{d}P(TS_k)B(TS_k)" />
 
 ### Gain Ratio
-<a href="#"><img src="https://latex.codecogs.com/gif.latex?GainRatio(A)&space;=&space;\frac{Gain(A)}{&space;-&space;\sum_{v_{A}}P(v_{A})\log_2P(v_{A})}" /></a>![image](https://user-images.githubusercontent.com/10279685/127140935-c5000a09-7f05-4968-bdee-582886c43637.gif)
+<img src="https://latex.codecogs.com/gif.latex?GainRatio(A)&space;=&space;\frac{Gain(A)}{&space;-&space;\sum_{v_{A}}P(v_{A})\log_2P(v_{A})}" />
 
 ## 👩‍💻 Usage <a name="usage"></a>
 Start <b>SWI-Prolog</b>: 
