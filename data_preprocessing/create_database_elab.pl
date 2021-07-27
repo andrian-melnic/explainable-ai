@@ -161,5 +161,46 @@ start(heart) :-
         writeln(').'),
 	fail.
 
+% database elaborato -> obesity
+start(obesity) :-
+    ensure_loaded(data_preprocessing/obesity/obesity_database),
+    tell('data_preprocessing/obesity/obesity_database_elab.pl'),
+    a(GENDER, AGE, HEIGHT, WEIGHT, FHO, FAVC, FCVC, NCP, CAEC, SMOKE, CH2O, SCC, FAF, TUE, CALC, MTRANS, TARGET),
+	write('aa('), write(GENDER),
+	write(','),  ( number(AGE), AGE =< 20,  write('\'0-20\'') ;
+                   number(AGE), AGE > 20, AGE =< 30, write('\'21-30\'') ;
+                   number(AGE), AGE > 30, AGE =< 40, write('\'31-40\'') ;
+				   number(AGE), AGE > 40, AGE =< 50, write('\'41-50\'') ;
+				   number(AGE), AGE > 50, AGE =< 60, write('\'51-60\'') ;
+				   number(AGE), AGE > 60, write('\'61+\'')),
+    write(','),  ( number(HEIGHT), HEIGHT =< 1.6,  write('\'0-1.60\'') ;
+                   number(HEIGHT), HEIGHT > 1.6, HEIGHT =< 1.7, write('\'1.61-1.70\'') ;
+                   number(HEIGHT), HEIGHT > 1.7, HEIGHT =< 1.8, write('\'1.71-1.80\'') ;
+				   number(HEIGHT), HEIGHT > 1.8, HEIGHT =< 1.9, write('\'1.81-1.90\'') ;
+				   number(HEIGHT), HEIGHT > 1.9, HEIGHT =< 2.0, write('\'1.91-2.00\'') ;
+				   number(HEIGHT), HEIGHT > 2.0, write('\'2.01+\'')),
+    write(','),  ( number(WEIGHT), WEIGHT =< 40,  write('\'0-40\'') ;
+                   number(WEIGHT), WEIGHT > 40, WEIGHT =< 60, write('\'41-60\'') ;
+                   number(WEIGHT), WEIGHT > 60, WEIGHT =< 80, write('\'61-80\'') ;
+                   number(WEIGHT), WEIGHT > 80, WEIGHT =< 100, write('\'81-100\'') ;
+                   number(WEIGHT), WEIGHT > 100, WEIGHT =< 120, write('\'101-120\'') ;
+                   number(WEIGHT), WEIGHT > 120, WEIGHT =< 140, write('\'121-140\'') ;
+				   number(WEIGHT), WEIGHT > 140, write('\'141+\'')),
+    write(','),  write(FHO),
+    write(','),  write(FAVC),
+    write(','),  write(FCVC),
+    write(','),  write(NCP),
+    write(','),  write(CAEC),
+    write(','),  write(SMOKE),
+    write(','),  write(CH2O),
+    write(','),  write(SCC),
+    write(','),  write(FAF),
+    write(','),  write(TUE),
+    write(','),  write(CALC),
+    write(','),  write(MTRANS),
+    write(','),  write(TARGET),
+    writeln(').'),
+    fail.
+
 % told
 start(_) :- told.

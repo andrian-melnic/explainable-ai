@@ -14,7 +14,7 @@
 
 /*
  * preprocess(+Dataset)
- * +Dataset = (stroke, stroke_ohe, heart) -> base di dati su cui effettuare data pre-processing 
+ * +Dataset = (stroke, stroke_ohe, heart, obesity) -> base di dati su cui effettuare data pre-processing 
  */
 preprocess(Dataset) :-
     start(Dataset),

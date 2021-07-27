@@ -163,6 +163,59 @@ startt(heart) :-
     setof(Thal_3,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,R,Thal_3),AttributiThal_3),
     write('a(thal_3,'), writeq(AttributiThal_3), writeln(').'),
 	starttt(heart).
+% dataset -> obesity
+startt(obesity) :-
+    ensure_loaded(data_preprocessing/obesity/obesity_database_elab),
+    tell('data_preprocessing/obesity/obesity_dataset.pl'),
+    setof(GENDER,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(GENDER,A,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributiGENDER),
+    write('a(gender,'), writeq(AttributiGENDER), writeln(').'),
+
+    setof(AGE,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,AGE,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributiAGE),
+    write('a(age,'), writeq(AttributiAGE), writeln(').'),
+
+    setof(HEIGHT,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,HEIGHT,C,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributiHEIGHT),
+    write('a(height,'), writeq(AttributiHEIGHT), writeln(').'),
+
+    setof(WEIGHT,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,WEIGHT,D,E,F,G,H,I,L,M,N,O,P,Q,R),AttributiWEIGHT),
+    write('a(weight,'), writeq(AttributiWEIGHT), writeln(').'),
+
+    setof(FHO,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,FHO,E,F,G,H,I,L,M,N,O,P,Q,R),AttributiFHO),
+    write('a(fho,'), writeq(AttributiFHO), writeln(').'),
+
+    setof(FAVC,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,FAVC,F,G,H,I,L,M,N,O,P,Q,R),AttributiFAVC),
+    write('a(favc,'), writeq(AttributiFAVC), writeln(').'),
+
+    setof(FCVC,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,FCVC,G,H,I,L,M,N,O,P,Q,R),AttributiFCVC),
+    write('a(fcvc,'), writeq(AttributiFCVC), writeln(').'),
+
+    setof(NCP,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,NCP,H,I,L,M,N,O,P,Q,R),AttributiNCP),
+    write('a(ncp,'), writeq(AttributiNCP), writeln(').'),
+
+    setof(CAEC,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,CAEC,I,L,M,N,O,P,Q,R),AttributiCAEC),
+    write('a(caec,'), writeq(AttributiCAEC), writeln(').'),
+
+    setof(SMOKE,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,SMOKE,L,M,N,O,P,Q,R),AttributiSMOKE),
+    write('a(smoke,'), writeq(AttributiSMOKE), writeln(').'),
+
+    setof(CH2O,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,CH2O,M,N,O,P,Q,R),AttributiCH2O),
+    write('a(ch20,'), writeq(AttributiCH2O), writeln(').'),
+
+    setof(SCC,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,SCC,N,O,P,Q,R),AttributiSCC),
+    write('a(scc,'), writeq(AttributiSCC), writeln(').'),
+
+    setof(FAF,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,FAF,O,P,Q,R),AttributiFAF),
+    write('a(faf,'), writeq(AttributiFAF), writeln(').'),
+
+    setof(TUE,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,O,TUE,P,Q,R),AttributiTUE),
+    write('a(tue,'), writeq(AttributiTUE), writeln(').'),
+
+    setof(CALC,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,O,P,CALC,Q,R),AttributiCALC),
+    write('a(calc,'), writeq(AttributiCALC), writeln(').'),
+
+    setof(MTRANS,A^B^C^D^E^F^G^H^I^L^M^N^O^P^Q^R^aa(A,B,C,D,E,F,G,H,I,L,M,N,O,P,Q,MTRANS,R),AttributiMTRANS),
+    write('a(mtrans,'), writeq(AttributiMTRANS), writeln(').'),
+
+	starttt(obesity).
 
 % dataset attributi -> stroke 
 starttt(stroke) :-
@@ -284,6 +337,47 @@ starttt(heart) :-
     write('thal_1 = '),writeq(Thal_1), write(', '),
     write('thal_2 = '),writeq(Thal_2), write(', '),
     write('thal_3 = '),writeq(Thal_3), writeln(']).'),
+    fail.
+% dataset attributi -> obesity
+starttt(obesity) :-
+    aa(GENDER,AGE,HEIGHT,WEIGHT,FHO,FAVC,FCVC,NCP,CAEC,SMOKE,CH2O,SCC,FAF,TUE,CALC,MTRANS,0),
+    write('e(healthy,['),
+    write('gender = '),writeq(GENDER), write(', '),
+    write('age = '),writeq(AGE), write(', '),
+    write('height = '),writeq(HEIGHT), write(', '),
+    write('weight = '),writeq(WEIGHT), write(', '),
+    write('fho = '),writeq(FHO), write(', '),
+    write('favc = '),writeq(FAVC), write(', '),
+	write('fcvc = '),writeq(FCVC), write(', '),
+    write('ncp = '),writeq(NCP), write(', '),
+    write('caec = '),writeq(CAEC), write(', '),
+    write('smoke = '),writeq(SMOKE), write(', '),
+    write('ch20 = '),writeq(CH2O), write(', '),
+    write('scc = '),writeq(SCC), write(', '),
+    write('faf = '),writeq(FAF), write(', '),
+    write('tue = '),writeq(TUE), write(', '),
+    write('calc = '),writeq(CALC), write(', '),
+    write('mtrans = '),writeq(MTRANS), writeln(']).'),
+    fail.
+starttt(obesity) :-
+    aa(GENDER,AGE,HEIGHT,WEIGHT,FHO,FAVC,FCVC,NCP,CAEC,SMOKE,CH2O,SCC,FAF,TUE,CALC,MTRANS,1),
+    write('e(sick,['),
+    write('gender = '),writeq(GENDER), write(', '),
+    write('age = '),writeq(AGE), write(', '),
+    write('height = '),writeq(HEIGHT), write(', '),
+    write('weight = '),writeq(WEIGHT), write(', '),
+    write('fho = '),writeq(FHO), write(', '),
+    write('favc = '),writeq(FAVC), write(', '),
+	write('fcvc = '),writeq(FCVC), write(', '),
+    write('ncp = '),writeq(NCP), write(', '),
+    write('caec = '),writeq(CAEC), write(', '),
+    write('smoke = '),writeq(SMOKE), write(', '),
+    write('ch20 = '),writeq(CH2O), write(', '),
+    write('scc = '),writeq(SCC), write(', '),
+    write('faf = '),writeq(FAF), write(', '),
+    write('tue = '),writeq(TUE), write(', '),
+    write('calc = '),writeq(CALC), write(', '),
+    write('mtrans = '),writeq(MTRANS), writeln(']).'),
     fail.
 
 % told

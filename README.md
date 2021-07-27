@@ -37,12 +37,14 @@
 This is a PROLOG implementation of a Decision Tree with multiple splitting criterias. The criteria used for measuring the goodness of split conditions are information gain, gain ratio and gini index.
 
 Datasets sources:
-- <a href="https://www.kaggle.com/fedesoriano/stroke-prediction-dataset">Brain Stroke</a>
+- <a href="https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+">Obesity</a>
 - <a href="https://www.kaggle.com/johnsmith88/heart-disease-dataset">Ischemic Heart Disease</a>
+- <a href="https://www.kaggle.com/fedesoriano/stroke-prediction-dataset">Brain Stroke</a>
 
 ## 🗂 Project Topology <a name="project-topology"></a>
 ```
 |-- data_preprocessing
+|   |-- obesity/...
 |   |-- heart/...
 |   |-- stroke/...
 |   |-- create_database_elab.pl
@@ -51,6 +53,7 @@ Datasets sources:
 |   |-- stroke_dataset.csv
 |
 |-- data
+|   |-- obesity/...
 |   |-- heart/...
 |   |-- stroke/...
 |   
@@ -92,25 +95,17 @@ Start <b>SWI-Prolog</b>:
 ```
 $ swipl
 ```
-Load the data pre-processing program:
-```
-[data_preprocessing/preprocessing].
-```
-Run the pre-process program:
-```
-preprocess(<stroke|stroke_ohe|heart>).
-```
 Load the tree induction program:
 ```
 [tree_induction].
 ```
 Load the avaiable dataset:
 ```
-load_dataset(<stroke|stroke_ohe|heart>).
+load_dataset(<obesity|heart|stroke|stroke_ohe>).
 ```
 Unload the dataset:
 ```
-unload_dataset(<stroke|stroke_ohe|heart>).
+unload_dataset(<obesity|heart|stroke|stroke_ohe>).
 ```
 Run all the tree inductions:
 ```
@@ -124,8 +119,45 @@ Print the Confusion Matrix:
 ```
 confusion_matrix.
 ```
+Load the data pre-processing program: <small>(optional)</small> 
+```
+[data_preprocessing/preprocessing].
+```
+Run the pre-process program: <small>(optional)</small> 
+```
+preprocess(<obesity|heart|stroke|stroke_ohe>).
+```
 
 ## 🔖 Results <a name = "results"></a>
+
+- ### Obesity Dataset
+  - #### Gini
+    ```
+    Performed tests: 253
+    Unclassified tests: 6
+    True negative  (TN): 132	 False positive (FP): 7
+    False negative (FN): 5	 True positive  (TP): 103
+    Accuracy (ACC): 0.951417004048583
+    Error: 0.04858299595141702
+    ```
+  - #### Information Gain
+    ```
+    Performed tests: 253
+    Unclassified tests: 6
+    True negative  (TN): 131	 False positive (FP): 7
+    False negative (FN): 5	 True positive  (TP): 104
+    Accuracy (ACC): 0.951417004048583
+    Error: 0.04858299595141702
+    ```
+  - #### Gain Ratio
+    ```
+    Performed tests: 253
+    Unclassified tests: 4
+    True negative  (TN): 134	 False positive (FP): 7
+    False negative (FN): 7	 True positive  (TP): 101
+    Accuracy (ACC): 0.9437751004016064
+    Error: 0.05622489959839361
+    ```
 
 - ### Heart Dataset
   - #### Gini
