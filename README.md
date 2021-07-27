@@ -88,8 +88,7 @@ Datasets sources:
 <a href="#"><img src="https://latex.codecogs.com/gif.latex?Gain(A)&space;=&space;B\left(\frac{p}{p&plus;n}\right)&space;-&space;\sum_{k=1}^{d}P(TS_k)B(TS_k)" /></a>
 
 ### Gain Ratio
-<a href="#"><img src="https://latex.codecogs.com/gif.latex?GainRatio(A)&space;=&space;\frac{Gain(A)}{&space;-&space;\sum_{v_{A}}P(v_{A})\log_2P(v_{A})}" /></a>![image](https://user-images.githubusercontent.com/10279685/127140780-8121c832-b716-4e98-8e19-57a40dc1c520.gif)
-
+<a href="#"><img src="https://latex.codecogs.com/gif.latex?GainRatio(A)&space;=&space;\frac{Gain(A)}{&space;-&space;\sum_{v_{A}}P(v_{A})\log_2P(v_{A})}" /></a>![image](https://user-images.githubusercontent.com/10279685/127140935-c5000a09-7f05-4968-bdee-582886c43637.gif)
 
 ## 👩‍💻 Usage <a name="usage"></a>
 Start <b>SWI-Prolog</b>: 
