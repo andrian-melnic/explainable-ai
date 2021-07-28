@@ -37,14 +37,15 @@
 This is a PROLOG implementation of a Decision Tree with multiple splitting criterias. The criteria used for measuring the goodness of split conditions are information gain, gain ratio and gini index.
 
 Datasets sources:
-- <a href="https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+">Obesity</a>
-- <a href="https://www.kaggle.com/johnsmith88/heart-disease-dataset">Ischemic Heart Disease</a>
-- <a href="https://www.kaggle.com/fedesoriano/stroke-prediction-dataset">Brain Stroke</a>
+- <a href="https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+">Obesity (UCI Machine Learning Repository)</a>
+- <a href="https://www.kaggle.com/johnsmith88/heart-disease-dataset">Ischemic Heart Disease (Kaggle)</a>
+- <a href="https://www.kaggle.com/fedesoriano/stroke-prediction-dataset">Brain Stroke (Kaggle)</a>
 
 ## 🗂 Project Topology <a name="project-topology"></a>
 ```
 |-- data_preprocessing
 |   |-- obesity/...
+|   |-- obesity_cnn/...
 |   |-- heart/...
 |   |-- stroke/...
 |   |-- create_database_elab.pl
@@ -54,6 +55,7 @@ Datasets sources:
 |
 |-- data
 |   |-- obesity/...
+|   |-- obesity_cnn/...
 |   |-- heart/...
 |   |-- stroke/...
 |   
@@ -159,33 +161,33 @@ preprocess(<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
     Error: 0.05600000000000005
     ```
 
-- ### Obesity Dataset
+- ### Obesity Dataset with NN's target
   - #### Gini
     ```
     Performed tests: 253
-    Unclassified tests: 6
-    True negative  (TN): 132	 False positive (FP): 7
-    False negative (FN): 5	 True positive  (TP): 103
-    Accuracy (ACC): 0.951417004048583
-    Error: 0.04858299595141702
+    Unclassified tests: 7
+    True negative  (TN): 128	 False positive (FP): 8
+    False negative (FN): 6	 True positive  (TP): 104
+    Accuracy (ACC): 0.943089430894309
+    Error: 0.05691056910569103
     ```
   - #### Information Gain
     ```
     Performed tests: 253
-    Unclassified tests: 6
-    True negative  (TN): 131	 False positive (FP): 7
-    False negative (FN): 5	 True positive  (TP): 104
-    Accuracy (ACC): 0.951417004048583
-    Error: 0.04858299595141702
+    Unclassified tests: 9
+    True negative  (TN): 129	 False positive (FP): 7
+    False negative (FN): 5	 True positive  (TP): 103
+    Accuracy (ACC): 0.9508196721311475
+    Error: 0.049180327868852514
     ```
   - #### Gain Ratio
     ```
     Performed tests: 253
-    Unclassified tests: 4
-    True negative  (TN): 134	 False positive (FP): 7
-    False negative (FN): 7	 True positive  (TP): 101
-    Accuracy (ACC): 0.9437751004016064
-    Error: 0.05622489959839361
+    Unclassified tests: 8
+    True negative  (TN): 132	 False positive (FP): 3
+    False negative (FN): 7	 True positive  (TP): 103
+    Accuracy (ACC): 0.9591836734693877
+    Error: 0.04081632653061229
     ```
 
 - ### Heart Dataset
