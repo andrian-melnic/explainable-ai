@@ -4,7 +4,7 @@
  * 
  * Conti Edoardo 		-	S1100649@studenti.univpm.it
  * Federici Lorenzo 	- 	S1098086@studenti.univpm.it
- * Andrian Melnic 		- 	S1098384@studenti.univpm.it
+ * Melnic Andrian		- 	S1098384@studenti.univpm.it
  * 
  * writes.pl
  ***/
