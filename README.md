@@ -130,6 +130,35 @@ preprocess(<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
 
 ## 🔖 Results <a name = "results"></a>
 
+- ### Obesity Dataset with CNN's target
+  - #### Gini
+    ```
+    Performed tests: 253
+    Unclassified tests: 3
+    True negative  (TN): 120	 False positive (FP): 7
+    False negative (FN): 9	 True positive  (TP): 114
+    Accuracy (ACC): 0.936
+    Error: 0.06399999999999995
+    ```
+  - #### Information Gain
+    ```
+    Performed tests: 253
+    Unclassified tests: 3
+    True negative  (TN): 118	 False positive (FP): 9
+    False negative (FN): 11	 True positive  (TP): 112
+    Accuracy (ACC): 0.92
+    Error: 0.07999999999999996
+    ```
+  - #### Gain Ratio
+    ```
+    Performed tests: 253
+    Unclassified tests: 3
+    True negative  (TN): 123	 False positive (FP): 5
+    False negative (FN): 9	 True positive  (TP): 113
+    Accuracy (ACC): 0.944
+    Error: 0.05600000000000005
+    ```
+
 - ### Obesity Dataset
   - #### Gini
     ```
