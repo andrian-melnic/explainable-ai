@@ -105,7 +105,7 @@ load_dataset(<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
 ```
 Unload the dataset:
 ```
-unload_dataset(<<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
+unload_dataset(<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
 ```
 Run all the tree inductions:
 ```
@@ -125,7 +125,7 @@ Load the data pre-processing program: <small>(optional)</small>
 ```
 Run the pre-process program: <small>(optional)</small> 
 ```
-preprocess(<<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
+preprocess(<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
 ```
 
 ## 🔖 Results <a name = "results"></a>
