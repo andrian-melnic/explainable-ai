@@ -4,7 +4,7 @@
   <div><sub>Icon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></sub></div>
 </p>
 
-<h1 align="center">Artificial Intelligence Project</br><sub>Decision Tree - PROLOG Implementation</sub></h1>
+<h1 align="center">Explainable Artificial Intelligence</br><sub></sub></h1>
 
 <div align="center">
 
@@ -18,10 +18,6 @@
 
 ---
 
-## 👷‍♂️ Work in Progress... <a name = "wip"></a>
-
-<img width=300 src="https://i.imgur.com/AUljOwd.jpg" />
-
 ## 📝 Table of Contents
 - [About](#about)
 - [Project Topology](#project-topology)
@@ -34,7 +30,7 @@
 
 ## 📋 About <a name = "about"></a>
 
-This is a PROLOG implementation of a Decision Tree with multiple splitting criterias. The criteria used for measuring the goodness of split conditions are information gain, gain ratio and gini index.
+This is an attempt to interpret Deep Neural Networks through a Decision Tree. The last one is a PROLOG implementation of a Decision Tree with multiple splitting criterias. The criteria used for measuring the goodness of split conditions are information gain, gain ratio and gini index.
 
 Datasets sources:
 - <a href="https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+">Obesity (UCI Machine Learning Repository)</a>
@@ -51,7 +47,6 @@ Datasets sources:
 |   |-- create_database_elab.pl
 |   |-- create_dataset.pl
 |   |-- preprocessing.pl
-|   |-- stroke_dataset.csv
 |
 |-- data
 |   |-- obesity/...
@@ -59,6 +54,9 @@ Datasets sources:
 |   |-- heart/...
 |   |-- stroke/...
 |   
+|-- dataset
+|   |-- obesity_dataset.csv
+|
 |-- splitting_criteria
 |   |-- gini_index.pl
 |   |-- information_gain.pl
@@ -79,6 +77,7 @@ Datasets sources:
 |-- writes.pl
 |-- classify.pl
 |-- tree_induction.pl
+|-- xai_neural_network.ipynb
 ```
 
 ## 📊 Splitting Criteria <a name="splitting-criteria"></a>
@@ -92,7 +91,7 @@ Datasets sources:
 ### Gain Ratio
 <img src="https://latex.codecogs.com/gif.latex?GainRatio(A)&space;=&space;\frac{Gain(A)}{&space;-&space;\sum_{v_{A}}P(v_{A})\log_2P(v_{A})}" />
 
-## 👩‍💻 Usage <a name="usage"></a>
+## 👩‍💻 Prolog Program Usage <a name="usage"></a>
 Start <b>SWI-Prolog</b>: 
 ```
 $ swipl
@@ -130,7 +129,7 @@ Run the pre-process program: <small>(optional)</small>
 preprocess(<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
 ```
 
-## 🔖 Results <a name = "results"></a>
+## 🔖 Prolog Results <a name = "results"></a>
 
 - ### Obesity Dataset with CNN's target
   - #### Gini
@@ -190,67 +189,10 @@ preprocess(<obesity|obesity_cnn|heart|stroke|stroke_ohe>).
     Error: 0.04081632653061229
     ```
 
-- ### Heart Dataset
-  - #### Gini
-    ```
-    Performed tests: 62
-    Unclassified tests: 0
-    True negative  (TN): 26	 False positive (FP): 3
-    False negative (FN): 0	 True positive  (TP): 33
-    Accuracy (ACC): 0.9516129032258065
-    Error: 0.048387096774193505
-    ```
-  - #### Information Gain
-    ```
-    Performed tests: 62
-    Unclassified tests: 0
-    True negative  (TN): 26	 False positive (FP): 3
-    False negative (FN): 1	 True positive  (TP): 32
-    Accuracy (ACC): 0.9354838709677419
-    Error: 0.06451612903225812
-    ```
-  - #### Gain Ratio
-    ```
-    Performed tests: 62
-    Unclassified tests: 0
-    True negative  (TN): 27	 False positive (FP): 2
-    False negative (FN): 4	 True positive  (TP): 29
-    Accuracy (ACC): 0.9032258064516129
-    Error: 0.09677419354838712
-    ```
-
-- ### Stroke Dataset
-  - #### Gini
-    ```
-    Performed tests: 77
-    Unclassified tests: 5
-    True negative  (TN): 49	 False positive (FP): 10
-    False negative (FN): 0	 True positive  (TP): 13
-    Accuracy (ACC): 0.8611111111111112
-    Error: 0.13888888888888884
-    ```
-  - #### Information Gain
-    ```
-    Performed tests: 77
-    Unclassified tests: 5
-    True negative  (TN): 47	 False positive (FP): 12
-    False negative (FN): 0	 True positive  (TP): 13
-    Accuracy (ACC): 0.8333333333333334
-    Error: 0.16666666666666663
-    ```
-  - #### Gain Ratio
-    ```
-    Performed tests: 77
-    Unclassified tests: 5
-    True negative  (TN): 51	 False positive (FP): 10
-    False negative (FN): 0	 True positive  (TP): 11
-    Accuracy (ACC): 0.8611111111111112
-    Error: 0.13888888888888884
-    ```
-
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [SWI-Prolog](https://www.swi-prolog.org/)
+- [Colab](http://colab.research.google.com)
 
 ## ✍️ Authors <a name = "authors"></a>
 
